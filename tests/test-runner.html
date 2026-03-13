@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>SolarEnerji — Test Runner</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+
+    .top { background: #1e293b; border-bottom: 1px solid #334155; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .top h1 { font-size: 16px; } .top h1 span { color: #f59e0b; }
+    .btns { display: flex; gap: 8px; }
+    .btn { padding: 7px 14px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .btn-go { background: #22c55e; color: #fff; } .btn-go:hover { background: #16a34a; }
+    .btn-go:disabled { background: #374151; color: #6b7280; cursor: not-allowed; }
+    .btn-s { background: #334155; color: #94a3b8; } .btn-s:hover { background: #475569; }
+
+    .bar { display: flex; gap: 14px; padding: 10px 20px; background: #1e293b; border-bottom: 1px solid #334155; font-size: 13px; align-items: center; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot-p { background: #22c55e; } .dot-f { background: #ef4444; } .dot-t { background: #3b82f6; }
+    .pbar { flex: 1; height: 6px; background: #334155; border-radius: 3px; overflow: hidden; margin-left: 12px; }
+    .pfill { height: 100%; background: #22c55e; border-radius: 3px; transition: width 0.3s; width: 0%; }
+    .timer { color: #94a3b8; font-size: 12px; margin-left: auto; }
+
+    .wrap { padding: 14px 20px; max-width: 1100px; }
+    .grp { margin-bottom: 10px; background: #1e293b; border-radius: 8px; border: 1px solid #334155; overflow: hidden; }
+    .grp-h { padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+    .grp-h:hover { background: #253348; }
+    .grp-t { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+    .badge-ok { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge-fl { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .badge-wt { background: rgba(148,163,184,0.15); color: #94a3b8; }
+    .badge-rn { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .chev { transition: transform 0.2s; color: #64748b; font-size: 11px; }
+    .grp.open .chev { transform: rotate(90deg); }
+    .grp-b { display: none; border-top: 1px solid #334155; } .grp.open .grp-b { display: block; }
+
+    .row { padding: 7px 14px 7px 36px; display: flex; align-items: center; gap: 8px; font-size: 13px; border-bottom: 1px solid #151d2e; }
+    .row:last-child { border-bottom: none; }
+    .ic { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; }
+    .ic-ok { background: #22c55e; color: #fff; } .ic-fl { background: #ef4444; color: #fff; }
+    .ic-wt { background: #475569; color: #94a3b8; } .ic-rn { background: #3b82f6; color: #fff; animation: pls 1s infinite; }
+    @keyframes pls { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .rn { flex: 1; color: #cbd5e1; }
+    .rt { color: #64748b; font-size: 11px; min-width: 45px; text-align: right; }
+    .err-msg { font-size: 12px; color: #fca5a5; background: rgba(239,68,68,0.1); padding: 5px 10px; margin: 0 14px 6px 36px; border-radius: 4px; border-left: 3px solid #ef4444; word-break: break-all; }
+
+    .warn-box { background: #92400e; color: #fef3c7; padding: 16px 20px; text-align: center; font-size: 14px; font-weight: 600; }
+    .warn-box a { color: #fde68a; }
+
+    #frame { position: fixed; bottom: 0; right: 0; width: 1280px; height: 720px; border: none; opacity: 0; pointer-events: none; z-index: -1; }
+    body.sf #frame { opacity: 1; pointer-events: auto; z-index: 200; width: 50vw; height: 50vh; border: 2px solid #f59e0b; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+<div class="top">
+  <h1>Solar<span>Enerji</span> — Test Runner</h1>
+  <div class="btns">
+    <button class="btn btn-s" id="bFrame">Tarayici Goster</button>
+    <button class="btn btn-go" id="bRun">Testleri Calistir</button>
+  </div>
+</div>
+
+<div id="warn"></div>
+
+<div class="bar">
+  <div><span class="dot dot-t"></span> Toplam: <strong id="sT">0</strong></div>
+  <div><span class="dot dot-p"></span> Gecti: <strong id="sP">0</strong></div>
+  <div><span class="dot dot-f"></span> Basarisiz: <strong id="sF">0</strong></div>
+  <div class="pbar"><div class="pfill" id="prog"></div></div>
+  <div class="timer" id="tmr">0.0s</div>
+</div>
+
+<div class="wrap" id="out"></div>
+
+<iframe id="frame" src="about:blank"></iframe>
+
+<script>
+// Global hata yakalayici — script parse hatalarini gostermek icin AYRI blokta
+window.onerror = function(msg, src, line, col) {
+  var w = document.getElementById('warn');
+  if (w) w.innerHTML = '<div class="warn-box">JavaScript Hatasi: ' + msg + '<br>Satir: ' + line + ', Sutun: ' + col + '</div>';
+  return false;
+};
+</script>
+
+<script>
+// ============================================================================
+// FRAMEWORK
+// ============================================================================
+var F = document.getElementById('frame');
+var OUT = document.getElementById('out');
+var total = 0, pass = 0, fail = 0, t0 = 0;
+var FRAME_W = 1280;
+
+// Base URL — ayni sunucu uzerinde calismali
+var BASE = window.location.protocol + '//' + window.location.host;
+
+// Sunucu kontrolu
+(function checkServer() {
+  if (window.location.protocol === 'file:') {
+    document.getElementById('warn').innerHTML =
+      '<div class="warn-box">Bu dosyayi dogrudan acamazsiniz. Bir yerel sunucu baslatmaniz gerekiyor:<br>' +
+      '<code style="background:#78350f;padding:2px 8px;border-radius:4px;margin-top:8px;display:inline-block">' +
+      'cd C:\\PROJECTS\\solar1-main && python -m http.server 3000</code><br>' +
+      'Sonra: <a href="http://localhost:3000/tests/test-runner.html">http://localhost:3000/tests/test-runner.html</a></div>';
+    document.getElementById('bRun').disabled = true;
+  }
+})();
+
+function doc() { return F.contentDocument; }
+function win() { return F.contentWindow; }
+
+function load(url) {
+  return new Promise(function(ok, no) {
+    var timer = setTimeout(function() { no(new Error('Zaman asimi: ' + url)); }, 12000);
+    F.onload = function() {
+      clearTimeout(timer);
+      // DOM + scriptlerin yuklenmesini bekle
+      setTimeout(ok, 500);
+    };
+    F.src = url;
+  });
+}
+
+function wait(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+function stats() {
+  document.getElementById('sT').textContent = total;
+  document.getElementById('sP').textContent = pass;
+  document.getElementById('sF').textContent = fail;
+  var done = pass + fail;
+  var pct = total > 0 ? (done / total * 100) : 0;
+  var prog = document.getElementById('prog');
+  prog.style.width = pct + '%';
+  prog.style.background = fail > 0 ? '#ef4444' : '#22c55e';
+  document.getElementById('tmr').textContent = ((Date.now() - t0) / 1000).toFixed(1) + 's';
+}
+
+// iframe boyutunu ayarla ve bekle
+function setWidth(w) {
+  FRAME_W = w;
+  F.style.width = w + 'px';
+  return wait(300);
+}
+function resetWidth() {
+  FRAME_W = 1280;
+  F.style.width = '1280px';
+}
+
+// ============================================================================
+// ASSERTIONS
+// ============================================================================
+function assert(ok, msg) { if (!ok) throw new Error(msg || 'Assertion failed'); }
+
+function el(sel) {
+  var e = doc().querySelector(sel);
+  if (!e) throw new Error('Element bulunamadi: ' + sel);
+  return e;
+}
+
+function elCount(sel) { return doc().querySelectorAll(sel).length; }
+
+function css(sel, prop) { return win().getComputedStyle(el(sel))[prop]; }
+
+function isVisible(sel) {
+  var e = doc().querySelector(sel);
+  if (!e) return false;
+  var s = win().getComputedStyle(e);
+  return s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0';
+}
+
+function hasClass(sel, cls) { return el(sel).classList.contains(cls); }
+
+function attr(sel, a) { return el(sel).getAttribute(a); }
+
+function contains(str, sub, msg) {
+  if (!str || str.indexOf(sub) === -1)
+    throw new Error((msg || '') + ' — "' + sub + '" bulunamadi iceride: "' + str + '"');
+}
+
+// Blur tetikle
+function triggerBlur(input) {
+  input.dispatchEvent(new Event('blur', { bubbles: true }));
+}
+
+// Input tetikle
+function triggerInput(input) {
+  input.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+// Form submit tetikle
+function triggerSubmit(form) {
+  form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+}
+
+// ============================================================================
+// UI
+// ============================================================================
+function mkGroup(id, title) {
+  var d = document.createElement('div');
+  d.className = 'grp open'; d.id = 'g-' + id;
+  d.innerHTML = '<div class="grp-h" onclick="this.parentElement.classList.toggle(\'open\')">' +
+    '<div class="grp-t"><span class="chev">&#9654;</span> ' + title +
+    ' <span class="badge badge-wt" id="b-' + id + '">bekliyor</span></div></div>' +
+    '<div class="grp-b" id="gb-' + id + '"></div>';
+  OUT.appendChild(d);
+}
+
+function mkRow(gid, tid, name) {
+  var d = document.createElement('div');
+  d.className = 'row'; d.id = 'r-' + tid;
+  d.innerHTML = '<div class="ic ic-wt" id="i-' + tid + '">-</div>' +
+    '<div class="rn"><strong>' + tid + '</strong>: ' + name + '</div>' +
+    '<div class="rt" id="t-' + tid + '"></div>';
+  document.getElementById('gb-' + gid).appendChild(d);
+}
+
+function setResult(tid, ok, ms, err) {
+  var ic = document.getElementById('i-' + tid);
+  document.getElementById('t-' + tid).textContent = ms + 'ms';
+  if (ok) { ic.className = 'ic ic-ok'; ic.textContent = '✓'; pass++; }
+  else {
+    ic.className = 'ic ic-fl'; ic.textContent = '✗'; fail++;
+    var row = document.getElementById('r-' + tid);
+    var ed = document.createElement('div');
+    ed.className = 'err-msg'; ed.textContent = err;
+    row.parentElement.insertBefore(ed, row.nextSibling);
+  }
+  stats();
+}
+
+function setRunning(tid) {
+  var ic = document.getElementById('i-' + tid);
+  if (ic) { ic.className = 'ic ic-rn'; ic.textContent = '⟳'; }
+}
+
+function setBadge(gid, p, f) {
+  var b = document.getElementById('b-' + gid);
+  if (f > 0) { b.className = 'badge badge-fl'; b.textContent = f + ' basarisiz'; }
+  else { b.className = 'badge badge-ok'; b.textContent = p + ' gecti'; }
+}
+
+// ============================================================================
+// PAGE URLS
+// ============================================================================
+var PG = {
+  home: BASE + '/index.html',
+  solar: BASE + '/gunes-enerjisi.html',
+  camera: BASE + '/kamera-kurulumu.html',
+  eng: BASE + '/muhendislik.html',
+  contact: BASE + '/contact.html',
+  admin: BASE + '/admin.html',
+  about: BASE + '/about.html',
+};
+var ALL_PG = [PG.home, PG.solar, PG.camera, PG.eng, PG.contact, PG.admin, PG.about];
+var PUB_PG = [PG.home, PG.solar, PG.camera, PG.eng, PG.contact, PG.about];
+
+// ============================================================================
+// TEST TANIMLARI
+// ============================================================================
+var GROUPS = [
+
+// ---- 1. NAV ----
+{ id:'nav', title:'1. Navigasyon ve Header', tests:[
+  { id:'NAV01', name:'5 nav linki mevcut', fn: async function() {
+    await load(PG.home);
+    assert(elCount('.nav .nav__link') === 5, 'Beklenen 5, gelen: ' + elCount('.nav .nav__link'));
+  }},
+  { id:'NAV02', name:'Gunes sayfasinda aktif link dogru', fn: async function() {
+    await load(PG.solar);
+    contains(attr('.nav__link--active','href'), 'gunes-enerjisi');
+  }},
+  { id:'NAV03', name:'about.html — aktif nav linki yok', fn: async function() {
+    await load(PG.about);
+    assert(elCount('.nav__link--active') === 0, 'Aktif link olmamali');
+  }},
+  { id:'NAV04', name:'Scroll sonrasi header golge efekti', fn: async function() {
+    await load(PG.home);
+    win().scrollTo(0, 200); await wait(300);
+    assert(hasClass('.header','header--scrolled'), 'header--scrolled sinifi eklenmeli');
+  }},
+  { id:'NAV05', name:'Scroll uste donunce golge kaybolur', fn: async function() {
+    await load(PG.home);
+    win().scrollTo(0, 200); await wait(300);
+    win().scrollTo(0, 0); await wait(300);
+    assert(!hasClass('.header','header--scrolled'), 'header--scrolled sinifi kalkmali');
+  }},
+  { id:'NAV07', name:'Header position:fixed', fn: async function() {
+    await load(PG.home);
+    assert(css('.header','position') === 'fixed', 'fixed olmali');
+  }},
+  { id:'NAV09', name:'Footer Hakkimizda linki var', fn: async function() {
+    await load(PG.home);
+    el('footer a[href="about.html"]');
+  }},
+  { id:'NAV10', name:'Footer hizmet linkleri var', fn: async function() {
+    await load(PG.home);
+    el('footer a[href="gunes-enerjisi.html"]');
+    el('footer a[href="kamera-kurulumu.html"]');
+    el('footer a[href="muhendislik.html"]');
+  }},
+]},
+
+// ---- 2. MOBIL ----
+{ id:'mob', title:'2. Mobil Menu', tests:[
+  { id:'MOB03', name:'Hamburger tiklayinca menu acilir', fn: async function() {
+    await load(PG.home); await setWidth(375);
+    doc().querySelector('.hamburger').click(); await wait(400);
+    assert(hasClass('.mobile-nav','mobile-nav--open'), 'mobile-nav--open sinifi eklenmeli');
+    resetWidth();
+  }},
+  { id:'MOB06', name:'Escape ile menu kapanir', fn: async function() {
+    await load(PG.home); await setWidth(375);
+    doc().querySelector('.hamburger').click(); await wait(400);
+    doc().dispatchEvent(new KeyboardEvent('keydown', { key:'Escape', bubbles:true }));
+    await wait(400);
+    assert(!hasClass('.mobile-nav','mobile-nav--open'), 'Menu kapanmali');
+    resetWidth();
+  }},
+  { id:'MOB08', name:'Menu acikken body scroll kitli', fn: async function() {
+    await load(PG.home); await setWidth(375);
+    doc().querySelector('.hamburger').click(); await wait(400);
+    assert(doc().body.style.overflow === 'hidden', 'overflow hidden olmali');
+    resetWidth();
+  }},
+  { id:'MOB11', name:'aria-expanded acikken true', fn: async function() {
+    await load(PG.home); await setWidth(375);
+    doc().querySelector('.hamburger').click(); await wait(400);
+    assert(attr('.hamburger','aria-expanded') === 'true', 'true olmali');
+    resetWidth();
+  }},
+  { id:'MOB12', name:'aria-expanded kapalikken false', fn: async function() {
+    await load(PG.home);
+    assert(attr('.hamburger','aria-expanded') === 'false', 'false olmali');
+  }},
+  { id:'MOB13', name:'admin.html — hamburger yok, hata yok', fn: async function() {
+    await load(PG.admin);
+    assert(elCount('.hamburger') === 0);
+  }},
+]},
+
+// ---- 3. TEMA ----
+{ id:'thm', title:'3. Tema (Dark/Light)', tests:[
+  { id:'THM01', name:'Toggle ile dark mode aktif', fn: async function() {
+    await load(PG.home);
+    win().localStorage.removeItem('theme'); await load(PG.home);
+    doc().querySelector('.theme-toggle').click(); await wait(200);
+    assert(doc().documentElement.getAttribute('data-theme') === 'dark', 'dark olmali');
+  }},
+  { id:'THM02', name:'Tekrar toggle ile light mode', fn: async function() {
+    await load(PG.home);
+    win().localStorage.setItem('theme','light'); await load(PG.home);
+    var btn = doc().querySelector('.theme-toggle');
+    btn.click(); await wait(100);
+    btn.click(); await wait(100);
+    assert(doc().documentElement.getAttribute('data-theme') === 'light', 'light olmali');
+  }},
+  { id:'THM03', name:'Tema sayfa degisince korunur', fn: async function() {
+    win().localStorage.setItem('theme','dark');
+    await load(PG.contact);
+    assert(doc().documentElement.getAttribute('data-theme') === 'dark', 'dark korunmali');
+    win().localStorage.removeItem('theme');
+  }},
+  { id:'THM11', name:'Tum sayfalarda toggle gorunur', fn: async function() {
+    for (var i = 0; i < PUB_PG.length; i++) {
+      await load(PUB_PG[i]);
+      assert(elCount('.theme-toggle') > 0, PUB_PG[i] + ' toggle yok');
+    }
+  }},
+]},
+
+// ---- 4. ANIMASYON ----
+{ id:'ani', title:'4. Scroll Animasyonlari', tests:[
+  { id:'ANI01', name:'Scroll ile animated sinifi eklenir', fn: async function() {
+    await load(PG.home);
+    win().scrollTo(0, doc().body.scrollHeight); await wait(1200);
+    assert(elCount('[data-animate].animated') > 0, 'En az 1 element animated olmali');
+  }},
+]},
+
+// ---- 5. SAYAC ----
+{ id:'cnt', title:'5. Sayaclar', tests:[
+  { id:'CNT01', name:'Sayaclar hedef degere ulasir', fn: async function() {
+    await load(PG.home);
+    var c = doc().querySelector('.counter');
+    if (!c) throw new Error('.counter yok');
+    c.scrollIntoView(); await wait(3000);
+    assert(c.textContent.trim() !== '0' && c.textContent.trim() !== '', 'Sayac 0 olmamali');
+  }},
+]},
+
+// ---- 6. FORM DOGRULAMA ----
+{ id:'frm', title:'6. Form Dogrulama', tests:[
+  { id:'FRM02', name:'Ad 1 karakter → hata', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#name'); inp.value = 'A'; triggerBlur(inp); await wait(100);
+    assert(inp.classList.contains('error'), 'error sinifi eklenmeli');
+  }},
+  { id:'FRM03', name:'Ad 2 karakter → gecerli', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#name'); inp.value = 'AB'; triggerBlur(inp); await wait(100);
+    assert(!inp.classList.contains('error'), 'error olmamali');
+  }},
+  { id:'FRM04', name:'Sadece bosluk → hata', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#name'); inp.value = '   '; triggerBlur(inp); await wait(100);
+    assert(inp.classList.contains('error'), 'bosluk trim sonrasi hata vermeli');
+  }},
+  { id:'FRM05', name:'Gecersiz email → hata', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#email'); inp.value = 'abc'; triggerBlur(inp); await wait(100);
+    assert(inp.classList.contains('error'));
+  }},
+  { id:'FRM06', name:'Gecerli email a@b.c → gecerli', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#email'); inp.value = 'a@b.c'; triggerBlur(inp); await wait(100);
+    assert(!inp.classList.contains('error'));
+  }},
+  { id:'FRM08', name:'Telefon bos → gecerli', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#phone'); inp.value = ''; triggerBlur(inp); await wait(100);
+    assert(!inp.classList.contains('error'));
+  }},
+  { id:'FRM09', name:'Telefon 6 hane → hata', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#phone'); inp.value = '123456'; triggerBlur(inp); await wait(100);
+    assert(inp.classList.contains('error'), 'min 7 hane');
+  }},
+  { id:'FRM10', name:'Telefon 7 hane → gecerli', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#phone'); inp.value = '1234567'; triggerBlur(inp); await wait(100);
+    assert(!inp.classList.contains('error'));
+  }},
+  { id:'FRM14', name:'Mesaj 9 karakter → hata', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#message'); inp.value = '123456789'; triggerBlur(inp); await wait(100);
+    assert(inp.classList.contains('error'));
+  }},
+  { id:'FRM15', name:'Mesaj 10 karakter → gecerli', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#message'); inp.value = '1234567890'; triggerBlur(inp); await wait(100);
+    assert(!inp.classList.contains('error'));
+  }},
+  { id:'FRM16', name:'Hata duzeltilince temizlenir', fn: async function() {
+    await load(PG.contact);
+    var inp = el('#name');
+    inp.value = 'A'; triggerBlur(inp); await wait(100);
+    assert(inp.classList.contains('error'), 'once hata olmali');
+    inp.value = 'Ahmet'; triggerInput(inp); await wait(100);
+    assert(!inp.classList.contains('error'), 'duzeltince temizlenmeli');
+  }},
+]},
+
+// ---- 7. FORM GONDERIM ----
+{ id:'sub', title:'7. Form Gonderim + localStorage', tests:[
+  { id:'FRM22', name:'Gonderim sonrasi localStorage a kaydedilir', fn: async function() {
+    await load(PG.contact);
+    win().localStorage.removeItem('solarenerji_messages');
+    var d = doc();
+    d.querySelector('#name').value = 'Test Kisi';
+    d.querySelector('#email').value = 'test@test.com';
+    d.querySelector('#subject').value = 'Test Konusu';
+    d.querySelector('#message').value = 'Bu test mesaji 12345';
+    triggerSubmit(d.querySelector('#contact-form'));
+    await wait(3000);
+    var msgs = JSON.parse(win().localStorage.getItem('solarenerji_messages') || '[]');
+    assert(msgs.length >= 1, 'En az 1 mesaj olmali, gelen: ' + msgs.length);
+    assert(msgs[0].name === 'Test Kisi', 'Isim: ' + msgs[0].name);
+  }},
+  { id:'FRM23', name:'Mesaj tum alanlari icerir', fn: async function() {
+    await load(PG.contact);
+    win().localStorage.removeItem('solarenerji_messages');
+    var d = doc();
+    d.querySelector('#name').value = 'Alan Testi';
+    d.querySelector('#email').value = 'alan@test.com';
+    d.querySelector('#phone').value = '5551234567';
+    d.querySelector('#subject').value = 'Konu X';
+    d.querySelector('#service').value = 'kamera';
+    d.querySelector('#message').value = 'Tum alanlarin test edilmesi.';
+    triggerSubmit(d.querySelector('#contact-form'));
+    await wait(3000);
+    var msgs = JSON.parse(win().localStorage.getItem('solarenerji_messages') || '[]');
+    var m = msgs[0];
+    var keys = ['name','email','phone','subject','service','message','date','status'];
+    for (var i = 0; i < keys.length; i++) {
+      assert(keys[i] in m, '"' + keys[i] + '" alani eksik');
+    }
+  }},
+  { id:'FRM21', name:'Honeypot doluysa kayit yapilmaz', fn: async function() {
+    await load(PG.contact);
+    win().localStorage.removeItem('solarenerji_messages');
+    var d = doc();
+    d.querySelector('#name').value = 'Bot';
+    d.querySelector('#email').value = 'bot@bot.com';
+    d.querySelector('#subject').value = 'Spam';
+    d.querySelector('#message').value = 'Bu spam testi mesaji.';
+    d.querySelector('input[name="_gotcha"]').value = 'spam';
+    triggerSubmit(d.querySelector('#contact-form'));
+    await wait(2000);
+    var msgs = JSON.parse(win().localStorage.getItem('solarenerji_messages') || '[]');
+    assert(msgs.length === 0, 'Honeypot dolu — kayit olmamali, gelen: ' + msgs.length);
+  }},
+]},
+
+// ---- 8. SOURCE ----
+{ id:'src', title:'8. Kaynak Sayfa Tespiti (?source=)', tests:[
+  { id:'SRC01', name:'source=gunes-enerjisi', fn: async function() {
+    await load(PG.contact + '?source=gunes-enerjisi');
+    contains(el('#contact-page-title').textContent, 'Güneş Enerjisi');
+    assert(el('#service').value === 'gunes-enerjisi', 'dropdown: ' + el('#service').value);
+  }},
+  { id:'SRC02', name:'source=kamera', fn: async function() {
+    await load(PG.contact + '?source=kamera');
+    contains(el('#contact-page-title').textContent, 'Kamera');
+    assert(el('#service').value === 'kamera');
+  }},
+  { id:'SRC03', name:'source=muhendislik', fn: async function() {
+    await load(PG.contact + '?source=muhendislik');
+    contains(el('#contact-page-title').textContent, 'Mühendislik');
+    assert(el('#service').value === 'muhendislik');
+  }},
+  { id:'SRC04', name:'source=diger → degisiklik yok', fn: async function() {
+    await load(PG.contact + '?source=diger');
+    contains(el('#contact-page-title').textContent, 'İletişim');
+  }},
+  { id:'SRC05', name:'source yok → varsayilan', fn: async function() {
+    await load(PG.contact);
+    contains(el('#contact-page-title').textContent, 'İletişim');
+    assert(el('#service').value === '', 'dropdown bos olmali');
+  }},
+]},
+
+// ---- 9. ADMIN ----
+{ id:'adm', title:'9. Admin Paneli', tests:[
+  { id:'ADM01', name:'Dogru sifre ile giris', fn: async function() {
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    el('#admin-password').value = 'admin123';
+    triggerSubmit(el('#login-form'));
+    await wait(500);
+    assert(hasClass('#admin-dashboard','visible'), 'Dashboard .visible olmali');
+  }},
+  { id:'ADM02', name:'Yanlis sifre → hata', fn: async function() {
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    el('#admin-password').value = 'yanlis';
+    triggerSubmit(el('#login-form'));
+    await wait(500);
+    assert(hasClass('.admin-login__error','visible'), 'Hata .visible olmali');
+  }},
+  { id:'ADM08', name:'Mesaj yokken bos durum', fn: async function() {
+    win().localStorage.removeItem('solarenerji_messages');
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    el('#admin-password').value = 'admin123';
+    triggerSubmit(el('#login-form'));
+    await wait(500);
+    assert(isVisible('#empty-state'), 'Bos durum gorunmeli');
+  }},
+  { id:'ADM09', name:'Mesaj varken istatistikler dogru', fn: async function() {
+    win().localStorage.setItem('solarenerji_messages', JSON.stringify([
+      { name:'A', email:'a@a.com', subject:'S1', service:'gunes-enerjisi', message:'M', date:new Date().toISOString(), status:'new' },
+      { name:'B', email:'b@b.com', subject:'S2', service:'kamera', message:'M', date:new Date().toISOString(), status:'new' },
+      { name:'C', email:'c@c.com', subject:'S3', service:'muhendislik', message:'M', date:new Date().toISOString(), status:'new' },
+    ]));
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    el('#admin-password').value = 'admin123';
+    triggerSubmit(el('#login-form'));
+    await wait(500);
+    assert(el('#stat-total').textContent.trim() === '3', 'Toplam 3 olmali');
+    assert(el('#stat-solar').textContent.trim() === '1', 'Solar 1 olmali');
+    assert(el('#stat-camera').textContent.trim() === '1', 'Kamera 1 olmali');
+    assert(el('#stat-eng').textContent.trim() === '1', 'Eng 1 olmali');
+  }},
+  { id:'ADM24', name:'XSS korunma — script calismaz', fn: async function() {
+    win().localStorage.setItem('solarenerji_messages', JSON.stringify([
+      { name:'<scr' + 'ipt>alert("x")<\/scr' + 'ipt>', email:'x@x.com', subject:'<img onerror=alert(1)>', service:'kamera', message:'t', date:new Date().toISOString(), status:'new' },
+    ]));
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    var fired = false;
+    win().alert = function() { fired = true; };
+    el('#admin-password').value = 'admin123';
+    triggerSubmit(el('#login-form'));
+    await wait(1000);
+    assert(!fired, 'XSS alert calisMAMALI');
+  }},
+  { id:'ADM26', name:'Cikis butonu giris ekranina doner', fn: async function() {
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    el('#admin-password').value = 'admin123';
+    triggerSubmit(el('#login-form'));
+    await wait(500);
+    el('#logout-btn').click(); await wait(500);
+    assert(isVisible('#admin-login'), 'Giris formu gorunmeli');
+    assert(!hasClass('#admin-dashboard','visible'), 'Dashboard gizlenmeli');
+  }},
+]},
+
+// ---- 10. SAYFA TESTLERI ----
+{ id:'pgs', title:'10. Sayfa Bazli', tests:[
+  { id:'IDX01', name:'3 hizmet karti dogru yonlendiriyor', fn: async function() {
+    await load(PG.home);
+    var cards = doc().querySelectorAll('a.image-card--clickable');
+    assert(cards.length === 3, '3 kart olmali');
+    var hrefs = [].map.call(cards, function(c) { return c.getAttribute('href'); });
+    assert(hrefs.indexOf('gunes-enerjisi.html') !== -1, 'gunes linki yok');
+    assert(hrefs.indexOf('kamera-kurulumu.html') !== -1, 'kamera linki yok');
+    assert(hrefs.indexOf('muhendislik.html') !== -1, 'muhendislik linki yok');
+  }},
+  { id:'IDX02', name:'Gorsel kartlari yukleniyor', fn: async function() {
+    await load(PG.home);
+    var imgs = doc().querySelectorAll('.image-card__image');
+    assert(imgs.length === 3, '3 gorsel olmali');
+    for (var i = 0; i < imgs.length; i++) {
+      var src = imgs[i].getAttribute('src');
+      assert(src && src.length > 0, 'src attribute bos');
+      var r = await fetch(BASE + '/' + src, { method: 'HEAD' });
+      assert(r.status === 200, 'Gorsel bulunamadi: ' + src + ' (HTTP ' + r.status + ')');
+    }
+  }},
+  { id:'IDX03', name:'loading="lazy" attribute mevcut', fn: async function() {
+    await load(PG.home);
+    var imgs = doc().querySelectorAll('.image-card__image');
+    for (var i = 0; i < imgs.length; i++) {
+      assert(imgs[i].getAttribute('loading') === 'lazy', 'lazy attribute yok');
+    }
+  }},
+  { id:'GNS01', name:'Gunes CTA linki dogru', fn: async function() {
+    await load(PG.solar);
+    el('a[href*="contact.html?source=gunes-enerjisi"]');
+  }},
+  { id:'KAM01', name:'Kamera CTA linki dogru', fn: async function() {
+    await load(PG.camera);
+    el('a[href*="contact.html?source=kamera"]');
+  }},
+  { id:'MUH01', name:'Muhendislik CTA linki dogru', fn: async function() {
+    await load(PG.eng);
+    el('a[href*="contact.html?source=muhendislik"]');
+  }},
+  { id:'ABT01', name:'about.html yuklenebilir', fn: async function() {
+    var r = await fetch(PG.about, {method:'HEAD'});
+    assert(r.status === 200, 'Beklenen 200, gelen: ' + r.status);
+  }},
+]},
+
+// ---- 11. SEO ----
+{ id:'seo', title:'11. SEO', tests:[
+  { id:'SEO01', name:'Her sayfada benzersiz title', fn: async function() {
+    var titles = [];
+    for (var i = 0; i < ALL_PG.length; i++) {
+      await load(ALL_PG[i]);
+      var t = doc().title;
+      assert(t && t.length > 0 && t.length <= 70, 'Title uygun degil: ' + t);
+      titles.push(t);
+    }
+    var uniq = titles.filter(function(v,i,a) { return a.indexOf(v) === i; });
+    assert(uniq.length === titles.length, 'Title lar benzersiz olmali — tekrar var');
+  }},
+  { id:'SEO03', name:'Open Graph etiketleri mevcut', fn: async function() {
+    var urls = [PG.home, PG.solar, PG.camera, PG.eng];
+    for (var i = 0; i < urls.length; i++) {
+      await load(urls[i]);
+      el('meta[property="og:title"]');
+      el('meta[property="og:image"]');
+    }
+  }},
+  { id:'SEO06', name:'admin.html noindex nofollow', fn: async function() {
+    await load(PG.admin);
+    var r = attr('meta[name="robots"]','content');
+    contains(r, 'noindex');
+    contains(r, 'nofollow');
+  }},
+  { id:'SEO07', name:'og:image dogru dosyalar', fn: async function() {
+    var map = [[PG.home,'sample5'],[PG.solar,'sample1'],[PG.camera,'sample2'],[PG.eng,'sample3']];
+    for (var i = 0; i < map.length; i++) {
+      await load(map[i][0]);
+      contains(attr('meta[property="og:image"]','content'), map[i][1]);
+    }
+  }},
+  { id:'SEO10', name:'Favicon logo.svg', fn: async function() {
+    await load(PG.home);
+    contains(attr('link[rel="icon"]','href'), 'logo.svg');
+  }},
+]},
+
+// ---- 12. GORSELLER ----
+{ id:'img', title:'12. Gorseller', tests:[
+  { id:'IMG06', name:'logo.svg header + footer', fn: async function() {
+    await load(PG.home);
+    el('.header img[src*="logo.svg"]');
+    el('footer img[src*="logo.svg"]');
+  }},
+  { id:'IMG07', name:'object-fit: cover', fn: async function() {
+    await load(PG.home);
+    assert(css('.image-card__image','objectFit') === 'cover', 'cover olmali');
+  }},
+  { id:'IMGF', name:'sample1-5.jpg dosyalari mevcut', fn: async function() {
+    for (var i = 1; i <= 5; i++) {
+      var r = await fetch(BASE + '/img/sample' + i + '.jpg', {method:'HEAD'});
+      assert(r.status === 200, 'sample' + i + '.jpg bulunamadi');
+    }
+  }},
+]},
+
+// ---- 13. ERISILEBILIRLIK ----
+{ id:'a11', title:'13. Erisilebilirlik', tests:[
+  { id:'A1105', name:'ARIA role="navigation" mevcut', fn: async function() {
+    await load(PG.home);
+    assert(elCount('[role="navigation"]') > 0);
+  }},
+  { id:'A1106', name:'Honeypot tabindex="-1"', fn: async function() {
+    await load(PG.contact);
+    assert(attr('input[name="_gotcha"]','tabindex') === '-1');
+  }},
+]},
+
+// ---- 14. PERFORMANS ----
+{ id:'prf', title:'14. Performans', tests:[
+  { id:'PRF05', name:'Google Fonts preconnect mevcut', fn: async function() {
+    await load(PG.home);
+    el('link[rel="preconnect"][href*="fonts.googleapis.com"]');
+  }},
+  { id:'PRF07', name:'Tum sayfalar 200 ile yuklenebilir', fn: async function() {
+    for (var i = 0; i < ALL_PG.length; i++) {
+      var r = await fetch(ALL_PG[i], {method:'HEAD'});
+      assert(r.status === 200, ALL_PG[i].split('/').pop() + ' → ' + r.status);
+    }
+  }},
+]},
+
+// ---- 15. E2E ----
+{ id:'e2e', title:'15. Uctan Uca', tests:[
+  { id:'E2E01', name:'Gunes: form gonder → admin da gor', fn: async function() {
+    win().localStorage.removeItem('solarenerji_messages');
+    await load(PG.contact + '?source=gunes-enerjisi');
+    var d = doc();
+    assert(d.querySelector('#service').value === 'gunes-enerjisi', 'Dropdown secili olmali');
+    d.querySelector('#name').value = 'E2E Gunes';
+    d.querySelector('#email').value = 'e2e@g.com';
+    d.querySelector('#message').value = 'Gunes enerjisi E2E test mesaji';
+    triggerSubmit(d.querySelector('#contact-form'));
+    await wait(3000);
+    // Admin panelinde kontrol
+    win().sessionStorage.removeItem('solarenerji_admin_session');
+    await load(PG.admin);
+    el('#admin-password').value = 'admin123';
+    triggerSubmit(el('#login-form'));
+    await wait(500);
+    assert(el('#stat-total').textContent.trim() === '1', 'Toplam 1 mesaj');
+    assert(el('#stat-solar').textContent.trim() === '1', 'Solar 1 mesaj');
+  }},
+  { id:'E2E05', name:'Tema tum sayfalarda korunur', fn: async function() {
+    win().localStorage.setItem('theme','dark');
+    var check = [PG.home, PG.solar, PG.contact, PG.about];
+    for (var i = 0; i < check.length; i++) {
+      await load(check[i]);
+      assert(doc().documentElement.getAttribute('data-theme') === 'dark', check[i].split('/').pop() + ' dark olmali');
+    }
+    win().localStorage.removeItem('theme');
+  }},
+]},
+
+];
+
+// ============================================================================
+// RUNNER
+// ============================================================================
+async function runAll() {
+  var btn = document.getElementById('bRun');
+  btn.disabled = true; btn.textContent = 'Calisiyor...';
+
+  // Onceki sonuclari temizle
+  total = 0; pass = 0; fail = 0;
+  t0 = Date.now();
+  init(); // UI yi sifirla
+
+  // Topla
+  for (var g = 0; g < GROUPS.length; g++) total += GROUPS[g].tests.length;
+  stats();
+
+  // Sunucu erisilebilirlik on kontrolu
+  try {
+    var preCheck = await fetch(BASE + '/index.html', { method: 'HEAD' });
+    if (preCheck.status !== 200) throw new Error('HTTP ' + preCheck.status);
+  } catch(e) {
+    document.getElementById('warn').innerHTML =
+      '<div class="warn-box">Sunucu erisimi basarisiz: ' + e.message + '<br>Yerel sunucu calistiginden emin olun.</div>';
+    btn.disabled = false; btn.textContent = 'Tekrar Calistir';
+    return;
+  }
+
+  for (var gi = 0; gi < GROUPS.length; gi++) {
+    var grp = GROUPS[gi];
+    var gP = 0, gF = 0;
+    document.getElementById('b-' + grp.id).className = 'badge badge-rn';
+    document.getElementById('b-' + grp.id).textContent = 'calisiyor...';
+
+    for (var ti = 0; ti < grp.tests.length; ti++) {
+      var test = grp.tests[ti];
+      setRunning(test.id);
+      var s = Date.now();
+      try {
+        await test.fn();
+        setResult(test.id, true, Date.now() - s);
+        gP++;
+      } catch(e) {
+        setResult(test.id, false, Date.now() - s, e.message);
+        gF++;
+      }
+      resetWidth();
+    }
+    setBadge(grp.id, gP, gF);
+  }
+
+  btn.disabled = false; btn.textContent = 'Tekrar Calistir';
+  document.getElementById('tmr').textContent = ((Date.now() - t0) / 1000).toFixed(1) + 's';
+}
+
+// Init
+function init() {
+  OUT.innerHTML = '';
+  for (var g = 0; g < GROUPS.length; g++) {
+    mkGroup(GROUPS[g].id, GROUPS[g].title);
+    for (var t = 0; t < GROUPS[g].tests.length; t++) {
+      mkRow(GROUPS[g].id, GROUPS[g].tests[t].id, GROUPS[g].tests[t].name);
+    }
+  }
+  total = 0; pass = 0; fail = 0; stats();
+}
+
+document.getElementById('bRun').addEventListener('click', function() {
+  runAll().catch(function(e) {
+    document.getElementById('warn').innerHTML =
+      '<div class="warn-box">Test calismasi hatasi: ' + e.message + '</div>';
+    var btn = document.getElementById('bRun');
+    btn.disabled = false; btn.textContent = 'Tekrar Calistir';
+  });
+});
+document.getElementById('bFrame').addEventListener('click', function() {
+  document.body.classList.toggle('sf');
+  this.textContent = document.body.classList.contains('sf') ? 'Tarayici Gizle' : 'Tarayici Goster';
+});
+
+try {
+  init();
+  // Sunucu erisilebilirlik kontrolu
+  fetch(BASE + '/index.html', { method: 'HEAD' }).then(function(r) {
+    if (r.status !== 200) {
+      document.getElementById('warn').innerHTML =
+        '<div class="warn-box">Sunucu yanit verdi ama index.html bulunamadi (HTTP ' + r.status + ')</div>';
+    }
+  }).catch(function() {
+    document.getElementById('warn').innerHTML =
+      '<div class="warn-box">Sunucu erisimi basarisiz! Yerel sunucu calismiyor olabilir.<br>' +
+      '<code style="background:#78350f;padding:2px 8px;border-radius:4px;margin-top:8px;display:inline-block">' +
+      'cd C:\\PROJECTS\\solar1-main && python -m http.server 3000</code><br>' +
+      'Sonra: <a href="http://localhost:3000/tests/test-runner.html">http://localhost:3000/tests/test-runner.html</a></div>';
+    document.getElementById('bRun').disabled = true;
+  });
+} catch(e) {
+  document.getElementById('warn').innerHTML =
+    '<div class="warn-box">Baslatma hatasi: ' + e.message + '</div>';
+}
+</script>
+</body>
+</html>

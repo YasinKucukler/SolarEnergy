@@ -1,0 +1,153 @@
+/* ============================================
+   Footer — 4 Sütunlu Alt Bilgi Alanı
+   ============================================
+
+   BU DOSYA: Tüm sayfalarda görünen footer bileşeninin
+   stillerini içerir.
+
+   İÇERİK:
+   - Footer container ve arka plan
+   - 4 sütun grid (marka, linkler, hizmetler, iletişim)
+   - Sosyal medya ikonları
+   - İletişim bilgileri
+   - Copyright bar
+
+   RESPONSIVE DAVRANIŞ:
+   - Mobil: 1 sütun (üst üste)
+   - 576px: 2 sütun
+   - 992px: 4 sütun (1.5fr 1fr 1fr 1.2fr)
+
+   DEĞİŞTİRMEK İÇİN:
+   - Arka plan rengi: --bg-footer (variables.css)
+   - Sosyal ikon renkleri: .footer__social-link hover rengi
+   - Sütun oranları: responsive.css'teki grid-template-columns
+   ============================================ */
+
+/* Footer ana container — koyu arka plan */
+.footer {
+  background-color: var(--bg-footer);
+  color: var(--text-on-dark);
+  padding-top: var(--space-16);
+}
+
+/* 4 sütunlu grid — responsive.css'te breakpoint'lere göre değişir */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;    /* Mobilde tek sütun */
+  gap: var(--space-8);
+  padding-bottom: var(--space-12);
+}
+
+/* ---- Marka Sütunu ---- */
+/* Logo, açıklama ve sosyal medya ikonları */
+.footer__brand {
+  max-width: 320px;
+}
+
+/* Footer logo — küçük versiyon (32x32) */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+}
+
+/* Logo'daki "Enerji" kısmı — gold renk */
+.footer__logo span {
+  color: var(--color-accent);
+}
+
+/* Marka açıklama metni */
+.footer__brand p {
+  color: var(--color-gray-400);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---- Link Sütunları ---- */
+/* Sütun başlığı */
+.footer__heading {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-white);
+  margin-bottom: var(--space-4);
+}
+
+/* Link listesi — dikey düzen */
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Tek link — hover'da gold renk */
+.footer__link {
+  color: var(--color-gray-400);
+  font-size: var(--fs-sm);
+  transition: color var(--transition-fast);
+}
+
+.footer__link:hover {
+  color: var(--color-accent);
+}
+
+/* ---- İletişim Bilgileri ---- */
+/* İkon + metin satırı */
+.footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  color: var(--color-gray-400);
+  font-size: var(--fs-sm);
+}
+
+/* İletişim ikonu — gold renk */
+.footer__contact-item i {
+  color: var(--color-accent);
+  margin-top: 3px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* ---- Sosyal Medya İkonları ---- */
+/* DEĞİŞTİRMEK İÇİN: Hover renklerini ayarlayın */
+.footer__social {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* Sosyal ikon butonu — daire şekli, hover'da gold */
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-gray-400);
+  font-size: var(--fs-lg);
+  transition: all var(--transition-fast);
+}
+
+.footer__social-link:hover {
+  background-color: var(--color-accent);
+  color: var(--color-black);
+  transform: translateY(-2px);
+}
+
+/* ---- Copyright Bar ---- */
+/* Alt çizgi — ince çizgi + telif hakkı metni */
+.footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-5) 0;
+  text-align: center;
+  color: var(--color-gray-500);
+  font-size: var(--fs-sm);
+}

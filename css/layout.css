@@ -1,0 +1,107 @@
+/* ============================================
+   Layout — Container, Grid, Section Boşlukları
+   ============================================
+
+   BU DOSYA: Sayfa düzeni yapı taşlarını içerir.
+
+   İÇERİK:
+   - Container (sayfa genişliği sınırlayıcı)
+   - Section (bölüm boşlukları)
+   - Grid sistemi (1-4 sütun)
+   - Page wrapper (yapışkan footer için)
+
+   DEĞİŞTİRMEK İÇİN:
+   - Container genişliği: --container-max (variables.css, varsayılan 1200px)
+   - Section padding: --space değişkenleri
+   - Grid gap: --space-6 (varsayılan 24px)
+   ============================================ */
+
+/* ---- Container ---- */
+/* Sayfa içeriğini ortalar ve max genişliği sınırlar */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Dar container — 800px max (formlar, dar içerik) */
+.container--narrow {
+  max-width: 800px;
+}
+
+/* Geniş container — 1400px max (geniş galeriler) */
+.container--wide {
+  max-width: 1400px;
+}
+
+/* ---- Section (Bölüm Boşlukları) ---- */
+/* Varsayılan section padding — responsive.css'te override edilir */
+.section {
+  padding: var(--space-16) 0;     /* 64px üst/alt */
+}
+
+/* Büyük section — daha fazla boşluk */
+.section--lg {
+  padding: var(--space-20) 0;     /* 80px üst/alt */
+}
+
+/* Küçük section — az boşluk (trust bar vb.) */
+.section--sm {
+  padding: var(--space-10) 0;     /* 40px üst/alt */
+}
+
+/* Arka planlı section — açık gri zemin */
+.section--bg {
+  background-color: var(--bg-surface);
+}
+
+/* Koyu section — lacivert zemin, beyaz metin */
+.section--dark {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Yeşil section — teal zemin, beyaz metin */
+.section--green {
+  background-color: var(--color-green);
+  color: var(--color-white);
+}
+
+/* ---- Grid Sistemi ---- */
+/* Mobile-first: tümü tek sütunla başlar */
+/* responsive.css'te breakpoint'lere göre sütun sayısı artar */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* 2 sütunlu grid — mobilde 1 sütun, 576px'te 2 sütun */
+.grid--2 {
+  grid-template-columns: 1fr;
+}
+
+/* 3 sütunlu grid — mobilde 1, tablette 2, masaüstünde 3 */
+.grid--3 {
+  grid-template-columns: 1fr;
+}
+
+/* 4 sütunlu grid — mobilde 1, tablette 2, masaüstünde 4 */
+.grid--4 {
+  grid-template-columns: 1fr;
+}
+
+/* ---- Page Wrapper ---- */
+/* Yapışkan footer için flex container */
+/* Footer sayfanın altında kalır, içerik kısa olsa bile */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-wrapper > main {
+  flex: 1;    /* Main alanı genişler, footer alta itilir */
+}

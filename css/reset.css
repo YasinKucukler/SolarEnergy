@@ -1,0 +1,123 @@
+/* ============================================
+   Modern CSS Reset — Tarayıcı Varsayılanlarını Sıfırlama
+   ============================================
+
+   BU DOSYA: Tarayıcılar arası tutarlılık sağlamak için
+   varsayılan stilleri sıfırlar.
+
+   İÇERİK:
+   - Box-sizing sıfırlama (tüm elementler)
+   - HTML ve body temel ayarları
+   - Başlık ve paragraf taşma koruması
+   - Link, medya, form ve liste sıfırlamaları
+   - Focus göstergesi (erişilebilirlik)
+
+   DEĞİŞTİRMEK İÇİN:
+   - Scroll davranışı: html'deki scroll-behavior
+   - Font ailesi: variables.css'teki --font-family
+   - Focus rengi: :focus-visible'daki --color-accent
+   ============================================ */
+
+/* ---- Kutu Modeli Sıfırlama ---- */
+/* Tüm elementlerde border-box kullan — padding genişliği artırmaz */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- HTML Kök Ayarları ---- */
+/* Metin boyutu ayarı: Mobil tarayıcıların otomatik boyutlandırmasını engelle */
+/* Yumuşak kaydırma: Sayfa içi bağlantılarda akıcı geçiş */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;       /* DEĞİŞTİRMEK İÇİN: 'auto' yaparak anlık geçiş sağlayabilirsiniz */
+}
+
+/* ---- Body Temel Ayarları ---- */
+/* Font, renk ve arka plan variables.css'ten gelir */
+body {
+  min-height: 100vh;             /* Sayfa en az ekran yüksekliğinde */
+  line-height: var(--lh-normal);
+  font-family: var(--font-family);
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  background-color: var(--bg-body);
+  -webkit-font-smoothing: antialiased;      /* macOS'ta daha pürüzsüz font */
+  -moz-osx-font-smoothing: grayscale;       /* Firefox'ta daha pürüzsüz font */
+}
+
+/* ---- Başlıklar ---- */
+/* Uzun kelimelerin taşmasını engelle, başlık fontu uygula */
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  line-height: var(--lh-tight);
+  font-family: var(--font-family-heading);
+}
+
+/* ---- Paragraflar ---- */
+/* Uzun kelimelerin taşmasını engelle */
+p {
+  overflow-wrap: break-word;
+}
+
+/* ---- Linkler ---- */
+/* Varsayılan mavi renk ve altçizgiyi kaldır */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- Medya Elementleri ---- */
+/* Görsel, video vb. elementlerin taşmasını engelle */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;               /* Container'dan taşmaz */
+  height: auto;                  /* Oranı korur */
+}
+
+/* ---- Form Elementleri ---- */
+/* Form elementleri ebeveynden font ve renk alır */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Buton varsayılanlarını temizle */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ---- Listeler ---- */
+/* Varsayılan madde işaretlerini kaldır */
+ul,
+ol {
+  list-style: none;
+}
+
+/* ---- Tablolar ---- */
+/* Çift kenarlık yerine tek kenarlık */
+table {
+  border-collapse: collapse;
+}
+
+/* ---- Erişilebilirlik: Focus Göstergesi ---- */
+/* Klavye navigasyonunda görünen altın renkli çerçeve */
+/* DEĞİŞTİRMEK İÇİN: Renk → --color-accent, kalınlık → 2px, mesafe → 2px */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

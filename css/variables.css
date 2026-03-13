@@ -1,0 +1,168 @@
+/* ============================================
+   Design Tokens — SolarEnerji Çoklu Hizmet Sistemi
+   ============================================
+
+   BU DOSYA: Tüm sitenin renk, yazı tipi, boşluk ve
+   diğer tasarım değişkenlerini merkezi olarak yönetir.
+
+   DEĞİŞTİRİLEBİLİR ALANLAR:
+   - Renk paletleri (primary, green, accent, camera-blue, engineering-purple)
+   - Yazı tipi ailesi (--font-family)
+   - Yazı boyutları (--fs-xs ... --fs-6xl)
+   - Boşluk değerleri (--space-1 ... --space-24)
+   - Köşe yuvarlaklıkları (--radius-sm ... --radius-full)
+   - Geçiş süreleri (--transition-fast, base, slow)
+   - Container genişliği (--container-max)
+   - Navbar yüksekliği (--nav-height)
+   ============================================ */
+
+:root {
+  /* ---- Ana Renkler (Primary) ---- */
+  /* Navbar ve koyu arka planlar için kullanılır */
+  --color-primary: #0f2440;
+  --color-primary-light: #1a3a5c;
+  --color-primary-dark: #091828;
+
+  /* ---- Marka Yeşili (Teal) ---- */
+  /* Butonlar, ikonlar ve vurgu öğeleri için */
+  --color-green: #0f766e;
+  --color-green-light: #14b8a6;
+  --color-green-dark: #0d5f58;
+
+  /* ---- Vurgu Rengi (Gold/Amber) ---- */
+  /* CTA butonları, aktif linkler ve önemli öğeler için */
+  /* Aynı zamanda Güneş Enerjisi hizmet rengi olarak kullanılır */
+  --color-accent: #f59e0b;
+  --color-accent-light: #fbbf24;
+  --color-accent-dark: #d97706;
+
+  /* ---- Kamera Hizmeti Renkleri (Mavi) ---- */
+  /* Kamera kurulumu sayfası ve kartları için */
+  --color-camera: #3b82f6;
+  --color-camera-light: #60a5fa;
+  --color-camera-dark: #2563eb;
+  --color-camera-bg: rgba(59, 130, 246, 0.1);
+
+  /* ---- Mühendislik Hizmeti Renkleri (Mor) ---- */
+  /* Mühendislik sayfası ve kartları için */
+  --color-engineering: #8b5cf6;
+  --color-engineering-light: #a78bfa;
+  --color-engineering-dark: #7c3aed;
+  --color-engineering-bg: rgba(139, 92, 246, 0.1);
+
+  /* ---- Nötr Renkler (Gri Skalası) ---- */
+  /* Arka planlar, metinler ve kenarlıklar için */
+  --color-white: #ffffff;
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+  --color-black: #0a0a0a;
+
+  /* ---- Anlamsal Token'lar (Semantic — Light Mode varsayılanları) ---- */
+  /* Bu değişkenler dark-mode.css'te override edilir */
+  --bg-body: var(--color-white);
+  --bg-surface: var(--color-gray-50);
+  --bg-surface-alt: var(--color-gray-100);
+  --bg-nav: var(--color-primary);
+  --bg-footer: var(--color-gray-900);
+  --bg-card: var(--color-white);
+  --bg-hero: linear-gradient(135deg, var(--color-primary) 0%, var(--color-green-dark) 100%);
+
+  /* Metin renkleri */
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gray-600);
+  --text-muted: var(--color-gray-500);
+  --text-on-dark: var(--color-gray-100);
+  --text-on-primary: var(--color-white);
+  --text-heading: var(--color-primary);
+  --text-link: var(--color-green);
+
+  /* Kenarlık renkleri */
+  --border-color: var(--color-gray-200);
+  --border-color-light: var(--color-gray-100);
+
+  /* Gölge seviyeleri */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* ---- Yazı Tipi (Typography) ---- */
+  /* DEĞİŞTİRMEK İÇİN: Google Fonts'tan başka bir font seçip buraya yazın */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Yazı boyutları — rem biriminde (1rem = 16px) */
+  --fs-xs: 0.75rem;    /* 12px */
+  --fs-sm: 0.875rem;   /* 14px */
+  --fs-base: 1rem;     /* 16px */
+  --fs-lg: 1.125rem;   /* 18px */
+  --fs-xl: 1.25rem;    /* 20px */
+  --fs-2xl: 1.5rem;    /* 24px */
+  --fs-3xl: 1.875rem;  /* 30px */
+  --fs-4xl: 2.25rem;   /* 36px */
+  --fs-5xl: 3rem;      /* 48px */
+  --fs-6xl: 3.75rem;   /* 60px */
+
+  /* Yazı kalınlıkları */
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* Satır yükseklikleri */
+  --lh-tight: 1.25;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.75;
+
+  /* ---- Boşluk Sistemi (Spacing) ---- */
+  /* Tutarlı boşluklar için bu değişkenleri kullanın */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* ---- Köşe Yuvarlaklıkları (Border Radius) ---- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ---- Geçiş Süreleri (Transitions) ---- */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* ---- Z-index Katman Sırası ---- */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+
+  /* ---- Container (Sayfa Genişliği) ---- */
+  /* DEĞİŞTİRMEK İÇİN: max değeri artırıp azaltabilirsiniz */
+  --container-max: 1200px;
+  --container-padding: var(--space-5);
+
+  /* ---- Navbar Yüksekliği ---- */
+  --nav-height: 72px;
+}

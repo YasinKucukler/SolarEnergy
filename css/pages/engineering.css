@@ -1,0 +1,74 @@
+/* ============================================
+   Mühendislik Destekleri Sayfası Stilleri
+   ============================================
+
+   BU DOSYA: muhendislik.html sayfasına özel stilleri içerir.
+
+   DEĞİŞTİRİLEBİLİR ALANLAR:
+   - Hero gradient renkleri (.eng-hero) — mor tonları
+   - Özellik kartları ikon renkleri
+   - Kart görsel placeholder gradient renkleri
+   ============================================ */
+
+/* ---- Hero Bölümü ---- */
+/* Mühendislik sayfası hero — mor tonlu gradient */
+.eng-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-engineering-dark) 100%);
+  color: var(--color-white);
+  padding: var(--space-16) 0 var(--space-20);
+  overflow: hidden;
+}
+
+/* Dekoratif daire — mor parıltı */
+.eng-hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -15%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.eng-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.eng-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ---- Mühendislik Hizmet Kartları ---- */
+/* Mühendislik kartlarındaki görsel placeholder — mor gradient */
+.eng-card .service-image-card__image {
+  background: linear-gradient(135deg, var(--color-engineering-dark), var(--color-engineering-light));
+}
+
+/* ---- Mühendislik Özellik Kartları ---- */
+/* 3D modelleme, baskı vb. özellikler için ikon rengi */
+/* DEĞİŞTİRMEK İÇİN: background gradient renklerini değiştirin */
+.eng-feature .feature-card__icon {
+  background: linear-gradient(135deg, var(--color-engineering), var(--color-engineering-dark));
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 992px) {
+  .eng-hero {
+    padding: var(--space-20) 0 var(--space-24);
+  }
+}

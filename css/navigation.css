@@ -1,0 +1,283 @@
+/* ============================================
+   Navigation — Sabit Navbar, Hamburger Menü, Mobil Çekmece
+   ============================================
+
+   BU DOSYA: Sabit üst navigasyon çubuğu ve mobil menü
+   bileşenlerinin tüm stillerini içerir.
+
+   İÇERİK:
+   - Header (sabit üst çubuk, bulanık arka plan)
+   - Logo
+   - Masaüstü navigasyon linkleri
+   - Tema değiştirme butonu (ay/güneş ikonu)
+   - Hamburger menü butonu (3 çizgi → X animasyonu)
+   - Mobil çekmece menü (sağdan kayar)
+   - Menü arkası karartma overlay'i
+   - Nav spacer (sabit navbar altında içerik kaydırma)
+
+   RESPONSIVE DAVRANIŞ:
+   - Mobil: Hamburger + çekmece menü görünür
+   - 992px+: Masaüstü nav linkleri görünür (responsive.css'te)
+
+   DEĞİŞTİRMEK İÇİN:
+   - Navbar yüksekliği: variables.css → --nav-height
+   - Navbar arka planı: variables.css → --bg-nav
+   - Bulanıklık efekti: backdrop-filter → blur(10px)
+   - Aktif link rengi: --color-accent
+   - Mobil çekmece genişliği: .mobile-nav → width: 300px
+   - Hamburger çizgi kalınlığı: .hamburger__line → height: 2px
+   ============================================ */
+
+/* ---- Header (Sabit Üst Çubuk) ---- */
+/* Sayfa kaydırılsa bile sabit kalır, bulanık arka plan efekti */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  height: var(--nav-height);
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(10px);           /* Arka plan bulanıklığı */
+  -webkit-backdrop-filter: blur(10px);   /* Safari desteği */
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Kaydırıldığında gölge eklenir — JS tarafından .header--scrolled class'ı eklenir */
+.header--scrolled {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Header içeriği — logo sol, nav sağ */
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* ---- Logo ---- */
+/* SVG ikon + marka adı, "Enerji" kısmı altın rengi */
+/* DEĞİŞTİRMEK İÇİN: Logo boyutu → .logo svg width/height, Font boyutu → --fs-xl */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  text-decoration: none;
+  flex-shrink: 0;                /* Daraltılamaz, sabit genişlik */
+}
+
+.logo svg {
+  width: 36px;
+  height: 36px;
+}
+
+/* Logo'daki vurgulanan kelime (ör: "Enerji") */
+.logo span {
+  color: var(--color-accent);
+}
+
+/* ---- Masaüstü Navigasyon ---- */
+/* Mobilde gizli, 992px'te görünür (responsive.css'te display: flex yapılır) */
+.nav {
+  display: none;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Tek navigasyon linki */
+.nav__link {
+  position: relative;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-gray-300);
+  transition: color var(--transition-fast);
+  border-radius: var(--radius-md);
+}
+
+/* Hover durumu — beyaz renk */
+.nav__link:hover {
+  color: var(--color-white);
+}
+
+/* Aktif sayfa linki — altın renk */
+.nav__link--active {
+  color: var(--color-accent);
+}
+
+/* Aktif link altı çizgisi — altın renk, yuvarlak köşeli */
+.nav__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: var(--space-3);
+  right: var(--space-3);
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-full);
+}
+
+/* ---- Header Sağ Taraf Aksiyonları ---- */
+/* Tema butonu + CTA butonu + hamburger */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ---- Tema Değiştirme Butonu ---- */
+/* Ay/Güneş ikonu — dark mode açma/kapama */
+/* DEĞİŞTİRMEK İÇİN: Buton boyutu → width/height, İkon boyutu → font-size */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  color: var(--color-gray-300);
+  transition: all var(--transition-fast);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: var(--fs-lg);
+}
+
+/* Hover'da altın renk ve hafif arka plan */
+.theme-toggle:hover {
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Varsayılan: Ay ikonu görünür (açık tema) */
+.theme-toggle .icon-moon { display: block; }
+/* Güneş ikonu gizli — dark-mode.css'te override edilir */
+.theme-toggle .icon-sun { display: none; }
+
+/* ---- Navbar CTA Butonu ---- */
+/* Mobilde gizli, 992px'te görünür (responsive.css'te) */
+.header-cta {
+  display: none;
+}
+
+/* ---- Hamburger Menü Butonu ---- */
+/* 3 çizgili buton — tıklanınca X'e dönüşür (JS ile .hamburger--active eklenir) */
+/* DEĞİŞTİRMEK İÇİN: Buton boyutu → width/height, Çizgi genişliği → .hamburger__line width */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: calc(var(--z-overlay) + 1);     /* Overlay'in üstünde kalır */
+}
+
+/* Hamburger çizgisi — beyaz, yuvarlak uçlu */
+.hamburger__line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-base);
+}
+
+/* Çizgiler arası boşluk */
+.hamburger__line + .hamburger__line {
+  margin-top: 6px;
+}
+
+/* Aktif durum — üst çizgi 45° döner */
+.hamburger--active .hamburger__line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+/* Aktif durum — orta çizgi kaybolur */
+.hamburger--active .hamburger__line:nth-child(2) {
+  opacity: 0;
+}
+
+/* Aktif durum — alt çizgi -45° döner (X şekli oluşur) */
+.hamburger--active .hamburger__line:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* ---- Mobil Çekmece Menü (Drawer) ---- */
+/* Sağdan kayarak açılır — JS ile .mobile-nav--open class'ı eklenir */
+/* DEĞİŞTİRMEK İÇİN: Genişlik → width: 300px, Arka plan → --color-primary */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;                  /* Başlangıçta ekran dışında */
+  width: 300px;
+  max-width: 80vw;               /* Ekranın %80'inden geniş olamaz */
+  height: 100vh;
+  background-color: var(--color-primary);
+  z-index: var(--z-overlay);
+  padding: calc(var(--nav-height) + var(--space-8)) var(--space-6) var(--space-6);
+  transition: right var(--transition-slow);
+  overflow-y: auto;              /* İçerik uzunsa kaydırılabilir */
+}
+
+/* Açık durum — sağdan 0'a kayar */
+.mobile-nav--open {
+  right: 0;
+}
+
+/* Mobil menü linki */
+.mobile-nav__link {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+  color: var(--color-gray-300);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  margin-bottom: var(--space-1);
+}
+
+/* Hover ve aktif durum — altın renk */
+.mobile-nav__link:hover,
+.mobile-nav__link--active {
+  color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobil menüdeki CTA butonu */
+.mobile-nav__cta {
+  margin-top: var(--space-6);
+}
+
+/* ---- Menü Arkası Karartma (Overlay) ---- */
+/* Mobil menü açıkken arka planı karartır, tıklanınca menü kapanır */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-overlay) - 1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base);
+}
+
+/* Görünür durum — JS ile .nav-overlay--visible eklenir */
+.nav-overlay--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---- Nav Spacer ---- */
+/* Sabit navbar'ın altına düşen içeriği aşağı iter */
+/* Yükseklik navbar ile aynı olmalı (--nav-height) */
+.nav-spacer {
+  height: var(--nav-height);
+}

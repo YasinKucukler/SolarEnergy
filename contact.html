@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>İletişim | SolarEnerji — Ücretsiz Teklif Alın</title>
+  <meta name="description" content="Güneş enerjisi, kamera kurulumu ve mühendislik projeleriniz için bize ulaşın. Ücretsiz keşif ve teklif.">
+  <link rel="canonical" href="https://www.orneksite.com/contact.html">
+
+  <meta property="og:title" content="İletişim | SolarEnerji">
+  <meta property="og:description" content="Projeleriniz için ücretsiz teklif alın.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.orneksite.com/contact.html">
+  <meta property="og:locale" content="tr_TR">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <script>(function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/pages/about.css">
+  <link rel="stylesheet" href="css/pages/contact.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="container">
+        <a href="index.html" class="logo" aria-label="Ana Sayfa">
+          <img src="img/logo.svg" alt="" width="36" height="36">
+          Solar<span>Enerji</span>
+        </a>
+        <nav class="nav" role="navigation" aria-label="Ana menü">
+          <a href="index.html" class="nav__link">Ana Sayfa</a>
+          <a href="gunes-enerjisi.html" class="nav__link">Güneş Enerjisi</a>
+          <a href="kamera-kurulumu.html" class="nav__link">Kamera Kurulumu</a>
+          <a href="muhendislik.html" class="nav__link">Mühendislik</a>
+          <a href="contact.html" class="nav__link nav__link--active">İletişim</a>
+        </nav>
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Tema değiştir" type="button">
+            <i class="fas fa-moon icon-moon"></i>
+            <i class="fas fa-sun icon-sun"></i>
+          </button>
+          <a href="contact.html" class="btn btn--primary btn--sm header-cta">Teklif Al</a>
+          <button class="hamburger" aria-label="Menüyü aç" aria-expanded="false" type="button">
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MOBİL NAV -->
+    <div class="nav-overlay" aria-hidden="true"></div>
+    <nav class="mobile-nav" role="navigation" aria-label="Mobil menü">
+      <a href="index.html" class="mobile-nav__link">Ana Sayfa</a>
+      <a href="gunes-enerjisi.html" class="mobile-nav__link">Güneş Enerjisi</a>
+      <a href="kamera-kurulumu.html" class="mobile-nav__link">Kamera Kurulumu</a>
+      <a href="muhendislik.html" class="mobile-nav__link">Mühendislik</a>
+      <a href="contact.html" class="mobile-nav__link mobile-nav__link--active">İletişim</a>
+      <div class="mobile-nav__cta">
+        <a href="contact.html" class="btn btn--primary" style="width:100%">Teklif Al</a>
+      </div>
+    </nav>
+
+    <div class="nav-spacer"></div>
+
+    <main>
+      <!-- ==========================================
+           PAGE HERO — Dinamik başlık
+           ?source= parametresine göre JS ile güncellenir
+           ========================================== -->
+      <section class="page-hero">
+        <div class="container">
+          <!-- Bu başlık contact-source.js tarafından dinamik olarak değiştirilir -->
+          <h1 class="page-hero__title" id="contact-page-title" data-animate="fade-up">İletişim</h1>
+          <p class="page-hero__desc" id="contact-page-desc" data-animate="fade-up" data-delay="100">Projeleriniz için bizimle iletişime geçin.</p>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           İLETİŞİM BÖLÜMÜ — Form + Bilgiler
+           ========================================== -->
+      <section class="section">
+        <div class="container">
+          <div class="contact-grid">
+
+            <!-- SOL TARAF: İletişim Formu -->
+            <div class="contact-form-wrapper" data-animate="fade-right">
+              <h2 class="contact-form__title">Bize Yazın</h2>
+              <p class="contact-form__desc">Formu doldurun, en kısa sürede size dönüş yapalım.</p>
+
+              <!-- Başarı mesajı — form gönderilince görünür -->
+              <div class="form-message form-message--success" role="alert">
+                <i class="fas fa-check-circle"></i> Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
+              </div>
+              <!-- Hata mesajı — gönderim başarısız olursa görünür -->
+              <div class="form-message form-message--error" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Bir hata oluştu. Lütfen tekrar deneyin veya bizi arayın.
+              </div>
+
+              <!-- DEĞİŞTİRMEK İÇİN: action URL'sini Formspree form ID'nizle güncelleyin -->
+              <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <!-- Honeypot — bot koruması (kullanıcı görmez) -->
+                <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off">
+
+                <!-- Gizli kaynak sayfa alanı — contact-source.js tarafından doldurulur -->
+                <input type="hidden" id="source_page" name="source_page" value="">
+
+                <!-- Ad Soyad + E-posta -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="name" class="form-label">Ad Soyad *</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Adınız Soyadınız" required>
+                    <div class="form-error"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email" class="form-label">E-posta *</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="ornek@email.com" required>
+                    <div class="form-error"></div>
+                  </div>
+                </div>
+
+                <!-- Telefon + Konu -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="phone" class="form-label">Telefon</label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="05XX XXX XX XX">
+                    <div class="form-error"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="subject" class="form-label">Konu *</label>
+                    <input type="text" id="subject" name="subject" class="form-input" placeholder="Teklif almak istiyorum" required>
+                    <div class="form-error"></div>
+                  </div>
+                </div>
+
+                <!-- YENİ: Hizmet Seçimi dropdown'ı -->
+                <!-- DEĞİŞTİRMEK İÇİN: Yeni hizmetler ekleyebilirsiniz -->
+                <div class="form-group">
+                  <label for="service" class="form-label">Hizmet Seçimi</label>
+                  <select id="service" name="service" class="form-select">
+                    <option value="">Hizmet Seçin (Opsiyonel)</option>
+                    <option value="gunes-enerjisi">Güneş Enerjisi Sistemleri</option>
+                    <option value="kamera">Kamera Kurulumu</option>
+                    <option value="muhendislik">Mühendislik Desteği</option>
+                    <option value="diger">Diğer</option>
+                  </select>
+                </div>
+
+                <!-- Mesaj alanı -->
+                <div class="form-group">
+                  <label for="message" class="form-label">Mesajınız *</label>
+                  <textarea id="message" name="message" class="form-textarea" placeholder="Projeniz hakkında detay verin..." required></textarea>
+                  <div class="form-error"></div>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--lg" style="width:100%">
+                  <i class="fas fa-paper-plane"></i> Mesaj Gönder
+                </button>
+              </form>
+            </div>
+
+            <!-- SAĞ TARAF: İletişim Bilgileri -->
+            <div class="contact-info" data-animate="fade-left">
+
+              <!-- İletişim Bilgileri Kartı -->
+              <!-- DEĞİŞTİRMEK İÇİN: Adres, telefon, e-posta bilgilerini güncelleyin -->
+              <div class="contact-info-card">
+                <h3 class="contact-info-card__title">İletişim Bilgileri</h3>
+                <div class="contact-info__item">
+                  <div class="contact-info__icon"><i class="fas fa-map-marker-alt"></i></div>
+                  <div class="contact-info__text">
+                    <strong>Adres</strong>
+                    Ankara, Türkiye
+                  </div>
+                </div>
+                <div class="contact-info__item">
+                  <div class="contact-info__icon"><i class="fas fa-phone"></i></div>
+                  <div class="contact-info__text">
+                    <strong>Telefon</strong>
+                    +90 (5XX) XXX XX XX
+                  </div>
+                </div>
+                <div class="contact-info__item">
+                  <div class="contact-info__icon"><i class="fas fa-envelope"></i></div>
+                  <div class="contact-info__text">
+                    <strong>E-posta</strong>
+                    info@solarenerji.com
+                  </div>
+                </div>
+                <div class="contact-info__item">
+                  <div class="contact-info__icon"><i class="fab fa-whatsapp"></i></div>
+                  <div class="contact-info__text">
+                    <strong>WhatsApp</strong>
+                    +90 (5XX) XXX XX XX
+                  </div>
+                </div>
+              </div>
+
+              <!-- Çalışma Saatleri -->
+              <!-- DEĞİŞTİRMEK İÇİN: Gün ve saat bilgilerini güncelleyin -->
+              <div class="contact-info-card">
+                <h3 class="contact-info-card__title">Çalışma Saatleri</h3>
+                <div class="hours-list">
+                  <div class="hours-item">
+                    <span class="hours-item__day">Pazartesi - Cuma</span>
+                    <span>09:00 - 18:00</span>
+                  </div>
+                  <div class="hours-item">
+                    <span class="hours-item__day">Cumartesi</span>
+                    <span>09:00 - 14:00</span>
+                  </div>
+                  <div class="hours-item">
+                    <span class="hours-item__day">Pazar</span>
+                    <span>Kapalı</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Harita alanı -->
+              <div class="contact-map">
+                <i class="fas fa-map-marked-alt" style="font-size:2rem;margin-right:var(--space-2)"></i>
+                Harita yakında eklenecek
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__brand">
+            <div class="footer__logo"><img src="img/logo.svg" alt="" width="32" height="32">Solar<span>Enerji</span></div>
+            <p>Enerji, güvenlik ve mühendislik alanlarında profesyonel çözümler sunarak teknolojik bir gelecek inşa ediyoruz.</p>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">Hızlı Linkler</h4>
+            <div class="footer__links">
+              <a href="index.html" class="footer__link">Ana Sayfa</a>
+              <a href="about.html" class="footer__link">Hakkımızda</a>
+              <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi</a>
+              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="muhendislik.html" class="footer__link">Mühendislik</a>
+              <a href="contact.html" class="footer__link">İletişim</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">Hizmetlerimiz</h4>
+            <div class="footer__links">
+              <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi Sistemleri</a>
+              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="muhendislik.html" class="footer__link">Mühendislik Destekleri</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__heading">İletişim</h4>
+            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><span>Ankara, Türkiye</span></div>
+            <div class="footer__contact-item"><i class="fas fa-phone"></i><span>+90 (5XX) XXX XX XX</span></div>
+            <div class="footer__contact-item"><i class="fas fa-envelope"></i><span>info@solarenerji.com</span></div>
+          </div>
+        </div>
+        <div class="footer__bottom"><p>&copy; 2025 SolarEnerji. Tüm hakları saklıdır.</p></div>
+      </div>
+    </footer>
+
+    <div class="floating-buttons">
+      <a href="https://wa.me/90XXXXXXXXXX" class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+      <a href="tel:+90XXXXXXXXXX" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın"><i class="fas fa-phone"></i></a>
+    </div>
+  </div>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/mobile-menu.js"></script>
+  <script src="js/scroll-animations.js"></script>
+  <script src="js/smooth-scroll.js"></script>
+  <!-- YENİ: Kaynak sayfa tespiti — ?source= parametresini okur -->
+  <script src="js/contact-source.js"></script>
+  <script src="js/form-validation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

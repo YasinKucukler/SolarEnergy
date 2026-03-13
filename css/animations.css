@@ -1,0 +1,98 @@
+/* ============================================
+   Scroll Animations — Keyframe ve Animasyon Sınıfları
+   ============================================
+
+   BU DOSYA: Kaydırma animasyonları için CSS kurallarını içerir.
+   scroll-animations.js ile birlikte çalışır.
+
+   NASIL ÇALIŞIR:
+   1. [data-animate] olan elementler başlangıçta gizli (opacity: 0)
+   2. JS, element görünür alana girdiğinde .animated class'ı ekler
+   3. CSS transition ile animasyon gerçekleşir
+
+   KULLANIM (HTML):
+   <div data-animate="fade-up">Aşağıdan yukarı gelir</div>
+   <div data-animate="fade-up" data-delay="200">200ms gecikmeyle gelir</div>
+
+   ANİMASYON TİPLERİ:
+   - fade-up: Aşağıdan yukarı (en çok kullanılan)
+   - fade-down: Yukarıdan aşağı
+   - fade-left: Soldan sağa
+   - fade-right: Sağdan sola
+   - scale-up: Küçükten büyüğe
+   - fade-in: Sadece opaklık (yer değiştirmez)
+
+   GECİKME (data-delay):
+   - 100, 200, 300, 400, 500, 600 ms
+   - Sıralı kartlar için kullanışlı
+
+   DEĞİŞTİRMEK İÇİN:
+   - Animasyon süresi: transition satırındaki 0.6s değeri
+   - Hareket mesafesi: translateY/translateX'teki 30px değeri
+   - Yeni gecikme eklemek: [data-delay="700"] { transition-delay: 700ms; }
+   ============================================ */
+
+/* ---- Başlangıç Durumu ---- */
+/* Animasyonlu elementler başlangıçta görünmez */
+[data-animate] {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;    /* GPU optimizasyonu ipucu */
+}
+
+/* Aşağıdan yukarı — 30px aşağıda başlar */
+[data-animate="fade-up"] {
+  transform: translateY(30px);
+}
+
+/* Yukarıdan aşağı — 30px yukarıda başlar */
+[data-animate="fade-down"] {
+  transform: translateY(-30px);
+}
+
+/* Soldan sağa — 30px solda başlar */
+[data-animate="fade-left"] {
+  transform: translateX(-30px);
+}
+
+/* Sağdan sola — 30px sağda başlar */
+[data-animate="fade-right"] {
+  transform: translateX(30px);
+}
+
+/* Küçükten büyüğe — %95 ölçekle başlar */
+[data-animate="scale-up"] {
+  transform: scale(0.95);
+}
+
+/* Sadece opaklık — yer değiştirmez */
+[data-animate="fade-in"] {
+  transform: none;
+}
+
+/* ---- Animasyon Tamamlandı Durumu ---- */
+/* .animated class'ı eklendiğinde görünür hale gelir */
+[data-animate].animated {
+  opacity: 1;
+  transform: translate(0) scale(1);
+}
+
+/* ---- Gecikme Değerleri ---- */
+/* Sıralı kartlar için 100ms aralıklarla gecikme */
+[data-delay="100"] { transition-delay: 100ms; }
+[data-delay="200"] { transition-delay: 200ms; }
+[data-delay="300"] { transition-delay: 300ms; }
+[data-delay="400"] { transition-delay: 400ms; }
+[data-delay="500"] { transition-delay: 500ms; }
+[data-delay="600"] { transition-delay: 600ms; }
+
+/* ---- Azaltılmış Hareket Tercihi ---- */
+/* Kullanıcı sisteminde "azaltılmış hareket" aktifse animasyonları devre dışı bırak */
+/* Bu bir erişilebilirlik gerekliliğidir */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

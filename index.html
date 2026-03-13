@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO: Başlık — DEĞİŞTİRMEK İÇİN: max 60 karakter -->
+  <title>SolarEnerji | Enerji, Güvenlik ve Mühendislik Çözümleri</title>
+
+  <!-- SEO: Açıklama — DEĞİŞTİRMEK İÇİN: max 160 karakter -->
+  <meta name="description" content="Güneş enerjisi kurulumu, güvenlik kamerası sistemleri ve mühendislik destekleri. Profesyonel ve güvenilir çözümler.">
+
+  <!-- SEO: Canonical URL — DEĞİŞTİRMEK İÇİN: gerçek domain adresinizi yazın -->
+  <link rel="canonical" href="https://www.orneksite.com/">
+
+  <!-- Open Graph — Sosyal medya paylaşım önizlemesi -->
+  <meta property="og:title" content="SolarEnerji | Enerji, Güvenlik ve Mühendislik Çözümleri">
+  <meta property="og:description" content="Güneş enerjisi, kamera kurulumu ve mühendislik destekleri.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.orneksite.com/">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:image" content="https://www.orneksite.com/img/sample5.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SolarEnerji | Enerji, Güvenlik ve Mühendislik">
+  <meta name="twitter:description" content="Güneş enerjisi, kamera kurulumu ve mühendislik destekleri.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+
+  <!-- Tema flaş önleme — sayfa yüklenmeden dark mode uygular -->
+  <script>
+    (function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();
+  </script>
+
+  <!-- Google Fonts — DEĞİŞTİRMEK İÇİN: başka font kullanmak isterseniz URL'yi değiştirin -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome İkonları -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- CSS Dosyaları — sıralama önemli -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dark-mode.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- JSON-LD Yapısal Veri — Google arama sonuçları için -->
+  <!-- DEĞİŞTİRMEK İÇİN: name, telephone, address bilgilerini güncelleyin -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "SolarEnerji",
+    "description": "Güneş enerjisi kurulumu, güvenlik kamerası sistemleri ve mühendislik destekleri.",
+    "url": "https://www.orneksite.com",
+    "telephone": "+90XXXXXXXXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ankara",
+      "addressCountry": "TR"
+    },
+    "sameAs": []
+  }
+  </script>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- ==========================================
+         HEADER — Sabit üst navigasyon
+         DEĞİŞTİRMEK İÇİN:
+         - Logo: img/logo.svg dosyasını değiştirin
+         - Marka adı: Solar<span>Enerji</span>
+         - Menü linkleri: href değerlerini güncelleyin
+         ========================================== -->
+    <header class="header" role="banner">
+      <div class="container">
+        <!-- Logo ve marka adı -->
+        <a href="index.html" class="logo" aria-label="Ana Sayfa">
+          <img src="img/logo.svg" alt="" width="36" height="36">
+          Solar<span>Enerji</span>
+        </a>
+
+        <!-- Masaüstü navigasyon — 5 link -->
+        <nav class="nav" role="navigation" aria-label="Ana menü">
+          <a href="index.html" class="nav__link nav__link--active">Ana Sayfa</a>
+          <a href="gunes-enerjisi.html" class="nav__link">Güneş Enerjisi</a>
+          <a href="kamera-kurulumu.html" class="nav__link">Kamera Kurulumu</a>
+          <a href="muhendislik.html" class="nav__link">Mühendislik</a>
+          <a href="contact.html" class="nav__link">İletişim</a>
+        </nav>
+
+        <!-- Sağ taraf butonları -->
+        <div class="header-actions">
+          <!-- Tema değiştirme butonu (dark/light) -->
+          <button class="theme-toggle" aria-label="Tema değiştir" type="button">
+            <i class="fas fa-moon icon-moon"></i>
+            <i class="fas fa-sun icon-sun"></i>
+          </button>
+          <!-- CTA butonu — sadece masaüstünde görünür -->
+          <a href="contact.html" class="btn btn--primary btn--sm header-cta">Teklif Al</a>
+          <!-- Hamburger menü — sadece mobilde görünür -->
+          <button class="hamburger" aria-label="Menüyü aç" aria-expanded="false" type="button">
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         MOBİL NAVİGASYON — Sağdan açılan çekmece
+         ========================================== -->
+    <div class="nav-overlay" aria-hidden="true"></div>
+    <nav class="mobile-nav" role="navigation" aria-label="Mobil menü">
+      <a href="index.html" class="mobile-nav__link mobile-nav__link--active">Ana Sayfa</a>
+      <a href="gunes-enerjisi.html" class="mobile-nav__link">Güneş Enerjisi</a>
+      <a href="kamera-kurulumu.html" class="mobile-nav__link">Kamera Kurulumu</a>
+      <a href="muhendislik.html" class="mobile-nav__link">Mühendislik</a>
+      <a href="contact.html" class="mobile-nav__link">İletişim</a>
+      <div class="mobile-nav__cta">
+        <a href="contact.html" class="btn btn--primary" style="width:100%">Teklif Al</a>
+      </div>
+    </nav>
+
+    <!-- Sabit navbar yüksekliği kadar boşluk -->
+    <div class="nav-spacer"></div>
+
+    <main>
+      <!-- ==========================================
+           HERO BÖLÜMÜ — Ana sayfa büyük banner
+           DEĞİŞTİRMEK İÇİN:
+           - Slogan: h1 içindeki metni değiştirin
+           - Alt yazı: p.hero__subtitle içeriğini güncelleyin
+           - Buton linkleri: href değerlerini ayarlayın
+           ========================================== -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero__content" data-animate="fade-up">
+            <!-- Üst etiket — DEĞİŞTİRMEK İÇİN: ikonu ve metni değiştirin -->
+            <div class="hero__label">
+              <i class="fas fa-bolt"></i>
+              Enerji, Güvenlik & Mühendislik
+            </div>
+            <!-- Ana başlık — DEĞİŞTİRMEK İÇİN: metni güncelleyin -->
+            <h1 class="hero__title">
+              Profesyonel<br><span>Teknoloji</span> Çözümleri
+            </h1>
+            <!-- Alt açıklama -->
+            <p class="hero__subtitle">
+              Güneş enerjisi sistemleri, güvenlik kamerası kurulumu ve mühendislik destekleri ile
+              ihtiyacınıza özel profesyonel çözümler sunuyoruz.
+            </p>
+            <!-- CTA Butonları -->
+            <div class="hero__buttons">
+              <a href="contact.html" class="btn btn--primary btn--lg">
+                <i class="fas fa-paper-plane"></i> Ücretsiz Teklif Al
+              </a>
+              <a href="#hizmetler" class="btn btn--secondary btn--lg">
+                <i class="fas fa-arrow-right"></i> Hizmetlerimiz
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           GÜVEN ÇUBUĞU — Sertifika ve güven öğeleri
+           DEĞİŞTİRMEK İÇİN: İkon ve metinleri güncelleyin
+           ========================================== -->
+      <section class="section--sm section--bg">
+        <div class="container">
+          <div class="trust-bar" data-animate="fade-up">
+            <div class="trust-bar__item"><i class="fas fa-shield-halved"></i> Güvenilir Hizmet</div>
+            <div class="trust-bar__item"><i class="fas fa-certificate"></i> Kaliteli Malzeme</div>
+            <div class="trust-bar__item"><i class="fas fa-headset"></i> 7/24 Destek</div>
+            <div class="trust-bar__item"><i class="fas fa-handshake"></i> Müşteri Memnuniyeti</div>
+            <div class="trust-bar__item"><i class="fas fa-star"></i> Profesyonel Ekip</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           HİZMETLERİMİZ — 3 büyük hizmet kartı
+           DEĞİŞTİRMEK İÇİN:
+           - Kart başlıkları ve açıklamaları
+           - Görsel URL'leri (şimdi picsum placeholder)
+           - Link hedefleri
+           ========================================== -->
+      <section class="section services-preview" id="hizmetler">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Hizmetlerimiz</span>
+            <h2 class="section-title">Neler Yapıyoruz?</h2>
+            <p class="section-desc">Üç ana hizmet alanımızla ihtiyacınıza uygun profesyonel çözümler sunuyoruz.</p>
+          </div>
+
+          <!-- 3 Hizmet Kartı -->
+          <div class="grid grid--3" style="margin-top:var(--space-10)">
+
+            <!-- Kart 1: Güneş Enerjisi — Kartın tamamı tıklanabilir link -->
+            <a href="gunes-enerjisi.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="100">
+              <img src="img/sample1.jpg" alt="Güneş enerjisi paneli kurulumu" class="image-card__image" loading="lazy">
+              <div class="image-card__body">
+                <h3 class="image-card__title">Güneş Enerjisi Sistemleri</h3>
+                <p class="image-card__text">Eve, araca, bahçeye ve kulübeye güneş paneli kurulumu. Taşınabilir solar sistemler ve elektrikli çit çözümleri.</p>
+                <span class="image-card__link image-card__link--solar">
+                  Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </a>
+
+            <!-- Kart 2: Kamera Kurulumu — Kartın tamamı tıklanabilir link -->
+            <a href="kamera-kurulumu.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="200">
+              <img src="img/sample2.jpg" alt="Güvenlik kamerası kurulumu" class="image-card__image" loading="lazy">
+              <div class="image-card__body">
+                <h3 class="image-card__title">Kamera Kurulumu</h3>
+                <p class="image-card__text">Ev, ofis, karavan ve ahır için güvenlik kamerası kurulumu. Mobilden canlı izleme ve kayıt toplama.</p>
+                <span class="image-card__link image-card__link--camera">
+                  Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </a>
+
+            <!-- Kart 3: Mühendislik — Kartın tamamı tıklanabilir link -->
+            <a href="muhendislik.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="300">
+              <img src="img/sample3.jpg" alt="Mühendislik ve inşaat hizmetleri" class="image-card__image" loading="lazy">
+              <div class="image-card__body">
+                <h3 class="image-card__title">Mühendislik Destekleri</h3>
+                <p class="image-card__text">3D modelleme, 3D printer ile ürün imalatı, web tasarım ve teknik mühendislik desteği hizmetleri.</p>
+                <span class="image-card__link image-card__link--engineering">
+                  Detaylı Bilgi <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           NEDEN BİZ — Avantajlar bölümü
+           DEĞİŞTİRMEK İÇİN: İkon, başlık ve açıklamaları güncelleyin
+           ========================================== -->
+      <section class="section section--bg">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Neden Biz?</span>
+            <h2 class="section-title">Bizi Tercih Etmeniz İçin Nedenler</h2>
+          </div>
+
+          <div class="grid grid--3" style="margin-top:var(--space-10)">
+            <div class="icon-card" data-animate="fade-up" data-delay="100">
+              <div class="icon-card__icon"><i class="fas fa-tools"></i></div>
+              <h3 class="icon-card__title">Deneyimli Ekip</h3>
+              <p class="icon-card__text">Alanında uzman teknik ekibimizle her projeyi titizlikle gerçekleştiriyoruz.</p>
+            </div>
+            <div class="icon-card" data-animate="fade-up" data-delay="200">
+              <div class="icon-card__icon"><i class="fas fa-gem"></i></div>
+              <h3 class="icon-card__title">Kaliteli Malzeme</h3>
+              <p class="icon-card__text">Sadece güvenilir ve uzun ömürlü markalarla çalışarak kaliteyi garanti ediyoruz.</p>
+            </div>
+            <div class="icon-card" data-animate="fade-up" data-delay="300">
+              <div class="icon-card__icon"><i class="fas fa-headset"></i></div>
+              <h3 class="icon-card__title">Satış Sonrası Destek</h3>
+              <p class="icon-card__text">Kurulum sonrası teknik destek ve bakım hizmeti ile her zaman yanınızdayız.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           İSTATİSTİKLER — Animasyonlu sayaçlar
+           DEĞİŞTİRMEK İÇİN:
+           - data-target: hedef sayıyı değiştirin
+           - data-suffix: ek metni değiştirin (+, adet, vb.)
+           - stat__label: etiket metnini değiştirin
+
+           NOT: Yeni işletme olduğunuz için sayılar mütevazı tutuldu.
+           İşiniz büyüdükçe bu sayıları güncelleyin.
+           ========================================== -->
+      <section class="section stats">
+        <div class="container">
+          <div class="stats__grid">
+            <div class="stat" data-animate="fade-up">
+              <div class="stat__number">
+                <!-- DEĞİŞTİRMEK İÇİN: data-target değerini güncelleyin -->
+                <span class="counter" data-target="10" data-suffix="+">0</span>
+              </div>
+              <div class="stat__label">Kurulan Sistem</div>
+            </div>
+            <div class="stat" data-animate="fade-up" data-delay="100">
+              <div class="stat__number">
+                <span class="counter" data-target="5" data-suffix="+">0</span>
+              </div>
+              <div class="stat__label">Kamera Sistemi</div>
+            </div>
+            <div class="stat" data-animate="fade-up" data-delay="200">
+              <div class="stat__number">
+                <span class="counter" data-target="3" data-suffix="+">0</span>
+              </div>
+              <div class="stat__label">3D Baskı Projesi</div>
+            </div>
+            <div class="stat" data-animate="fade-up" data-delay="300">
+              <div class="stat__number">
+                <span class="counter" data-target="15" data-suffix="+">0</span>
+              </div>
+              <div class="stat__label">Mutlu Müşteri</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           MÜŞTERİ YORUMLARI — 3 hizmetten birer yorum
+           DEĞİŞTİRMEK İÇİN:
+           - Yorum metinlerini gerçek müşteri yorumlarıyla değiştirin
+           - İsim, rol ve şehir bilgilerini güncelleyin
+           - Avatar baş harflerini ayarlayın
+           ========================================== -->
+      <section class="section section--bg">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Müşteri Yorumları</span>
+            <h2 class="section-title">Müşterilerimiz Ne Diyor?</h2>
+            <p class="section-desc">Farklı hizmet alanlarımızdan müşteri deneyimleri.</p>
+          </div>
+
+          <div class="testimonials__grid" style="margin-top:var(--space-10)">
+            <!-- Yorum 1 — Güneş Enerjisi müşterisi -->
+            <div class="testimonial" data-animate="fade-up" data-delay="100">
+              <p class="testimonial__quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Güneş paneli kurulumu çok profesyonelce yapıldı, teşekkürler.</p>
+              <div class="testimonial__author">
+                <div class="testimonial__avatar">AY</div>
+                <div>
+                  <!-- DEĞİŞTİRMEK İÇİN: Gerçek müşteri bilgileriyle değiştirin -->
+                  <div class="testimonial__name">Ahmet Y.</div>
+                  <div class="testimonial__role">Güneş Enerjisi Müşterisi</div>
+                </div>
+              </div>
+            </div>
+            <!-- Yorum 2 — Kamera müşterisi -->
+            <div class="testimonial" data-animate="fade-up" data-delay="200">
+              <p class="testimonial__quote">Lorem ipsum dolor sit amet. Kamera sistemi kuruldu, telefondan rahatlıkla izleyebiliyorum. Memnunuz.</p>
+              <div class="testimonial__author">
+                <div class="testimonial__avatar">FK</div>
+                <div>
+                  <div class="testimonial__name">Fatma K.</div>
+                  <div class="testimonial__role">Kamera Kurulumu Müşterisi</div>
+                </div>
+              </div>
+            </div>
+            <!-- Yorum 3 — Mühendislik müşterisi -->
+            <div class="testimonial" data-animate="fade-up" data-delay="300">
+              <p class="testimonial__quote">Lorem ipsum dolor sit amet. 3D baskı ile ihtiyacımız olan parçalar hızlıca üretildi, kalitesi çok iyi.</p>
+              <div class="testimonial__author">
+                <div class="testimonial__avatar">MÖ</div>
+                <div>
+                  <div class="testimonial__name">Mehmet Ö.</div>
+                  <div class="testimonial__role">Mühendislik Müşterisi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           CTA BÖLÜMÜ — Harekete geçirici çağrı
+           DEĞİŞTİRMEK İÇİN: Başlık, açıklama ve buton metnini güncelleyin
+           ========================================== -->
+      <section class="section cta-section">
+        <div class="container text-center">
+          <div data-animate="fade-up">
+            <span class="section-label" style="color:var(--color-accent-light)">Hemen Başlayın</span>
+            <h2 class="section-title">Projeniz İçin Teklif Alın</h2>
+            <p class="section-desc">Güneş enerjisi, kamera veya mühendislik projeleriniz için ücretsiz keşif ve teklif almak isterseniz hemen iletişime geçin.</p>
+            <div style="margin-top:var(--space-8)">
+              <a href="contact.html" class="btn btn--primary btn--lg">
+                <i class="fas fa-paper-plane"></i> Ücretsiz Teklif Al
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==========================================
+         FOOTER — Alt bilgi alanı
+         DEĞİŞTİRMEK İÇİN:
+         - Marka açıklaması
+         - Sosyal medya linkleri (# yerine gerçek URL)
+         - Telefon, e-posta, adres bilgileri
+         - Yıl bilgisi (© 2025)
+         ========================================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__grid">
+          <!-- Marka sütunu -->
+          <div class="footer__brand">
+            <div class="footer__logo">
+              <img src="img/logo.svg" alt="" width="32" height="32">
+              Solar<span>Enerji</span>
+            </div>
+            <!-- DEĞİŞTİRMEK İÇİN: Firma tanıtım metnini güncelleyin -->
+            <p>Enerji, güvenlik ve mühendislik alanlarında profesyonel çözümler sunarak teknolojik bir gelecek inşa ediyoruz.</p>
+            <!-- Sosyal medya linkleri — DEĞİŞTİRMEK İÇİN: # yerine gerçek URL yazın -->
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <!-- Hızlı Linkler sütunu -->
+          <div>
+            <h4 class="footer__heading">Hızlı Linkler</h4>
+            <div class="footer__links">
+              <a href="index.html" class="footer__link">Ana Sayfa</a>
+              <a href="about.html" class="footer__link">Hakkımızda</a>
+              <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi</a>
+              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="muhendislik.html" class="footer__link">Mühendislik</a>
+              <a href="contact.html" class="footer__link">İletişim</a>
+            </div>
+          </div>
+
+          <!-- Hizmetlerimiz sütunu -->
+          <div>
+            <h4 class="footer__heading">Hizmetlerimiz</h4>
+            <div class="footer__links">
+              <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi Sistemleri</a>
+              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="muhendislik.html" class="footer__link">Mühendislik Destekleri</a>
+            </div>
+          </div>
+
+          <!-- İletişim sütunu — DEĞİŞTİRMEK İÇİN: bilgileri güncelleyin -->
+          <div>
+            <h4 class="footer__heading">İletişim</h4>
+            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><span>Ankara, Türkiye</span></div>
+            <div class="footer__contact-item"><i class="fas fa-phone"></i><span>+90 (5XX) XXX XX XX</span></div>
+            <div class="footer__contact-item"><i class="fas fa-envelope"></i><span>info@solarenerji.com</span></div>
+          </div>
+        </div>
+
+        <!-- Alt çizgi — telif hakkı -->
+        <div class="footer__bottom">
+          <!-- DEĞİŞTİRMEK İÇİN: Yılı ve firma adını güncelleyin -->
+          <p>&copy; 2025 SolarEnerji. Tüm hakları saklıdır.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ==========================================
+         FLOATING BUTTONS — Sabit WhatsApp ve Telefon
+         DEĞİŞTİRMEK İÇİN:
+         - WhatsApp: wa.me/ sonrasındaki numarayı değiştirin
+         - Telefon: tel: sonrasındaki numarayı değiştirin
+         ========================================== -->
+    <div class="floating-buttons">
+      <a href="https://wa.me/90XXXXXXXXXX" class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="tel:+90XXXXXXXXXX" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın">
+        <i class="fas fa-phone"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Dosyaları -->
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/mobile-menu.js"></script>
+  <script src="js/scroll-animations.js"></script>
+  <script src="js/counters.js"></script>
+  <script src="js/smooth-scroll.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

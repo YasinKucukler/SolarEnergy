@@ -1,0 +1,176 @@
+/* ============================================
+   Base Styles — Butonlar, Başlıklar, Utility
+   ============================================
+
+   BU DOSYA: Tüm site genelinde kullanılan temel
+   tipografi, buton ve yardımcı sınıfları içerir.
+
+   İÇERİK:
+   - Başlık boyutları (h1-h4)
+   - Paragraf stili
+   - Link geçişi
+   - Buton varyantları (primary, secondary, outline, lg, sm)
+   - Bölüm başlık stilleri (section-label, section-title)
+   - Utility sınıfları (text-center, text-white, sr-only)
+
+   DEĞİŞTİRMEK İÇİN:
+   - Buton renklerini variables.css'ten değiştirin
+   - Buton boyutlarını padding değerleriyle ayarlayın
+   - Section title max-width değerini section-desc'te ayarlayın
+   ============================================ */
+
+/* ---- Başlıklar (Typography) ---- */
+/* Varsayılan başlık boyutları — responsive.css'te override edilir */
+h1 {
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--text-heading);
+}
+
+h2 {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  color: var(--text-heading);
+}
+
+h3 {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  color: var(--text-heading);
+}
+
+h4 {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--text-heading);
+}
+
+/* Paragraf — ikincil renk, geniş satır aralığı */
+p {
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+}
+
+/* Linkler — renk geçiş animasyonu */
+a {
+  transition: color var(--transition-fast);
+}
+
+/* ---- Butonlar ---- */
+/* Temel buton yapısı — tüm varyantların ortak stilleri */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Birincil buton — gold/amber arka plan, koyu metin */
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-black);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* İkincil buton — şeffaf, beyaz kenarlık (koyu arka planlarda) */
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-white);
+  border-color: var(--color-white);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Outline buton — şeffaf, yeşil kenarlık */
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+.btn--outline:hover {
+  background-color: var(--color-green);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Büyük buton — daha fazla padding ve büyük font */
+.btn--lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--fs-lg);
+  border-radius: var(--radius-lg);
+}
+
+/* Küçük buton — navbar CTA için */
+.btn--sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--fs-sm);
+}
+
+/* ---- Bölüm Başlıkları ---- */
+/* Bölüm etiketi — üst kısımdaki küçük renkli metin */
+.section-label {
+  display: inline-block;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2);
+}
+
+/* Bölüm başlığı — büyük, kalın başlık */
+.section-title {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  color: var(--text-heading);
+  margin-bottom: var(--space-4);
+}
+
+/* Bölüm açıklaması — başlık altındaki açıklama metni */
+/* DEĞİŞTİRMEK İÇİN: max-width değerini ayarlayarak genişliği değiştirin */
+.section-desc {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- Yardımcı Sınıflar (Utility) ---- */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-white { color: var(--color-white); }
+.text-accent { color: var(--color-accent); }
+
+/* Screen Reader Only — görsel olarak gizli ama ekran okuyucu erişebilir */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

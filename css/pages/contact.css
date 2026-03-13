@@ -1,0 +1,229 @@
+/* ============================================
+   İletişim Sayfası — Form, Bilgi Kartları, Harita
+   ============================================
+
+   BU DOSYA: İletişim sayfası (contact.html) bileşenlerinin
+   stillerini içerir.
+
+   İÇERİK:
+   - İletişim grid'i (form + bilgi yan yana)
+   - Form wrapper ve form satırları
+   - Başarı/hata mesajları
+   - İletişim bilgi kartları (adres, telefon, email)
+   - Çalışma saatleri listesi
+   - Harita alanı (Google Maps embed veya placeholder)
+
+   RESPONSIVE DAVRANIŞ:
+   - Mobil: Form ve bilgi üst üste, form alanları tek sütun
+   - 576px: Form alanları 2 sütun (isim + email yan yana)
+   - 768px: Form ve bilgi yan yana (1.2fr + 0.8fr)
+
+   DEĞİŞTİRMEK İÇİN:
+   - Form kart arka planı: --bg-card
+   - Başarı mesajı rengi: .form-message--success
+   - Hata mesajı rengi: .form-message--error
+   - İletişim ikon gradient'ı: .contact-info__icon background
+   - Harita yüksekliği: .contact-map height
+   ============================================ */
+
+/* ---- İletişim Grid ---- */
+/* Form solda, bilgi sağda — mobilde üst üste */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+/* ---- Form Tarafı ---- */
+/* Form wrapper — beyaz kart, gölgeli */
+.contact-form-wrapper {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+}
+
+/* Form başlığı */
+.contact-form__title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--text-heading);
+  margin-bottom: var(--space-2);
+}
+
+/* Form açıklaması */
+.contact-form__desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+/* Form satırı — 576px'te 2 sütun olur (isim + email yan yana) */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+/* ---- Form Başarı / Hata Mesajları ---- */
+/* Varsayılan gizli — .visible class'ı ile gösterilir */
+.form-message {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  display: none;
+  margin-bottom: var(--space-4);
+}
+
+/* Başarı mesajı — yeşil arka plan ve kenarlık */
+.form-message--success {
+  background-color: rgba(15, 118, 110, 0.1);
+  color: var(--color-green);
+  border: 1px solid rgba(15, 118, 110, 0.2);
+}
+
+/* Hata mesajı — kırmızı arka plan ve kenarlık */
+/* DEĞİŞTİRMEK İÇİN: Renk → #ef4444 değerini değiştirin */
+.form-message--error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Görünür durum — JS form-validation.js tarafından eklenir */
+.form-message.visible {
+  display: block;
+}
+
+/* ---- Bilgi Tarafı ---- */
+/* İletişim bilgi kartları — dikey düzen */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Tek bilgi kartı (ör: Adres, İletişim Bilgileri) */
+.contact-info-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+
+/* Bilgi kartı başlığı */
+.contact-info-card__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  color: var(--text-heading);
+  margin-bottom: var(--space-4);
+}
+
+/* İletişim bilgi satırı — ikon + metin */
+.contact-info__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+/* Son öğede alt boşluk yok */
+.contact-info__item:last-child {
+  margin-bottom: 0;
+}
+
+/* İletişim ikonu — yeşil gradient daire */
+/* DEĞİŞTİRMEK İÇİN: Gradient renkleri → --color-green ve --color-green-dark */
+.contact-info__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-green), var(--color-green-dark));
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+/* İletişim metin alanı */
+.contact-info__text {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+/* Metin başlığı (ör: "Telefon", "Email") — koyu ve kalın */
+.contact-info__text strong {
+  display: block;
+  color: var(--text-primary);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-1);
+}
+
+/* ---- Çalışma Saatleri ---- */
+/* Gün + saat listesi — dikey düzen */
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Tek saat satırı — gün sol, saat sağ */
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-color-light);
+}
+
+/* Son satırda alt çizgi yok */
+.hours-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Gün adı — koyu renk */
+.hours-item__day {
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+/* ---- Harita Alanı ---- */
+/* Google Maps embed veya placeholder */
+/* DEĞİŞTİRMEK İÇİN: Yükseklik → height: 250px, Google Maps iframe ekleyin */
+.contact-map {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  height: 250px;
+  background-color: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* Harita iframe — tam genişlik/yükseklik */
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ---- Responsive Kurallar ---- */
+/* 576px+ — form alanları 2 sütun */
+@media (min-width: 576px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 768px+ — form ve bilgi yan yana */
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1.2fr 0.8fr;   /* Form biraz daha geniş */
+  }
+}
