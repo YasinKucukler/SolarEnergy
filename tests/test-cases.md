@@ -216,6 +216,7 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 | IDX-07 | Floating WhatsApp butonuna tikla | `https://wa.me/90XXXXXXXXXX` acilir (yeni sekme) | 2 |
 | IDX-08 | Floating telefon butonuna tikla | `tel:+90XXXXXXXXXX` tetiklenir | 2 |
 | IDX-09 | JSON-LD LocalBusiness semasini dogrula | Yapısal veri hatasız (Google Rich Results Test) | 3 |
+| IDX-10 | Floating konum butonuna tikla | Google Maps linki yeni sekmede acilir, isaretli konum gosterilir | 2 |
 
 ### 9.2 Gunes Enerjisi (gunes-enerjisi.html)
 
@@ -267,7 +268,7 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 | RES-06 | Footer grid 576px altinda | Tek kolon duzeni | 2 |
 | RES-07 | Footer grid 576-991px arasinda | 2 kolon duzeni | 3 |
 | RES-08 | Footer grid 992px ustunde | 4 kolon duzeni (`1.5fr 1fr 1fr 1.2fr`) | 2 |
-| RES-09 | Floating butonlarin tum cihaz boyutlarinda gorunur oldugunu dogrula | WhatsApp ve telefon butonlari her boyutta sag altta gorunur | 2 |
+| RES-09 | Floating butonlarin tum cihaz boyutlarinda gorunur oldugunu dogrula | WhatsApp, telefon ve konum butonlari her boyutta sag altta gorunur | 2 |
 | RES-10 | Form alanlari mobilde tam genislikte gorunur mu | Input ve textarea elemanlari 100% genislik kaplar | 2 |
 
 ---
@@ -360,14 +361,14 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 | Iletisim Formu | 23 |
 | Kaynak Sayfa Tespiti | 7 |
 | Yonetici Paneli | 20 |
-| Sayfa Bazli Testler | 17 |
+| Sayfa Bazli Testler | 18 |
 | Responsive Tasarim | 10 |
 | SEO ve Meta Etiketler | 10 |
 | Erisilebilik | 7 |
 | Entegrasyon Testleri | 7 |
 | Performans | 8 |
 | Gorseller | 8 |
-| **TOPLAM** | **170** |
+| **TOPLAM** | **171** |
 
 ---
 

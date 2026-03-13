@@ -576,6 +576,11 @@
   background-color: var(--color-green);
 }
 
+/* Konum butonu — kırmızı */
+.floating-btn--location {
+  background-color: #ea4335;
+}
+
 /* ============ PROCESS STEPS ============ */
 /* Süreç adımları — numaralı adım kartları */
 .process {

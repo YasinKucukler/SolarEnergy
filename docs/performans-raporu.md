@@ -298,7 +298,7 @@ Projeye 5 adet lisans gerektirmeyen örnek görsel eklendi. Tümü ticari kullan
 - [ ] PHP backend ekleyin (form işleme)
 - [ ] Gerçek admin paneli oluşturun (PHP + MySQL)
 - [ ] Blog bölümü ekleyin (SEO için)
-- [ ] Google Maps embed ekleyin
+- [x] ~~Google Maps embed ekleyin~~ → Floating konum butonu eklendi (Google Maps yönlendirme)
 - [ ] Çoklu dil desteği (İngilizce)
 
 ---
@@ -316,7 +316,7 @@ Siteyi yayına almadan önce bu kontrolleri yapın:
 - [ ] Admin paneli giriş/çıkış çalışıyor
 - [ ] Form gönderimi localStorage'a kaydediyor
 - [ ] Admin panelinde mesajlar görünüyor
-- [ ] Floating WhatsApp/telefon butonları çalışıyor
+- [ ] Floating WhatsApp/telefon/konum butonları çalışıyor
 - [ ] Her sayfanın SEO etiketleri benzersiz
 - [ ] JSON-LD yapısal veri hatasız
 - [ ] Lighthouse skoru 90+ (Performance)
