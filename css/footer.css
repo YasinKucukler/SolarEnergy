@@ -44,20 +44,39 @@
   max-width: 320px;
 }
 
-/* Footer logo — küçük versiyon (32x32) */
+/* Footer logo — header'daki yapının küçük versiyonu */
 .footer__logo {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--fs-xl);
-  font-weight: var(--fw-bold);
+  gap: var(--space-3);
   color: var(--color-white);
   margin-bottom: var(--space-4);
 }
 
-/* Logo'daki "Enerji" kısmı — gold renk */
-.footer__logo span {
-  color: var(--color-accent);
+/* Amblem — arka planı şeffaf, footer zemininde durur */
+.footer__logo-img {
+  height: 48px;
+  width: auto;
+}
+
+/* "KÜÇÜKLER" üstte, "MÜHENDİSLİK" altta */
+.footer__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.footer__logo-name {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+}
+
+.footer__logo-sub {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.22em;
+  color: var(--color-gray-400);
 }
 
 /* Marka açıklama metni */

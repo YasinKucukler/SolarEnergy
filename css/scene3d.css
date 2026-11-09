@@ -1,0 +1,202 @@
+/* ============================================
+   3D Sahne — Sadece 3D çalışırken geçerli stiller
+   ============================================
+
+   BU DOSYA: js/scene3d.js ile birlikte çalışır.
+
+   NASIL ÇALIŞIR:
+   - Sayfa önce normal (düz) tasarımıyla açılır — hiçbir şey 3D'yi beklemez.
+   - 3D sahne hazır olunca <html> etiketine "has-3d" sınıfı eklenir.
+   - Bu dosyadaki kuralların neredeyse tamamı "html.has-3d" ile başlar;
+     3D yüklenmezse (eski cihaz, veri tasarrufu, azaltılmış hareket) hiçbiri
+     devreye girmez ve site bugünkü görünümünde kalır.
+
+   DEĞİŞTİRMEK İÇİN:
+   - İçerik panellerinin saydamlığı: --glass-bg / --glass-bg-alt
+   - Hero okunabilirlik gölgesi: --scene-shade
+   - Hero yüksekliği: min-height değerleri
+   ============================================ */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.46);       /* Bölüm zemini — maket arkadan görünür */
+  --glass-bg-alt: rgba(241, 245, 249, 0.54);
+  --glass-card: rgba(255, 255, 255, 0.78);     /* Kartlar — buzlu cam */
+  --glass-text-halo: rgba(255, 255, 255, 0.85);
+  --scene-ink: #0b1a2e;               /* 3D yüklenirken görünen zemin rengi */
+  --scene-shade: 8, 20, 36;           /* Hero üzerindeki koyu perde (RGB) */
+}
+
+[data-theme="dark"] {
+  --glass-bg: rgba(10, 12, 16, 0.5);
+  --glass-bg-alt: rgba(16, 20, 26, 0.56);
+  --glass-card: rgba(22, 24, 30, 0.72);
+  --glass-text-halo: rgba(0, 0, 0, 0.75);
+}
+
+/* 3D açıkken kart zeminleri buzlu cama döner (her iki temada) */
+html.has-3d {
+  --bg-card: var(--glass-card);
+}
+
+html.has-3d :is(.card, .icon-card, .image-card, .testimonial, .service-image-card, .feature-card,
+  .project-card, .process__step, .contact-form-wrapper, .contact-info-card, .team-card, .cert-badge, .faq__item) {
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  backdrop-filter: blur(14px) saturate(1.25);
+}
+
+/* Bölüm başlıkları doğrudan maketin önünde — hafif hale ile okunur kalır */
+html.has-3d main > section:not(.stats, .cta-section, .scene-window) :is(.section-title, .section-desc, .section-label, .story__text, .trust-bar__item) {
+  text-shadow: 0 0 14px var(--glass-text-halo), 0 0 3px var(--glass-text-halo);
+}
+
+/* ---- Tuval (canvas) — tüm sayfanın arkasında sabit ---- */
+#scene3d {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+#scene3d.is-ready {
+  opacity: 1;
+}
+
+html.has-3d body {
+  background-color: var(--scene-ink);
+}
+
+html.has-3d .page-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- İçerik bölümleri — maketin önünde hafif saydam paneller ---- */
+html.has-3d main > section {
+  background-color: var(--glass-bg);
+}
+
+html.has-3d main > section.section--bg {
+  background-color: var(--glass-bg-alt);
+}
+
+/* ---- Pencere bölümleri — maketin göründüğü yerler (istatistik, teklif) ---- */
+html.has-3d main > :is(.stats, .cta-section) {
+  background: linear-gradient(180deg, rgba(var(--scene-shade), 0.45) 0%, rgba(var(--scene-shade), 0.2) 100%);
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-24);
+}
+
+html.has-3d main > .cta-section .section-desc,
+html.has-3d main > .stats .stat__label {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* ---- Mühendislik: "Web Geliştirme" penceresi — kulübenin yan odası görünür ---- */
+html.has-3d main > .scene-window {
+  background: transparent;
+  min-height: 78vh;
+  min-height: 78svh;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-16) 0;
+}
+
+html.has-3d .scene-window__caption {
+  background: rgba(var(--scene-shade), 0.62);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* ---- Hero'lar — şeffaf, maket arkada ---- */
+html.has-3d main > :is(.hero, .solar-hero, .camera-hero, .eng-hero, .page-hero) {
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+html.has-3d main > .hero {
+  min-height: calc(100vh - var(--nav-height));
+  min-height: calc(100svh - var(--nav-height));
+}
+
+html.has-3d main > :is(.solar-hero, .camera-hero, .eng-hero) {
+  min-height: calc(88vh - var(--nav-height));
+  min-height: calc(88svh - var(--nav-height));
+}
+
+html.has-3d main > .page-hero {
+  min-height: 46vh;
+  min-height: 46svh;
+  justify-content: center;
+}
+
+html.has-3d main > :is(.hero, .page-hero) > .container,
+html.has-3d :is(.solar-hero__content, .camera-hero__content, .eng-hero__content) {
+  width: 100%;
+}
+
+/* Eski dekoratif daireler yerine okunabilirlik perdesi */
+html.has-3d main > :is(.hero, .solar-hero, .camera-hero, .eng-hero, .page-hero)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: linear-gradient(180deg,
+    rgba(var(--scene-shade), 0.62) 0%,
+    rgba(var(--scene-shade), 0.5) 55%,
+    rgba(var(--scene-shade), 0.6) 100%);
+  pointer-events: none;
+}
+
+/* Sayfa başlığı (Hakkımızda, İletişim) — ortada, daha hafif perde */
+html.has-3d main > .page-hero::before {
+  background: radial-gradient(ellipse at center, rgba(var(--scene-shade), 0.55) 0%, rgba(var(--scene-shade), 0.15) 70%);
+}
+
+html.has-3d main > :is(.hero, .solar-hero, .camera-hero, .eng-hero, .page-hero)::after {
+  display: none;
+}
+
+html.has-3d :is(.hero__title, .page-hero__title) {
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Hero kaydırılırken yazı hafifçe yukarı süzülür (--hero-p: 0 → 1, JS ayarlar) */
+html.has-3d main > :is(.hero, .page-hero) > .container,
+html.has-3d :is(.solar-hero__content, .camera-hero__content, .eng-hero__content) {
+  translate: 0 calc(var(--hero-p, 0) * -70px);
+}
+
+/* ---- Masaüstü: hero yazısı solda, maket sağda ---- */
+@media (min-width: 992px) {
+  html.has-3d main > :is(.hero, .solar-hero, .camera-hero, .eng-hero)::before {
+    background: linear-gradient(90deg,
+      rgba(var(--scene-shade), 0.78) 0%,
+      rgba(var(--scene-shade), 0.4) 38%,
+      rgba(var(--scene-shade), 0) 62%);
+  }
+
+  html.has-3d .hero .hero__content,
+  html.has-3d :is(.solar-hero__content, .camera-hero__content, .eng-hero__content) {
+    text-align: left;
+    max-width: 580px;
+    margin-left: 0;
+  }
+
+  html.has-3d :is(.solar-hero__content, .camera-hero__content, .eng-hero__content) {
+    margin-left: max(var(--container-padding), calc((100% - var(--container-max)) / 2 + var(--container-padding)));
+  }
+
+  html.has-3d :is(.hero, .solar-hero, .camera-hero, .eng-hero) .hero__buttons {
+    justify-content: flex-start;
+  }
+}

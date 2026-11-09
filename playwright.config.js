@@ -3,6 +3,8 @@ const { defineConfig } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests',
   fullyParallel: true,
+  /* Fazla paralel tarayıcı işlemciyi doldurup tıklamaları zaman aşımına düşürüyor; 4 hem kararlı hem en hızlısı */
+  workers: 4,
   retries: 0,
   reporter: 'html',
   timeout: 15000,
@@ -12,7 +14,8 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
   },
   webServer: {
-    command: 'npx serve -s . -l 3000 --no-clipboard',
+    /* -s (SPA modu) KULLANMAYIN: her adrese index.html döner. cleanUrls kapalı: .html adresleri yönlendirilmez */
+    command: 'npx serve . -l 3000 --no-clipboard -c tests/serve.json',
     port: 3000,
     reuseExistingServer: true,
   },

@@ -229,7 +229,7 @@
     /* Hizmet adını insan-okuyabilir formata çevir */
     var serviceNames = {
       'gunes-enerjisi': 'Güneş Enerjisi',
-      'kamera': 'Kamera Kurulumu',
+      'kamera': 'Güvenlik Sistemleri',
       'muhendislik': 'Mühendislik',
       'diger': 'Diğer'
     };

@@ -5,24 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <title>Mühendislik Destekleri | 3D Modelleme, 3D Baskı - SolarEnerji</title>
-  <meta name="description" content="3D modelleme, 3D printer ile ürün imalatı, web tasarım ve mühendislik desteği hizmetleri.">
+  <title>Ortaca 3D Printer, Web Tasarım ve Mühendislik | KCK Tech</title>
+  <meta name="description" content="Ortaca'da 3D printer ile parça ve prototip üretimi, 3D modelleme, web sitesi ve web tasarım. Dalaman, Dalyan, Köyceğiz, Fethiye ve Muğla'ya mühendislik desteği.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0f2440">
   <link rel="canonical" href="https://www.orneksite.com/muhendislik.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Mühendislik Destekleri | SolarEnerji">
+  <meta property="og:site_name" content="KCK Tech">
+  <meta property="og:title" content="Ortaca 3D Printer, Web Tasarım ve Mühendislik | KCK Tech">
   <meta property="og:description" content="3D modelleme, 3D baskı ve web tasarım hizmetleri.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.orneksite.com/muhendislik.html">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:image" content="https://www.orneksite.com/img/sample3.jpg">
+  <meta property="og:image:width" content="640">
+  <meta property="og:image:height" content="427">
+  <meta property="og:image:alt" content="Mühendislik hizmetleri">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mühendislik Destekleri | SolarEnerji">
+  <meta name="twitter:title" content="Ortaca 3D Printer, Web Tasarım ve Mühendislik | KCK Tech">
   <meta name="twitter:description" content="3D modelleme, 3D baskı ve web tasarım hizmetleri.">
+  <meta name="twitter:image" content="https://www.orneksite.com/img/sample3.jpg">
 
-  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <script>(function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,37 +52,104 @@
   <link rel="stylesheet" href="css/pages/camera.css">
   <link rel="stylesheet" href="css/pages/engineering.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <!-- 3D sahne stilleri — sadece 3D yüklenince devreye girer -->
+  <link rel="stylesheet" href="css/scene3d.css">
 
   <!-- JSON-LD: Service şeması -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Mühendislik Destekleri",
-    "description": "3D modelleme, 3D printer ile ürün imalatı, web tasarım ve mühendislik desteği.",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "SolarEnerji",
-      "url": "https://www.orneksite.com"
-    },
-    "areaServed": { "@type": "Country", "name": "Türkiye" }
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Mühendislik Destekleri",
+        "serviceType": "3D modelleme, 3D baskı ve web tasarım",
+        "description": "3D modelleme, 3D printer ile ürün imalatı, web tasarım ve mühendislik desteği.",
+        "url": "https://www.orneksite.com/muhendislik.html",
+        "image": "https://www.orneksite.com/img/sample3.jpg",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.orneksite.com/#business",
+          "name": "KCK Tech",
+          "alternateName": "Küçükler Mühendislik",
+          "url": "https://www.orneksite.com/"
+        },
+        "areaServed": [{ "@type": "City", "name": "Ortaca" }, { "@type": "Place", "name": "Dalyan" }, { "@type": "City", "name": "Köyceğiz" }, { "@type": "City", "name": "Dalaman" }, { "@type": "City", "name": "Fethiye" }, { "@type": "Place", "name": "Göcek" }, { "@type": "City", "name": "Menteşe" }, { "@type": "AdministrativeArea", "name": "Muğla" }]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://www.orneksite.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Mühendislik", "item": "https://www.orneksite.com/muhendislik.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <!-- JSON-LD: Sık sorulan sorular (sayfadaki SSS bölümüyle aynı olmalı) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Ortaca'da 3D printer ile hangi parçaları yaptırabilirim?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kırılan ya da bulunamayan yedek parçalar, ürün prototipleri, aparatlar, maketler ve kişiye özel ürünler 3D printer ile üretilebilir. Parçanın kullanım amacına göre uygun malzemeyi birlikte seçiyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Elimde 3D model yok, sadece kırık parça veya fikir var. Ne yapmalıyım?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sorun değil. Parçayı ölçüp ya da fikrinizi dinleyip 3D modellemesini biz yapıyoruz. Model onaylandıktan sonra 3D printer ile üretime geçiyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "3D baskı ne kadar sürer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Parçanın boyutuna ve detayına göre değişir. Küçük parçalar çoğu zaman aynı gün hazır olur; büyük veya çok parçalı işler için size önceden süre bildiriyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Web sitesi yaptırmak istiyorum, süreç nasıl işliyor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Önce işletmenizi ve hedeflerinizi konuşuyoruz, ardından tasarımı hazırlıyoruz. Onayınızdan sonra hızlı açılan, mobil uyumlu ve Google'da bulunabilir (SEO uyumlu) web sitenizi yayına alıyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ortaca dışından da web tasarım veya 3D modelleme hizmeti alabilir miyim?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Evet. Ortaca merkezliyiz; Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde yerinize gelerek keşif, kurulum ve teknik destek hizmeti veriyoruz. Web tasarım ve 3D modelleme işlerini uzaktan da yürütebiliyoruz."
+        }
+      }
+    ]
   }
   </script>
 </head>
-<body>
+<body data-scene="engineering">
   <div class="page-wrapper">
 
     <!-- HEADER -->
     <header class="header" role="banner">
       <div class="container">
         <a href="index.html" class="logo" aria-label="Ana Sayfa">
-          <img src="img/logo.svg" alt="" width="36" height="36">
-          Solar<span>Enerji</span>
+          <img src="img/logo.png" alt="KCK Tech" width="105" height="56" class="logo__img">
+          <span class="logo__text"><span class="logo__name">KÜÇÜKLER</span><span class="logo__sub">MÜHENDİSLİK</span></span>
         </a>
         <nav class="nav" role="navigation" aria-label="Ana menü">
           <a href="index.html" class="nav__link">Ana Sayfa</a>
           <a href="gunes-enerjisi.html" class="nav__link">Güneş Enerjisi</a>
-          <a href="kamera-kurulumu.html" class="nav__link">Kamera Kurulumu</a>
+          <a href="guvenlik-sistemleri.html" class="nav__link">Güvenlik Sistemleri</a>
           <a href="muhendislik.html" class="nav__link nav__link--active">Mühendislik</a>
           <a href="contact.html" class="nav__link">İletişim</a>
         </nav>
@@ -98,7 +173,7 @@
     <nav class="mobile-nav" role="navigation" aria-label="Mobil menü">
       <a href="index.html" class="mobile-nav__link">Ana Sayfa</a>
       <a href="gunes-enerjisi.html" class="mobile-nav__link">Güneş Enerjisi</a>
-      <a href="kamera-kurulumu.html" class="mobile-nav__link">Kamera Kurulumu</a>
+      <a href="guvenlik-sistemleri.html" class="mobile-nav__link">Güvenlik Sistemleri</a>
       <a href="muhendislik.html" class="mobile-nav__link mobile-nav__link--active">Mühendislik</a>
       <a href="contact.html" class="mobile-nav__link">İletişim</a>
       <div class="mobile-nav__cta">
@@ -116,19 +191,36 @@
         <div class="eng-hero__content" data-animate="fade-up">
           <div class="hero__label">
             <i class="fas fa-cogs"></i>
-            Mühendislik Destekleri
+            Ortaca Mühendislik Destekleri
           </div>
           <h1 class="hero__title">
             Fikirlerinizi<br><span>Gerçeğe</span> Dönüştürün
           </h1>
           <p class="hero__subtitle">
-            3D modelleme, 3D printer ile ürün imalatı, web tasarım ve
+            Ortaca ve Muğla genelinde 3D modelleme, 3D printer ile ürün imalatı, web sitesi ve web tasarım,
             teknik mühendislik desteği hizmetleri.
           </p>
           <div class="hero__buttons">
             <a href="contact.html?source=muhendislik" class="btn btn--primary btn--lg">
               <i class="fas fa-paper-plane"></i> Teklif Al
             </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           PENCERE BÖLÜMÜ — 3D sahnede kulübenin yan odası (web geliştirme) görünür
+           3D yüklenmezse düz lacivert bir şerit olarak görünür.
+           DEĞİŞTİRMEK İÇİN: başlık ve açıklama metni
+           ========================================== -->
+      <section class="scene-window">
+        <div class="container">
+          <div class="scene-window__caption" data-animate="fade-up">
+            <div class="scene-window__icon"><i class="fas fa-laptop-code"></i></div>
+            <div>
+              <h2 class="scene-window__title">Web Geliştirme</h2>
+              <p class="scene-window__text">Kurumsal web sitesi ve e-ticaret çözümlerini tasarlayıp kodluyoruz. Dijital varlığınızı profesyonelce oluşturuyoruz.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -144,7 +236,7 @@
           <div class="text-center" data-animate="fade-up">
             <span class="section-label">Hizmet Alanlarımız</span>
             <h2 class="section-title">Mühendislik Çözümlerimiz</h2>
-            <p class="section-desc">Teknolojiyi ihtiyacınıza özel kullanıyoruz.</p>
+            <p class="section-desc">Ortaca'da 3D printer, 3D modelleme ve web tasarım ile teknolojiyi ihtiyacınıza özel kullanıyoruz.</p>
           </div>
 
           <div class="service-cards-grid" style="margin-top:var(--space-10)">
@@ -158,7 +250,7 @@
                 <h3 class="service-image-card__title">3D Modelleme</h3>
                 <p class="service-image-card__text">
                   Ürün tasarımı ve prototip modelleme. Fikirlerinizi bilgisayar
-                  ortamında 3 boyutlu olarak görselleştiriyoruz. Lorem ipsum dolor sit amet.
+                  ortamında 3 boyutlu olarak görselleştiriyoruz.
                 </p>
               </div>
             </div>
@@ -172,7 +264,7 @@
                 <h3 class="service-image-card__title">3D Printer İmalat</h3>
                 <p class="service-image-card__text">
                   Özel parça ve fonksiyonel ürün üretimi. Hızlı prototipleme ve
-                  küçük seri üretim imkanı. Lorem ipsum dolor sit amet.
+                  küçük seri üretim imkanı.
                 </p>
               </div>
             </div>
@@ -183,10 +275,10 @@
                 <i class="fas fa-code"></i>
               </div>
               <div class="service-image-card__body">
-                <h3 class="service-image-card__title">Web Tasarım & Diğer</h3>
+                <h3 class="service-image-card__title">Web Sitesi & Web Tasarım</h3>
                 <p class="service-image-card__text">
                   Kurumsal web sitesi, e-ticaret ve teknik destek hizmetleri.
-                  Dijital varlığınızı profesyonelce oluşturuyoruz. Lorem ipsum.
+                  Dijital varlığınızı profesyonelce oluşturuyoruz.
                 </p>
               </div>
             </div>
@@ -295,6 +387,43 @@
         </div>
       </section>
 
+      <!-- ==========================================
+           SIK SORULAN SORULAR — Yerel SEO + Google için FAQPage verisi
+           DEĞİŞTİRMEK İÇİN: soru/cevapları burada VE <head> içindeki FAQPage JSON-LD'de aynı şekilde güncelleyin
+           NOT: <main> içine bölüm eklenip silinirse js/scene3d.js → PAGES satırını da güncelleyin
+           ========================================== -->
+      <section class="section section--bg" id="sss">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Sık Sorulan Sorular</span>
+            <h2 class="section-title">Mühendislik Hizmetleri Hakkında Sık Sorulan Sorular</h2>
+            <p class="section-desc">Ortaca'da 3D printer, 3D modelleme ve web tasarım hizmetleriyle ilgili en çok merak edilenler.</p>
+          </div>
+          <div class="faq" data-animate="fade-up">
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Ortaca'da 3D printer ile hangi parçaları yaptırabilirim?</summary>
+              <p class="faq__answer">Kırılan ya da bulunamayan yedek parçalar, ürün prototipleri, aparatlar, maketler ve kişiye özel ürünler 3D printer ile üretilebilir. Parçanın kullanım amacına göre uygun malzemeyi birlikte seçiyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Elimde 3D model yok, sadece kırık parça veya fikir var. Ne yapmalıyım?</summary>
+              <p class="faq__answer">Sorun değil. Parçayı ölçüp ya da fikrinizi dinleyip 3D modellemesini biz yapıyoruz. Model onaylandıktan sonra 3D printer ile üretime geçiyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">3D baskı ne kadar sürer?</summary>
+              <p class="faq__answer">Parçanın boyutuna ve detayına göre değişir. Küçük parçalar çoğu zaman aynı gün hazır olur; büyük veya çok parçalı işler için size önceden süre bildiriyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Web sitesi yaptırmak istiyorum, süreç nasıl işliyor?</summary>
+              <p class="faq__answer">Önce işletmenizi ve hedeflerinizi konuşuyoruz, ardından tasarımı hazırlıyoruz. Onayınızdan sonra hızlı açılan, mobil uyumlu ve Google'da bulunabilir (SEO uyumlu) web sitenizi yayına alıyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Ortaca dışından da web tasarım veya 3D modelleme hizmeti alabilir miyim?</summary>
+              <p class="faq__answer">Evet. Ortaca merkezliyiz; Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde yerinize gelerek keşif, kurulum ve teknik destek hizmeti veriyoruz. Web tasarım ve 3D modelleme işlerini uzaktan da yürütebiliyoruz.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <!-- CTA -->
       <section class="section cta-section">
         <div class="container text-center">
@@ -317,10 +446,10 @@
       <div class="container">
         <div class="footer__grid">
           <div class="footer__brand">
-            <div class="footer__logo"><img src="img/logo.svg" alt="" width="32" height="32">Solar<span>Enerji</span></div>
+            <div class="footer__logo"><img src="img/logo.png" alt="KCK Tech" width="90" height="48" class="footer__logo-img"><span class="footer__logo-text"><span class="footer__logo-name">KÜÇÜKLER</span><span class="footer__logo-sub">MÜHENDİSLİK</span></span></div>
             <p>Enerji, güvenlik ve mühendislik alanlarında profesyonel çözümler sunarak teknolojik bir gelecek inşa ediyoruz.</p>
             <div class="footer__social">
-              <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/kucukler_muh/" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
               <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
               <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -332,7 +461,7 @@
               <a href="index.html" class="footer__link">Ana Sayfa</a>
               <a href="about.html" class="footer__link">Hakkımızda</a>
               <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi</a>
-              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="guvenlik-sistemleri.html" class="footer__link">Güvenlik Sistemleri</a>
               <a href="muhendislik.html" class="footer__link">Mühendislik</a>
               <a href="contact.html" class="footer__link">İletişim</a>
             </div>
@@ -341,24 +470,25 @@
             <h4 class="footer__heading">Hizmetlerimiz</h4>
             <div class="footer__links">
               <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi Sistemleri</a>
-              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="guvenlik-sistemleri.html" class="footer__link">Güvenlik Sistemleri</a>
               <a href="muhendislik.html" class="footer__link">Mühendislik Destekleri</a>
             </div>
           </div>
           <div>
             <h4 class="footer__heading">İletişim</h4>
-            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><span>Ankara, Türkiye</span></div>
-            <div class="footer__contact-item"><i class="fas fa-phone"></i><span>+90 (5XX) XXX XX XX</span></div>
-            <div class="footer__contact-item"><i class="fas fa-envelope"></i><span>info@solarenerji.com</span></div>
+            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><a href="https://www.google.com/maps/search/?api=1&amp;query=Ortaca%2C%20Mu%C4%9Fla" class="footer__link" target="_blank" rel="noopener">Ortaca, Muğla</a></div>
+            <div class="footer__contact-item"><i class="fas fa-phone"></i><span><a href="tel:+905436194898" class="footer__link">+90 (543) 619 48 98</a><br><a href="tel:+905436398913" class="footer__link">+90 (543) 639 89 13</a></span></div>
+            <div class="footer__contact-item"><i class="fas fa-envelope"></i><a href="mailto:kcktech48@gmail.com?subject=Web%20Sitesi%20-%20Bilgi%20Talebi" class="footer__link">kcktech48@gmail.com</a></div>
+            <div class="footer__contact-item"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/kucukler_muh/" class="footer__link" target="_blank" rel="noopener">@kucukler_muh</a></div>
           </div>
         </div>
-        <div class="footer__bottom"><p>&copy; 2025 SolarEnerji. Tüm hakları saklıdır.</p></div>
+        <div class="footer__bottom"><p>&copy; 2025 KCK Tech — Küçükler Mühendislik. Tüm hakları saklıdır.</p></div>
       </div>
     </footer>
 
     <div class="floating-buttons">
-      <a href="https://wa.me/90XXXXXXXXXX" class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
-      <a href="tel:+90XXXXXXXXXX" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın"><i class="fas fa-phone"></i></a>
+      <a href="https://wa.me/905436194898?text=Merhaba%2C%20web%20sitenizden%20ula%C5%9F%C4%B1yorum.%20Bilgi%20almak%20istiyorum." class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+      <a href="tel:+905436194898" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın"><i class="fas fa-phone"></i></a>
       <a href="https://www.google.com/maps?q=ENLEM,BOYLAM" class="floating-btn floating-btn--location" aria-label="Konumumuzu haritada görün" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i></a>
     </div>
   </div>
@@ -368,5 +498,7 @@
   <script src="js/scroll-animations.js"></script>
   <script src="js/smooth-scroll.js"></script>
   <script src="js/main.js"></script>
+  <!-- 3D arazi maketi — sayfa yüklendikten sonra arka planda yüklenir, açılışı yavaşlatmaz -->
+  <script src="js/scene3d.js" defer></script>
 </body>
 </html>

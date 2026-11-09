@@ -1,4 +1,19 @@
+# Bağımlılıklar — npm install ile yeniden kurulur
 node_modules/
-.claude/
-playwright-report/
+
+# Playwright test çıktıları
 test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Claude Code yerel ayarları
+.claude/
+
+# Sistem / editör dosyaları
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log

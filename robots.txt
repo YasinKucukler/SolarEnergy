@@ -1,0 +1,8 @@
+# DEĞİŞTİRMEK İÇİN: alan adı belli olunca Sitemap satırındaki orneksite.com'u değiştirin
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /tests/
+Disallow: /docs/
+
+Sitemap: https://www.orneksite.com/sitemap.xml

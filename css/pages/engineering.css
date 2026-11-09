@@ -66,6 +66,48 @@
   background: linear-gradient(135deg, var(--color-engineering), var(--color-engineering-dark));
 }
 
+/* ---- Pencere Bölümü: Web Geliştirme ---- */
+/* 3D çalışınca arkadan kulübenin "Web Geliştirme" odası görünür (scene3d.css).
+   3D yoksa bu stil ile düz lacivert-mor bir şerit olarak görünür. */
+.scene-window {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-engineering-dark) 100%);
+  padding: var(--space-12) 0;
+}
+
+.scene-window__caption {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 520px;
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.scene-window__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-green-light), var(--color-green-dark));
+  color: var(--color-white);
+  font-size: var(--fs-xl);
+}
+
+.scene-window__title {
+  font-size: var(--fs-2xl);
+  color: var(--color-white);
+  margin-bottom: var(--space-2);
+}
+
+.scene-window__text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 /* ---- Responsive ---- */
 @media (min-width: 992px) {
   .eng-hero {

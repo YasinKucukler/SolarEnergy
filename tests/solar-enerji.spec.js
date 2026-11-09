@@ -11,7 +11,7 @@ const { test, expect } = require('@playwright/test');
 const PAGES = {
   home: '/',
   solar: '/gunes-enerjisi.html',
-  camera: '/kamera-kurulumu.html',
+  camera: '/guvenlik-sistemleri.html',
   engineering: '/muhendislik.html',
   contact: '/contact.html',
   admin: '/admin.html',
@@ -30,7 +30,7 @@ test.describe('1. Navigasyon ve Header', () => {
     const navLinks = page.locator('.nav .nav__link');
     await expect(navLinks).toHaveCount(5);
 
-    const expectedHrefs = ['index.html', 'gunes-enerjisi.html', 'kamera-kurulumu.html', 'muhendislik.html', 'contact.html'];
+    const expectedHrefs = ['index.html', 'gunes-enerjisi.html', 'guvenlik-sistemleri.html', 'muhendislik.html', 'contact.html'];
     for (let i = 0; i < expectedHrefs.length; i++) {
       const href = await navLinks.nth(i).getAttribute('href');
       expect(href).toContain(expectedHrefs[i]);
@@ -86,10 +86,11 @@ test.describe('1. Navigasyon ve Header', () => {
 
   test('NAV-10: Footer hizmet linkleri dogru sayfalara yonlendirir', async ({ page }) => {
     await page.goto(PAGES.home);
+    // Footer'da hem "Hızlı Linkler" hem "Hizmetler" sütununda link olabilir — en az biri yeterli
     const footerLinks = page.locator('footer');
-    await expect(footerLinks.locator('a[href="gunes-enerjisi.html"]')).toHaveCount(1);
-    await expect(footerLinks.locator('a[href="kamera-kurulumu.html"]')).toHaveCount(1);
-    await expect(footerLinks.locator('a[href="muhendislik.html"]')).toHaveCount(1);
+    for (const href of ['gunes-enerjisi.html', 'guvenlik-sistemleri.html', 'muhendislik.html']) {
+      expect(await footerLinks.locator(`a[href="${href}"]`).count()).toBeGreaterThan(0);
+    }
   });
 });
 
@@ -117,7 +118,8 @@ test.describe('2. Mobil Menu', () => {
     await page.goto(PAGES.home);
     await page.locator('.hamburger').click();
     await expect(page.locator('.mobile-nav')).toHaveClass(/mobile-nav--open/);
-    await page.locator('.nav-overlay').click({ force: true });
+    // Menü sağdan ekranın %80'ini kaplar — overlay'e soldaki açık şeritten tıkla
+    await page.locator('.nav-overlay').click({ position: { x: 20, y: 300 } });
     await expect(page.locator('.mobile-nav')).not.toHaveClass(/mobile-nav--open/);
   });
 
@@ -207,7 +209,8 @@ test.describe('3. Tema (Dark/Light Mode)', () => {
   });
 
   test('THM-06: localStorage dark iken beyaz flas olmaz', async ({ page }) => {
-    await page.evaluate(() => localStorage.setItem('theme', 'dark'));
+    // Tema sayfanın kendi scriptlerinden ÖNCE yazılmalı (about:blank'te localStorage erişilemez)
+    await page.addInitScript(() => localStorage.setItem('theme', 'dark'));
     await page.goto(PAGES.home);
     // Sayfa yuklenir yuklenmez dark olmali
     const theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
@@ -527,7 +530,7 @@ test.describe('7. Iletisim Formu', () => {
     test('SRC-02: source=kamera — baslik ve form degisir', async ({ page }) => {
       await page.goto(PAGES.contact + '?source=kamera');
       const title = await page.locator('#contact-page-title').textContent();
-      expect(title).toContain('Kamera');
+      expect(title).toContain('Güvenlik Sistemleri');
 
       const serviceVal = await page.locator('#service').inputValue();
       expect(serviceVal).toBe('kamera');
@@ -736,7 +739,7 @@ test.describe('9. Sayfa Bazli Testler', () => {
         hrefs.push(await cards.nth(i).getAttribute('href'));
       }
       expect(hrefs).toContain('gunes-enerjisi.html');
-      expect(hrefs).toContain('kamera-kurulumu.html');
+      expect(hrefs).toContain('guvenlik-sistemleri.html');
       expect(hrefs).toContain('muhendislik.html');
     });
 
@@ -774,13 +777,13 @@ test.describe('9. Sayfa Bazli Testler', () => {
 
     test('IDX-07: Floating WhatsApp butonu gorunur', async ({ page }) => {
       await page.goto(PAGES.home);
-      const waBtn = page.locator('a[href*="wa.me"]');
+      const waBtn = page.locator('a.floating-btn--whatsapp[href*="wa.me"]');
       await expect(waBtn).toBeVisible();
     });
 
     test('IDX-08: Floating telefon butonu gorunur', async ({ page }) => {
       await page.goto(PAGES.home);
-      const phoneBtn = page.locator('a[href^="tel:"]');
+      const phoneBtn = page.locator('a.floating-btn--phone[href^="tel:"]');
       await expect(phoneBtn).toBeVisible();
     });
   });
@@ -801,7 +804,7 @@ test.describe('9. Sayfa Bazli Testler', () => {
     });
   });
 
-  test.describe('9.3 Kamera Kurulumu', () => {
+  test.describe('9.3 Güvenlik Sistemleri', () => {
 
     test('KAM-01: CTA butonu contact?source=kamera ya yonlendirir', async ({ page }) => {
       await page.goto(PAGES.camera);
@@ -809,11 +812,11 @@ test.describe('9. Sayfa Bazli Testler', () => {
       await expect(ctaLink).toBeVisible();
     });
 
-    test('KAM-02: Aktif nav linki Kamera Kurulumu', async ({ page }) => {
+    test('KAM-02: Aktif nav linki Güvenlik Sistemleri', async ({ page }) => {
       await page.goto(PAGES.camera);
       const activeLink = page.locator('.nav__link--active');
       const href = await activeLink.getAttribute('href');
-      expect(href).toContain('kamera-kurulumu');
+      expect(href).toContain('guvenlik-sistemleri');
     });
   });
 
@@ -842,7 +845,8 @@ test.describe('9. Sayfa Bazli Testler', () => {
 
     test('ABT-02: Bize Ulasin butonu contact.html e gider', async ({ page }) => {
       await page.goto(PAGES.about);
-      const contactLink = page.locator('a[href="contact.html"]').first();
+      // Hikaye bölümündeki "Bize Ulaşın" butonu (header CTA mobilde gizli olduğu için onu seçme)
+      const contactLink = page.locator('.story__content a[href="contact.html"]');
       await expect(contactLink).toBeVisible();
     });
   });
@@ -874,8 +878,8 @@ test.describe('10. Responsive Tasarim', () => {
   test('RES-09: Floating butonlar mobilde gorunur', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(PAGES.home);
-    await expect(page.locator('a[href*="wa.me"]')).toBeVisible();
-    await expect(page.locator('a[href^="tel:"]')).toBeVisible();
+    await expect(page.locator('a.floating-btn--whatsapp[href*="wa.me"]')).toBeVisible();
+    await expect(page.locator('a.floating-btn--phone[href^="tel:"]')).toBeVisible();
   });
 
   test('RES-10: Form alanlari mobilde tam genislik', async ({ page }) => {
@@ -954,12 +958,12 @@ test.describe('11. SEO ve Meta Etiketler', () => {
     }
   });
 
-  test('SEO-10: Favicon (logo.svg) yukleniyor', async ({ page }) => {
+  test('SEO-10: Favicon (favicon.png) yukleniyor', async ({ page }) => {
     await page.goto(PAGES.home);
     const favicon = page.locator('link[rel="icon"]');
     await expect(favicon).toHaveCount(1);
     const href = await favicon.getAttribute('href');
-    expect(href).toContain('logo.svg');
+    expect(href).toContain('favicon.png');
   });
 });
 
@@ -1035,8 +1039,8 @@ test.describe('13. Uctan Uca Akislar', () => {
     await page.evaluate(() => localStorage.removeItem('solarenerji_messages'));
 
     await page.goto(PAGES.home);
-    await page.locator('a.image-card--clickable[href="kamera-kurulumu.html"]').click();
-    await expect(page).toHaveURL(/kamera-kurulumu/);
+    await page.locator('a.image-card--clickable[href="guvenlik-sistemleri.html"]').click();
+    await expect(page).toHaveURL(/guvenlik-sistemleri/);
 
     await page.locator('a[href*="contact.html?source=kamera"]').first().click();
     await expect(page).toHaveURL(/contact\.html\?source=kamera/);
@@ -1142,12 +1146,12 @@ test.describe('14. Gorseller', () => {
     }
   });
 
-  test('IMG-06: logo.svg header ve footer da gorunur', async ({ page }) => {
+  test('IMG-06: logo.png header ve footer da gorunur', async ({ page }) => {
     await page.goto(PAGES.home);
-    const headerLogo = page.locator('.header img[src*="logo.svg"]');
+    const headerLogo = page.locator('.header img[src*="logo.png"]');
     await expect(headerLogo).toBeVisible();
 
-    const footerLogo = page.locator('footer img[src*="logo.svg"]');
+    const footerLogo = page.locator('footer img[src*="logo.png"]');
     await expect(footerLogo).toBeVisible();
   });
 

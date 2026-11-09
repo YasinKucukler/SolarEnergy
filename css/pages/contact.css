@@ -160,6 +160,20 @@
   margin-bottom: var(--space-1);
 }
 
+/* Tıklanabilir iletişim linkleri (tel:, mailto:, WhatsApp, Instagram, harita) */
+.contact-info__text a {
+  display: inline-block;
+  padding: 2px 0;               /* Mobilde dokunma alanı */
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+.contact-info__text a:hover,
+.contact-info__text a:focus-visible {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
 /* ---- Çalışma Saatleri ---- */
 /* Gün + saat listesi — dikey düzen */
 .hours-list {

@@ -148,7 +148,7 @@ benzer küçük işletme siteleriyle karşılaştırır ve yapılan optimizasyon
 ### JSON-LD Şemaları:
 - **index.html**: LocalBusiness şeması
 - **gunes-enerjisi.html**: Service şeması (Güneş Enerjisi)
-- **kamera-kurulumu.html**: Service şeması (Kamera Kurulumu)
+- **guvenlik-sistemleri.html**: Service şeması (Kamera Kurulumu)
 - **muhendislik.html**: Service şeması (Mühendislik)
 - **admin.html**: noindex, nofollow (arama motorlarından gizli)
 
@@ -258,7 +258,7 @@ Projeye 5 adet lisans gerektirmeyen örnek görsel eklendi. Tümü ticari kullan
 | Dosya | İçerik | Kaynak | Lisans | Kullanım |
 |-------|--------|--------|--------|----------|
 | `img/sample1.jpg` | Güneş paneli | Pexels | Pexels License (ücretsiz) | index.html güneş enerjisi kartı, gunes-enerjisi.html og:image |
-| `img/sample2.jpg` | Güvenlik kamerası | Pexels | Pexels License (ücretsiz) | index.html kamera kartı, kamera-kurulumu.html og:image |
+| `img/sample2.jpg` | Güvenlik kamerası | Pexels | Pexels License (ücretsiz) | index.html kamera kartı, guvenlik-sistemleri.html og:image |
 | `img/sample3.jpg` | İnşaat/mühendislik | Pexels | Pexels License (ücretsiz) | index.html mühendislik kartı, muhendislik.html og:image |
 | `img/sample4.jpg` | Ekip/ofis fotoğrafı | Pexels | Pexels License (ücretsiz) | about.html için hazır (henüz bağlanmadı) |
 | `img/sample5.jpg` | Kurumsal hero/banner | Unsplash | Unsplash License (ücretsiz) | index.html og:image |
@@ -272,7 +272,7 @@ Projeye 5 adet lisans gerektirmeyen örnek görsel eklendi. Tümü ticari kullan
 |-------|------------|
 | `index.html` | 3 hizmet kartındaki gradient placeholder'lar `<img>` etiketleriyle değiştirildi (sample1, sample2, sample3) |
 | `index.html` | `og:image` etiketi `sample5.jpg` olarak güncellendi |
-| `kamera-kurulumu.html` | `og:image` etiketi `sample2.jpg` olarak güncellendi |
+| `guvenlik-sistemleri.html` | `og:image` etiketi `sample2.jpg` olarak güncellendi |
 | `muhendislik.html` | `og:image` etiketi `sample3.jpg` olarak güncellendi |
 | `css/components.css` | `.image-card__image` sınıfı eklendi (width: 100%, height: 220px, object-fit: cover) |
 

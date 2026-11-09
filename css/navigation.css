@@ -57,27 +57,41 @@
 }
 
 /* ---- Logo ---- */
-/* SVG ikon + marka adı, "Enerji" kısmı altın rengi */
-/* DEĞİŞTİRMEK İÇİN: Logo boyutu → .logo svg width/height, Font boyutu → --fs-xl */
+/* KCK Tech amblemi (şeffaf, koyu zemin için beyaz harfli) + yanında "KÜÇÜKLER / MÜHENDİSLİK" */
+/* DEĞİŞTİRMEK İÇİN: Logo boyutu → .logo__img height, Yazı → HTML'de .logo__name / .logo__sub */
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--fs-xl);
-  font-weight: var(--fw-bold);
+  gap: var(--space-3);
   color: var(--color-white);
   text-decoration: none;
   flex-shrink: 0;                /* Daraltılamaz, sabit genişlik */
 }
 
-.logo svg {
-  width: 36px;
-  height: 36px;
+/* Amblem (img/logo.png) — arka planı şeffaf, header zemininde durur */
+.logo__img {
+  height: 56px;                  /* Header 72px (--nav-height) */
+  width: auto;
 }
 
-/* Logo'daki vurgulanan kelime (ör: "Enerji") */
-.logo span {
-  color: var(--color-accent);
+/* "KÜÇÜKLER" üstte, "MÜHENDİSLİK" altta */
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.logo__name {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+}
+
+.logo__sub {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.22em;
+  color: var(--color-gray-300);
 }
 
 /* ---- Masaüstü Navigasyon ---- */

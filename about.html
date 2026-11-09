@@ -5,18 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <title>Hakkımızda | SolarEnerji — Enerji, Güvenlik, Mühendislik</title>
-  <meta name="description" content="SolarEnerji olarak güneş enerjisi, kamera kurulumu ve mühendislik alanlarında profesyonel hizmetler sunuyoruz.">
+  <title>Hakkımızda | KCK Tech Ortaca — Küçükler Mühendislik</title>
+  <meta name="description" content="Ortaca merkezli KCK Tech (Küçükler Mühendislik); Muğla genelinde güneş enerjisi, güvenlik kamerası, 3D printer ve web tasarım hizmetleri sunar.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0f2440">
   <link rel="canonical" href="https://www.orneksite.com/about.html">
 
-  <meta property="og:title" content="Hakkımızda | SolarEnerji">
+  <meta property="og:site_name" content="KCK Tech">
+  <meta property="og:title" content="Hakkımızda | KCK Tech">
   <meta property="og:description" content="Enerji, güvenlik ve mühendislik alanlarında profesyonel ekibimiz.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.orneksite.com/about.html">
   <meta property="og:locale" content="tr_TR">
+  <meta property="og:image" content="https://www.orneksite.com/img/logo-full.jpg">
+  <meta property="og:image:width" content="600">
+  <meta property="og:image:height" content="510">
+  <meta property="og:image:alt" content="KCK Tech — Küçükler Mühendislik logosu">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Hakkımızda | KCK Tech">
+  <meta name="twitter:description" content="Enerji, güvenlik ve mühendislik alanlarında profesyonel ekibimiz.">
+  <meta name="twitter:image" content="https://www.orneksite.com/img/logo-full.jpg">
 
-  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "url": "https://www.orneksite.com/about.html",
+        "name": "Hakkımızda | KCK Tech",
+        "inLanguage": "tr-TR",
+        "about": { "@type": "LocalBusiness", "@id": "https://www.orneksite.com/#business", "name": "KCK Tech", "url": "https://www.orneksite.com/" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Ana Sayfa", "item": "https://www.orneksite.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Hakkımızda", "item": "https://www.orneksite.com/about.html" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <script>(function(){var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,22 +67,73 @@
   <link rel="stylesheet" href="css/dark-mode.css">
   <link rel="stylesheet" href="css/pages/about.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <!-- 3D sahne stilleri — sadece 3D yüklenince devreye girer -->
+  <link rel="stylesheet" href="css/scene3d.css">
+  <!-- JSON-LD: Sık sorulan sorular (sayfadaki SSS bölümüyle aynı olmalı) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "KCK Tech kimdir?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KCK Tech (Küçükler Mühendislik), Ortaca merkezli bir teknik hizmet firmasıdır. Güneş enerjisi (solar panel) kurulumu, güvenlik kamerası ve elektrikli çit sistemleri, 3D modelleme ve 3D printer ile üretim, web sitesi ve web tasarım alanlarında hizmet veriyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "KCK Tech nerede, hangi bölgelere hizmet veriyor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ortaca merkezliyiz; Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde yerinize gelerek keşif, kurulum ve teknik destek hizmeti veriyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Bireysel müşterilere mi, işletmelere mi hizmet veriyorsunuz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Her ikisine de. Ev, bağ evi, karavan ve bahçe sahiplerinden esnafa, işyerlerine, çiftlik ve ahırlara kadar her ölçekte projeye çözüm üretiyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kurulumlarda hangi malzemeleri kullanıyorsunuz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Güvenilir markaların kaliteli ve uzun ömürlü ürünleriyle çalışıyoruz. Malzeme seçimini projenizin ihtiyacına ve bütçenize göre birlikte yapıyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Neden KCK Tech'i tercih etmeliyim?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enerji, güvenlik ve mühendislik hizmetlerini tek çatı altında sunuyoruz; güneş enerjili kamera veya elektrikli çit gibi birleşik çözümleri tek ekiple kuruyoruz. Ücretsiz keşif yapıyor, kurulum sonrasında da teknik destekle yanınızda oluyoruz."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
-<body>
+<body data-scene="about">
   <div class="page-wrapper">
 
     <!-- HEADER -->
     <header class="header" role="banner">
       <div class="container">
         <a href="index.html" class="logo" aria-label="Ana Sayfa">
-          <img src="img/logo.svg" alt="" width="36" height="36">
-          Solar<span>Enerji</span>
+          <img src="img/logo.png" alt="KCK Tech" width="105" height="56" class="logo__img">
+          <span class="logo__text"><span class="logo__name">KÜÇÜKLER</span><span class="logo__sub">MÜHENDİSLİK</span></span>
         </a>
         <!-- NOT: Hakkımızda üst menüde yok, footer'da var -->
         <nav class="nav" role="navigation" aria-label="Ana menü">
           <a href="index.html" class="nav__link">Ana Sayfa</a>
           <a href="gunes-enerjisi.html" class="nav__link">Güneş Enerjisi</a>
-          <a href="kamera-kurulumu.html" class="nav__link">Kamera Kurulumu</a>
+          <a href="guvenlik-sistemleri.html" class="nav__link">Güvenlik Sistemleri</a>
           <a href="muhendislik.html" class="nav__link">Mühendislik</a>
           <a href="contact.html" class="nav__link">İletişim</a>
         </nav>
@@ -72,7 +156,7 @@
     <nav class="mobile-nav" role="navigation" aria-label="Mobil menü">
       <a href="index.html" class="mobile-nav__link">Ana Sayfa</a>
       <a href="gunes-enerjisi.html" class="mobile-nav__link">Güneş Enerjisi</a>
-      <a href="kamera-kurulumu.html" class="mobile-nav__link">Kamera Kurulumu</a>
+      <a href="guvenlik-sistemleri.html" class="mobile-nav__link">Güvenlik Sistemleri</a>
       <a href="muhendislik.html" class="mobile-nav__link">Mühendislik</a>
       <a href="contact.html" class="mobile-nav__link">İletişim</a>
       <div class="mobile-nav__cta">
@@ -103,15 +187,16 @@
               <h2 class="section-title">Teknolojinin Gücüne İnandık</h2>
               <!-- DEĞİŞTİRMEK İÇİN: Aşağıdaki paragrafları firma hikayenizle değiştirin -->
               <p class="story__text">
-                SolarEnerji olarak güneş enerjisi sistemleri, güvenlik kamerası kurulumu ve
-                mühendislik destekleri alanlarında hizmet veriyoruz. Müşterilerimize kaliteli
-                malzeme ve profesyonel işçilikle en iyi çözümleri sunmayı hedefliyoruz.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                KCK Tech (Küçükler Mühendislik) olarak Ortaca merkezli ekibimizle güneş enerjisi sistemleri,
+                güvenlik sistemleri (kamera ve elektrikli çit) ve mühendislik destekleri alanlarında hizmet veriyoruz.
+                Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde ev, bağ evi, karavan, işyeri ve
+                çiftliklere kaliteli malzeme ve özenli işçilikle kalıcı çözümler sunuyoruz.
               </p>
               <p class="story__text">
-                Teknik ekibimiz her projeyi titizlikle planlıyor ve uyguluyor. Kurulum sonrası
-                destek ve bakım hizmetlerimizle her zaman yanınızdayız. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
+                Enerji, güvenlik ve mühendisliği tek çatı altında topluyoruz: elektriği olmayan bir bahçeye güneş enerjili
+                kamera ve elektrikli çit kurabiliyor, kırılan bir parçayı 3D printer ile yeniden üretebiliyor, işletmenizin
+                web sitesini tasarlayabiliyoruz. Her projeye ücretsiz keşifle başlıyor, ihtiyacınızı yerinde dinliyor ve
+                kurulum sonrasında da teknik destek ve bakımla yanınızda olmaya devam ediyoruz.
               </p>
               <a href="contact.html" class="btn btn--outline">
                 <i class="fas fa-paper-plane"></i> Bize Ulaşın
@@ -193,6 +278,43 @@
         </div>
       </section>
 
+      <!-- ==========================================
+           SIK SORULAN SORULAR — Yerel SEO + Google için FAQPage verisi
+           DEĞİŞTİRMEK İÇİN: soru/cevapları burada VE <head> içindeki FAQPage JSON-LD'de aynı şekilde güncelleyin
+           NOT: <main> içine bölüm eklenip silinirse js/scene3d.js → PAGES satırını da güncelleyin
+           ========================================== -->
+      <section class="section section--bg" id="sss">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Sık Sorulan Sorular</span>
+            <h2 class="section-title">KCK Tech Hakkında Sık Sorulan Sorular</h2>
+            <p class="section-desc">Firmamız, çalışma şeklimiz ve hizmet bölgemiz hakkında merak edilenler.</p>
+          </div>
+          <div class="faq" data-animate="fade-up">
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">KCK Tech kimdir?</summary>
+              <p class="faq__answer">KCK Tech (Küçükler Mühendislik), Ortaca merkezli bir teknik hizmet firmasıdır. Güneş enerjisi (solar panel) kurulumu, güvenlik kamerası ve elektrikli çit sistemleri, 3D modelleme ve 3D printer ile üretim, web sitesi ve web tasarım alanlarında hizmet veriyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">KCK Tech nerede, hangi bölgelere hizmet veriyor?</summary>
+              <p class="faq__answer">Ortaca merkezliyiz; Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde yerinize gelerek keşif, kurulum ve teknik destek hizmeti veriyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Bireysel müşterilere mi, işletmelere mi hizmet veriyorsunuz?</summary>
+              <p class="faq__answer">Her ikisine de. Ev, bağ evi, karavan ve bahçe sahiplerinden esnafa, işyerlerine, çiftlik ve ahırlara kadar her ölçekte projeye çözüm üretiyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Kurulumlarda hangi malzemeleri kullanıyorsunuz?</summary>
+              <p class="faq__answer">Güvenilir markaların kaliteli ve uzun ömürlü ürünleriyle çalışıyoruz. Malzeme seçimini projenizin ihtiyacına ve bütçenize göre birlikte yapıyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Neden KCK Tech'i tercih etmeliyim?</summary>
+              <p class="faq__answer">Enerji, güvenlik ve mühendislik hizmetlerini tek çatı altında sunuyoruz; güneş enerjili kamera veya elektrikli çit gibi birleşik çözümleri tek ekiple kuruyoruz. Ücretsiz keşif yapıyor, kurulum sonrasında da teknik destekle yanınızda oluyoruz.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <!-- CTA -->
       <section class="section cta-section">
         <div class="container text-center">
@@ -213,10 +335,10 @@
       <div class="container">
         <div class="footer__grid">
           <div class="footer__brand">
-            <div class="footer__logo"><img src="img/logo.svg" alt="" width="32" height="32">Solar<span>Enerji</span></div>
+            <div class="footer__logo"><img src="img/logo.png" alt="KCK Tech" width="90" height="48" class="footer__logo-img"><span class="footer__logo-text"><span class="footer__logo-name">KÜÇÜKLER</span><span class="footer__logo-sub">MÜHENDİSLİK</span></span></div>
             <p>Enerji, güvenlik ve mühendislik alanlarında profesyonel çözümler sunarak teknolojik bir gelecek inşa ediyoruz.</p>
             <div class="footer__social">
-              <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/kucukler_muh/" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
               <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
               <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -228,7 +350,7 @@
               <a href="index.html" class="footer__link">Ana Sayfa</a>
               <a href="about.html" class="footer__link">Hakkımızda</a>
               <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi</a>
-              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="guvenlik-sistemleri.html" class="footer__link">Güvenlik Sistemleri</a>
               <a href="muhendislik.html" class="footer__link">Mühendislik</a>
               <a href="contact.html" class="footer__link">İletişim</a>
             </div>
@@ -237,24 +359,25 @@
             <h4 class="footer__heading">Hizmetlerimiz</h4>
             <div class="footer__links">
               <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi Sistemleri</a>
-              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="guvenlik-sistemleri.html" class="footer__link">Güvenlik Sistemleri</a>
               <a href="muhendislik.html" class="footer__link">Mühendislik Destekleri</a>
             </div>
           </div>
           <div>
             <h4 class="footer__heading">İletişim</h4>
-            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><span>Ankara, Türkiye</span></div>
-            <div class="footer__contact-item"><i class="fas fa-phone"></i><span>+90 (5XX) XXX XX XX</span></div>
-            <div class="footer__contact-item"><i class="fas fa-envelope"></i><span>info@solarenerji.com</span></div>
+            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><a href="https://www.google.com/maps/search/?api=1&amp;query=Ortaca%2C%20Mu%C4%9Fla" class="footer__link" target="_blank" rel="noopener">Ortaca, Muğla</a></div>
+            <div class="footer__contact-item"><i class="fas fa-phone"></i><span><a href="tel:+905436194898" class="footer__link">+90 (543) 619 48 98</a><br><a href="tel:+905436398913" class="footer__link">+90 (543) 639 89 13</a></span></div>
+            <div class="footer__contact-item"><i class="fas fa-envelope"></i><a href="mailto:kcktech48@gmail.com?subject=Web%20Sitesi%20-%20Bilgi%20Talebi" class="footer__link">kcktech48@gmail.com</a></div>
+            <div class="footer__contact-item"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/kucukler_muh/" class="footer__link" target="_blank" rel="noopener">@kucukler_muh</a></div>
           </div>
         </div>
-        <div class="footer__bottom"><p>&copy; 2025 SolarEnerji. Tüm hakları saklıdır.</p></div>
+        <div class="footer__bottom"><p>&copy; 2025 KCK Tech — Küçükler Mühendislik. Tüm hakları saklıdır.</p></div>
       </div>
     </footer>
 
     <div class="floating-buttons">
-      <a href="https://wa.me/90XXXXXXXXXX" class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
-      <a href="tel:+90XXXXXXXXXX" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın"><i class="fas fa-phone"></i></a>
+      <a href="https://wa.me/905436194898?text=Merhaba%2C%20web%20sitenizden%20ula%C5%9F%C4%B1yorum.%20Bilgi%20almak%20istiyorum." class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+      <a href="tel:+905436194898" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın"><i class="fas fa-phone"></i></a>
       <a href="https://www.google.com/maps?q=ENLEM,BOYLAM" class="floating-btn floating-btn--location" aria-label="Konumumuzu haritada görün" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i></a>
     </div>
   </div>
@@ -264,5 +387,7 @@
   <script src="js/scroll-animations.js"></script>
   <script src="js/smooth-scroll.js"></script>
   <script src="js/main.js"></script>
+  <!-- 3D arazi maketi — sayfa yüklendikten sonra arka planda yüklenir, açılışı yavaşlatmaz -->
+  <script src="js/scene3d.js" defer></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ Bu belge, SolarEnerji projesinin tam yapisini, sayfa haritasini, dosya agacini v
 |------------------------|--------------------------------|-----------------------------|---------------------------------------------------------|
 | `index.html`           | Ana Sayfa                      | `/`                         | 3 hizmeti tanitan hub sayfa (hero, istatistikler, kartlar) |
 | `gunes-enerjisi.html`  | Gunes Enerjisi Sistemleri      | `/gunes-enerjisi.html`      | 6 alt hizmet karti ile gunes enerjisi detay sayfasi     |
-| `kamera-kurulumu.html` | Kamera Kurulumu                | `/kamera-kurulumu.html`     | 4 kart + ozellikler ile kamera kurulumu detay sayfasi   |
+| `guvenlik-sistemleri.html` | Kamera Kurulumu                | `/guvenlik-sistemleri.html`     | 4 kart + ozellikler ile kamera kurulumu detay sayfasi   |
 | `muhendislik.html`     | Muhendislik Destekleri         | `/muhendislik.html`         | 3 kart + ozellikler ile muhendislik detay sayfasi       |
 | `contact.html`         | Iletisim                       | `/contact.html`             | Iletisim formu + kaynak sayfa tespiti (?source= param)  |
 | `admin.html`           | Yonetici Paneli                | `/admin.html`               | localStorage tabanli demo yonetim paneli                |
@@ -21,7 +21,7 @@ Bu belge, SolarEnerji projesinin tam yapisini, sayfa haritasini, dosya agacini v
 ```
 index.html (Hub)
   |-- "Gunes Enerjisi" --> gunes-enerjisi.html --> contact.html?source=gunes-enerjisi
-  |-- "Kamera Kurulumu" --> kamera-kurulumu.html --> contact.html?source=kamera
+  |-- "Kamera Kurulumu" --> guvenlik-sistemleri.html --> contact.html?source=kamera
   |-- "Muhendislik"     --> muhendislik.html     --> contact.html?source=muhendislik
   |-- "Iletisim"        --> contact.html
   |-- Footer: "Hakkimizda" --> about.html
@@ -37,7 +37,7 @@ contact.html --> form gonderimi --> localStorage --> admin.html (mesajlari gorun
 solar1-main/
 |-- index.html                  # Ana Sayfa -- 3 hizmeti tanitan hub
 |-- gunes-enerjisi.html         # Gunes Enerjisi Sistemleri detay sayfasi
-|-- kamera-kurulumu.html        # Kamera Kurulumu detay sayfasi
+|-- guvenlik-sistemleri.html        # Kamera Kurulumu detay sayfasi
 |-- muhendislik.html            # Muhendislik Destekleri detay sayfasi
 |-- contact.html                # Iletisim formu (kaynak sayfa tespiti)
 |-- admin.html                  # Yonetici Paneli (localStorage tabanli)
@@ -99,7 +99,7 @@ Ana Sayfa | Gunes Enerjisi | Kamera Kurulumu | Muhendislik | Iletisim
 
 - **Ana Sayfa**: `index.html`
 - **Gunes Enerjisi**: `gunes-enerjisi.html`
-- **Kamera Kurulumu**: `kamera-kurulumu.html`
+- **Kamera Kurulumu**: `guvenlik-sistemleri.html`
 - **Muhendislik**: `muhendislik.html`
 - **Iletisim**: `contact.html`
 
@@ -135,7 +135,7 @@ Projenin sifirdan mevcut haline getirilmesi icin yapilan tum islemler:
 
 7. **gunes-enerjisi.html olusturuldu** -- 6 alt hizmet karti ile gunes enerjisi detay sayfasi yazildi (panel satisi, GES kurulumu, hibrit sistemler vb.).
 
-8. **kamera-kurulumu.html olusturuldu** -- 4 kart + ozellik listesi ile kamera kurulumu detay sayfasi yazildi.
+8. **guvenlik-sistemleri.html olusturuldu** -- 4 kart + ozellik listesi ile kamera kurulumu detay sayfasi yazildi.
 
 9. **muhendislik.html olusturuldu** -- 3 kart + ozellik listesi ile muhendislik destekleri detay sayfasi yazildi.
 

@@ -5,29 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO: Başlık — DEĞİŞTİRMEK İÇİN: max 60 karakter -->
-  <title>SolarEnerji | Enerji, Güvenlik ve Mühendislik Çözümleri</title>
+  <title>KCK Tech Ortaca | Güneş Enerjisi, Güvenlik, Mühendislik</title>
 
   <!-- SEO: Açıklama — DEĞİŞTİRMEK İÇİN: max 160 karakter -->
-  <meta name="description" content="Güneş enerjisi kurulumu, güvenlik kamerası sistemleri ve mühendislik destekleri. Profesyonel ve güvenilir çözümler.">
+  <meta name="description" content="Ortaca merkezli; Dalyan, Dalaman, Köyceğiz, Fethiye ve Muğla'da güneş enerjisi, güvenlik kamerası, 3D printer ve web tasarım hizmeti. Ücretsiz keşif.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0f2440">
 
   <!-- SEO: Canonical URL — DEĞİŞTİRMEK İÇİN: gerçek domain adresinizi yazın -->
   <link rel="canonical" href="https://www.orneksite.com/">
 
   <!-- Open Graph — Sosyal medya paylaşım önizlemesi -->
-  <meta property="og:title" content="SolarEnerji | Enerji, Güvenlik ve Mühendislik Çözümleri">
-  <meta property="og:description" content="Güneş enerjisi, kamera kurulumu ve mühendislik destekleri.">
+  <meta property="og:site_name" content="KCK Tech">
+  <meta property="og:title" content="KCK Tech Ortaca | Güneş Enerjisi, Güvenlik, Mühendislik">
+  <meta property="og:description" content="Ortaca ve Muğla'da güneş enerjisi, güvenlik kamerası, 3D printer ve web tasarım.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.orneksite.com/">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:image" content="https://www.orneksite.com/img/sample5.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="853">
+  <meta property="og:image:alt" content="Güneş paneli kurulumu">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SolarEnerji | Enerji, Güvenlik ve Mühendislik">
-  <meta name="twitter:description" content="Güneş enerjisi, kamera kurulumu ve mühendislik destekleri.">
+  <meta name="twitter:title" content="KCK Tech Ortaca | Güneş Enerjisi, Güvenlik, Mühendislik">
+  <meta name="twitter:description" content="Ortaca ve Muğla'da güneş enerjisi, güvenlik kamerası, 3D printer ve web tasarım.">
+  <meta name="twitter:image" content="https://www.orneksite.com/img/sample5.jpg">
 
   <!-- Favicon -->
-  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
   <!-- Tema flaş önleme — sayfa yüklenmeden dark mode uygular -->
   <script>
@@ -54,49 +62,147 @@
   <link rel="stylesheet" href="css/dark-mode.css">
   <link rel="stylesheet" href="css/pages/home.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <!-- 3D sahne stilleri — sadece 3D yüklenince devreye girer -->
+  <link rel="stylesheet" href="css/scene3d.css">
 
   <!-- JSON-LD Yapısal Veri — Google arama sonuçları için -->
   <!-- DEĞİŞTİRMEK İÇİN: name, telephone, address bilgilerini güncelleyin -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "SolarEnerji",
-    "description": "Güneş enerjisi kurulumu, güvenlik kamerası sistemleri ve mühendislik destekleri.",
-    "url": "https://www.orneksite.com",
-    "telephone": "+90XXXXXXXXXX",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Ankara",
-      "addressCountry": "TR"
-    },
-    "sameAs": []
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.orneksite.com/#business",
+        "name": "KCK Tech",
+        "alternateName": "Küçükler Mühendislik",
+        "description": "Güneş enerjisi kurulumu, güvenlik kamerası sistemleri ve mühendislik destekleri.",
+        "url": "https://www.orneksite.com/",
+        "logo": "https://www.orneksite.com/img/logo-full.jpg",
+        "image": "https://www.orneksite.com/img/sample5.jpg",
+        "telephone": "+905436194898",
+        "email": "kcktech48@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ortaca",
+          "addressRegion": "Muğla",
+          "postalCode": "48600",
+          "addressCountry": "TR"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Ortaca" },
+          { "@type": "Place", "name": "Dalyan" },
+          { "@type": "City", "name": "Köyceğiz" },
+          { "@type": "City", "name": "Dalaman" },
+          { "@type": "City", "name": "Fethiye" },
+          { "@type": "Place", "name": "Göcek" },
+          { "@type": "City", "name": "Menteşe" },
+          { "@type": "AdministrativeArea", "name": "Muğla" }
+        ],
+        "knowsAbout": ["Güneş enerjisi", "Solar panel kurulumu", "Güvenlik kamerası", "Elektrikli çit", "3D printer", "3D modelleme", "Web tasarım", "Web sitesi", "Mühendislik"],
+        "sameAs": ["https://www.instagram.com/kucukler_muh/"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Hizmetler",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Güneş Enerjisi Sistemleri Kurulumu", "url": "https://www.orneksite.com/gunes-enerjisi.html" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Güvenlik Kamerası ve Elektrikli Çit", "url": "https://www.orneksite.com/guvenlik-sistemleri.html" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mühendislik Destekleri", "url": "https://www.orneksite.com/muhendislik.html" } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.orneksite.com/#website",
+        "url": "https://www.orneksite.com/",
+        "name": "KCK Tech",
+        "inLanguage": "tr-TR",
+        "publisher": { "@id": "https://www.orneksite.com/#business" }
+      }
+    ]
+  }
+  </script>
+  <!-- JSON-LD: Sık sorulan sorular (sayfadaki SSS bölümüyle aynı olmalı) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "KCK Tech hangi hizmetleri veriyor?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Güneş enerjisi (solar panel) kurulumu, güvenlik kamerası ve elektrikli çit sistemleri, 3D modelleme ve 3D printer ile parça üretimi, web sitesi ve web tasarım hizmetleri veriyoruz. Her hizmetin detaylarını ilgili sayfada bulabilirsiniz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Hangi bölgelere hizmet veriyorsunuz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ortaca merkezliyiz; Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde yerinize gelerek keşif, kurulum ve teknik destek hizmeti veriyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Keşif ve teklif ücretli mi?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hayır. Güneş enerjisi ve güvenlik sistemi projeleri için keşif ve teklif ücretsizdir. Yerinizi görüp ihtiyacınızı belirledikten sonra size özel teklif hazırlıyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Nasıl teklif alabilirim?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "İletişim sayfamızdaki formu doldurabilir, bizi telefonla arayabilir veya WhatsApp üzerinden yazabilirsiniz. Size en kısa sürede dönüş yapıyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Güneş enerjisi ve güvenlik sistemini birlikte kurabilir misiniz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Evet. Özellikle elektriği olmayan bağ evi, tarla, ahır ve bahçelerde güneş paneli ve aküyle çalışan kamera ve elektrikli çit sistemlerini tek seferde kuruyoruz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kurulumdan sonra destek veriyor musunuz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Evet. Kurulum sonrasında da teknik destek ve bakım hizmetiyle yanınızdayız. Bir sorun olduğunda bize telefon veya WhatsApp üzerinden ulaşabilirsiniz."
+        }
+      }
+    ]
   }
   </script>
 </head>
-<body>
+<body data-scene="home">
   <div class="page-wrapper">
 
     <!-- ==========================================
          HEADER — Sabit üst navigasyon
          DEĞİŞTİRMEK İÇİN:
-         - Logo: img/logo.svg dosyasını değiştirin
-         - Marka adı: Solar<span>Enerji</span>
+         - Logo: img/logo.png (amblem), img/favicon.png, img/apple-touch-icon.png
+         - Marka yazısı: KÜÇÜKLER (logo__name) + MÜHENDİSLİK (logo__sub)
          - Menü linkleri: href değerlerini güncelleyin
          ========================================== -->
     <header class="header" role="banner">
       <div class="container">
         <!-- Logo ve marka adı -->
         <a href="index.html" class="logo" aria-label="Ana Sayfa">
-          <img src="img/logo.svg" alt="" width="36" height="36">
-          Solar<span>Enerji</span>
+          <img src="img/logo.png" alt="KCK Tech" width="105" height="56" class="logo__img">
+          <span class="logo__text"><span class="logo__name">KÜÇÜKLER</span><span class="logo__sub">MÜHENDİSLİK</span></span>
         </a>
 
         <!-- Masaüstü navigasyon — 5 link -->
         <nav class="nav" role="navigation" aria-label="Ana menü">
           <a href="index.html" class="nav__link nav__link--active">Ana Sayfa</a>
           <a href="gunes-enerjisi.html" class="nav__link">Güneş Enerjisi</a>
-          <a href="kamera-kurulumu.html" class="nav__link">Kamera Kurulumu</a>
+          <a href="guvenlik-sistemleri.html" class="nav__link">Güvenlik Sistemleri</a>
           <a href="muhendislik.html" class="nav__link">Mühendislik</a>
           <a href="contact.html" class="nav__link">İletişim</a>
         </nav>
@@ -127,7 +233,7 @@
     <nav class="mobile-nav" role="navigation" aria-label="Mobil menü">
       <a href="index.html" class="mobile-nav__link mobile-nav__link--active">Ana Sayfa</a>
       <a href="gunes-enerjisi.html" class="mobile-nav__link">Güneş Enerjisi</a>
-      <a href="kamera-kurulumu.html" class="mobile-nav__link">Kamera Kurulumu</a>
+      <a href="guvenlik-sistemleri.html" class="mobile-nav__link">Güvenlik Sistemleri</a>
       <a href="muhendislik.html" class="mobile-nav__link">Mühendislik</a>
       <a href="contact.html" class="mobile-nav__link">İletişim</a>
       <div class="mobile-nav__cta">
@@ -152,7 +258,7 @@
             <!-- Üst etiket — DEĞİŞTİRMEK İÇİN: ikonu ve metni değiştirin -->
             <div class="hero__label">
               <i class="fas fa-bolt"></i>
-              Enerji, Güvenlik & Mühendislik
+              Ortaca · Muğla — Enerji, Güvenlik & Mühendislik
             </div>
             <!-- Ana başlık — DEĞİŞTİRMEK İÇİN: metni güncelleyin -->
             <h1 class="hero__title">
@@ -160,8 +266,8 @@
             </h1>
             <!-- Alt açıklama -->
             <p class="hero__subtitle">
-              Güneş enerjisi sistemleri, güvenlik kamerası kurulumu ve mühendislik destekleri ile
-              ihtiyacınıza özel profesyonel çözümler sunuyoruz.
+              Ortaca ve Muğla genelinde güneş enerjisi (solar) sistemleri, güvenlik kamerası ve elektrikli çit kurulumu,
+              3D printer, web tasarım ve mühendislik destekleri ile ihtiyacınıza özel profesyonel çözümler sunuyoruz.
             </p>
             <!-- CTA Butonları -->
             <div class="hero__buttons">
@@ -212,22 +318,22 @@
 
             <!-- Kart 1: Güneş Enerjisi — Kartın tamamı tıklanabilir link -->
             <a href="gunes-enerjisi.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="100">
-              <img src="img/sample1.jpg" alt="Güneş enerjisi paneli kurulumu" class="image-card__image" loading="lazy">
+              <img src="img/sample1.jpg" alt="Güneş enerjisi paneli kurulumu" class="image-card__image" width="640" height="425" loading="lazy" decoding="async">
               <div class="image-card__body">
                 <h3 class="image-card__title">Güneş Enerjisi Sistemleri</h3>
-                <p class="image-card__text">Eve, araca, bahçeye ve kulübeye güneş paneli kurulumu. Taşınabilir solar sistemler ve elektrikli çit çözümleri.</p>
+                <p class="image-card__text">Eve, araca, bahçeye ve kulübeye güneş paneli kurulumu. Taşınabilir solar sistemler.</p>
                 <span class="image-card__link image-card__link--solar">
                   Detaylı Bilgi <i class="fas fa-arrow-right"></i>
                 </span>
               </div>
             </a>
 
-            <!-- Kart 2: Kamera Kurulumu — Kartın tamamı tıklanabilir link -->
-            <a href="kamera-kurulumu.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="200">
-              <img src="img/sample2.jpg" alt="Güvenlik kamerası kurulumu" class="image-card__image" loading="lazy">
+            <!-- Kart 2: Güvenlik Sistemleri (kamera + elektrikli çit) — Kartın tamamı tıklanabilir link -->
+            <a href="guvenlik-sistemleri.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="200">
+              <img src="img/sample2.jpg" alt="Güvenlik kamerası ve elektrikli çit sistemleri" class="image-card__image" width="640" height="427" loading="lazy" decoding="async">
               <div class="image-card__body">
-                <h3 class="image-card__title">Kamera Kurulumu</h3>
-                <p class="image-card__text">Ev, ofis, karavan ve ahır için güvenlik kamerası kurulumu. Mobilden canlı izleme ve kayıt toplama.</p>
+                <h3 class="image-card__title">Güvenlik Sistemleri</h3>
+                <p class="image-card__text">Ev, ofis, karavan ve ahır için güvenlik kamerası ve elektrikli çit. Mobilden canlı izleme ve kayıt toplama.</p>
                 <span class="image-card__link image-card__link--camera">
                   Detaylı Bilgi <i class="fas fa-arrow-right"></i>
                 </span>
@@ -236,7 +342,7 @@
 
             <!-- Kart 3: Mühendislik — Kartın tamamı tıklanabilir link -->
             <a href="muhendislik.html" class="image-card image-card--clickable" data-animate="fade-up" data-delay="300">
-              <img src="img/sample3.jpg" alt="Mühendislik ve inşaat hizmetleri" class="image-card__image" loading="lazy">
+              <img src="img/sample3.jpg" alt="3D printer, web tasarım ve mühendislik hizmetleri" class="image-card__image" width="640" height="427" loading="lazy" decoding="async">
               <div class="image-card__body">
                 <h3 class="image-card__title">Mühendislik Destekleri</h3>
                 <p class="image-card__text">3D modelleme, 3D printer ile ürün imalatı, web tasarım ve teknik mühendislik desteği hizmetleri.</p>
@@ -290,6 +396,47 @@
            NOT: Yeni işletme olduğunuz için sayılar mütevazı tutuldu.
            İşiniz büyüdükçe bu sayıları güncelleyin.
            ========================================== -->
+      <!-- ==========================================
+           HİZMET BÖLGEMİZ — Yerel SEO: Ortaca ve çevresi
+           DEĞİŞTİRMEK İÇİN: ilçe listesi ve kart metinleri
+           NOT: <main> içine bölüm eklenip silinirse js/scene3d.js → PAGES.home satırını da güncelleyin
+           ========================================== -->
+      <section class="section" id="hizmet-bolgesi">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Hizmet Bölgemiz</span>
+            <h2 class="section-title">Ortaca ve Muğla'da Yanınızdayız</h2>
+            <p class="section-desc">
+              KCK Tech (Küçükler Mühendislik) Ortaca merkezlidir. Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek,
+              Menteşe ve Muğla genelinde keşif, kurulum ve teknik destek için yerinize geliyoruz.
+            </p>
+          </div>
+
+          <div class="grid grid--4" style="margin-top:var(--space-10)">
+            <div class="icon-card" data-animate="fade-up" data-delay="100">
+              <div class="icon-card__icon"><i class="fas fa-solar-panel"></i></div>
+              <h3 class="icon-card__title">Ortaca Güneş Enerjisi</h3>
+              <p class="icon-card__text">Ev, bağ evi, karavan ve bahçe için solar enerji ve güneş paneli kurulumu, akülü sistemler. <a href="gunes-enerjisi.html">Güneş enerjisi sistemleri</a></p>
+            </div>
+            <div class="icon-card" data-animate="fade-up" data-delay="200">
+              <div class="icon-card__icon"><i class="fas fa-video"></i></div>
+              <h3 class="icon-card__title">Güvenlik Kamerası</h3>
+              <p class="icon-card__text">Ev, işyeri, ahır ve bahçe için güvenlik kamerası ve elektrikli çit; telefondan canlı izleme. <a href="guvenlik-sistemleri.html">Güvenlik sistemleri</a></p>
+            </div>
+            <div class="icon-card" data-animate="fade-up" data-delay="300">
+              <div class="icon-card__icon"><i class="fas fa-cube"></i></div>
+              <h3 class="icon-card__title">3D Printer Ortaca</h3>
+              <p class="icon-card__text">3D modelleme ve 3D printer ile yedek parça, prototip ve kişiye özel ürün üretimi. <a href="muhendislik.html">3D baskı hizmeti</a></p>
+            </div>
+            <div class="icon-card" data-animate="fade-up" data-delay="400">
+              <div class="icon-card__icon"><i class="fas fa-laptop-code"></i></div>
+              <h3 class="icon-card__title">Web Sitesi & Web Tasarım</h3>
+              <p class="icon-card__text">Esnaf ve işletmeler için hızlı, mobil uyumlu web sitesi ve web tasarım. <a href="muhendislik.html">Web tasarım hizmeti</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section stats">
         <div class="container">
           <div class="stats__grid">
@@ -340,7 +487,7 @@
           <div class="testimonials__grid" style="margin-top:var(--space-10)">
             <!-- Yorum 1 — Güneş Enerjisi müşterisi -->
             <div class="testimonial" data-animate="fade-up" data-delay="100">
-              <p class="testimonial__quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Güneş paneli kurulumu çok profesyonelce yapıldı, teşekkürler.</p>
+              <p class="testimonial__quote">Güneş paneli kurulumu çok profesyonelce yapıldı, teşekkürler.</p>
               <div class="testimonial__author">
                 <div class="testimonial__avatar">AY</div>
                 <div>
@@ -352,18 +499,18 @@
             </div>
             <!-- Yorum 2 — Kamera müşterisi -->
             <div class="testimonial" data-animate="fade-up" data-delay="200">
-              <p class="testimonial__quote">Lorem ipsum dolor sit amet. Kamera sistemi kuruldu, telefondan rahatlıkla izleyebiliyorum. Memnunuz.</p>
+              <p class="testimonial__quote">Kamera sistemi kuruldu, telefondan rahatlıkla izleyebiliyorum. Memnunuz.</p>
               <div class="testimonial__author">
                 <div class="testimonial__avatar">FK</div>
                 <div>
                   <div class="testimonial__name">Fatma K.</div>
-                  <div class="testimonial__role">Kamera Kurulumu Müşterisi</div>
+                  <div class="testimonial__role">Güvenlik Sistemleri Müşterisi</div>
                 </div>
               </div>
             </div>
             <!-- Yorum 3 — Mühendislik müşterisi -->
             <div class="testimonial" data-animate="fade-up" data-delay="300">
-              <p class="testimonial__quote">Lorem ipsum dolor sit amet. 3D baskı ile ihtiyacımız olan parçalar hızlıca üretildi, kalitesi çok iyi.</p>
+              <p class="testimonial__quote">3D baskı ile ihtiyacımız olan parçalar hızlıca üretildi, kalitesi çok iyi.</p>
               <div class="testimonial__author">
                 <div class="testimonial__avatar">MÖ</div>
                 <div>
@@ -377,6 +524,47 @@
       </section>
 
       <!-- ==========================================
+           SIK SORULAN SORULAR — Yerel SEO + Google için FAQPage verisi
+           DEĞİŞTİRMEK İÇİN: soru/cevapları burada VE <head> içindeki FAQPage JSON-LD'de aynı şekilde güncelleyin
+           NOT: <main> içine bölüm eklenip silinirse js/scene3d.js → PAGES satırını da güncelleyin
+           ========================================== -->
+      <section class="section" id="sss">
+        <div class="container">
+          <div class="text-center" data-animate="fade-up">
+            <span class="section-label">Sık Sorulan Sorular</span>
+            <h2 class="section-title">Sık Sorulan Sorular</h2>
+            <p class="section-desc">KCK Tech ve hizmetlerimiz hakkında en çok merak edilenler.</p>
+          </div>
+          <div class="faq" data-animate="fade-up">
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">KCK Tech hangi hizmetleri veriyor?</summary>
+              <p class="faq__answer">Güneş enerjisi (solar panel) kurulumu, güvenlik kamerası ve elektrikli çit sistemleri, 3D modelleme ve 3D printer ile parça üretimi, web sitesi ve web tasarım hizmetleri veriyoruz. Her hizmetin detaylarını ilgili sayfada bulabilirsiniz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Hangi bölgelere hizmet veriyorsunuz?</summary>
+              <p class="faq__answer">Ortaca merkezliyiz; Dalyan, Köyceğiz, Dalaman, Fethiye, Göcek, Menteşe ve Muğla genelinde yerinize gelerek keşif, kurulum ve teknik destek hizmeti veriyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Keşif ve teklif ücretli mi?</summary>
+              <p class="faq__answer">Hayır. Güneş enerjisi ve güvenlik sistemi projeleri için keşif ve teklif ücretsizdir. Yerinizi görüp ihtiyacınızı belirledikten sonra size özel teklif hazırlıyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Nasıl teklif alabilirim?</summary>
+              <p class="faq__answer">İletişim sayfamızdaki formu doldurabilir, bizi telefonla arayabilir veya WhatsApp üzerinden yazabilirsiniz. Size en kısa sürede dönüş yapıyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Güneş enerjisi ve güvenlik sistemini birlikte kurabilir misiniz?</summary>
+              <p class="faq__answer">Evet. Özellikle elektriği olmayan bağ evi, tarla, ahır ve bahçelerde güneş paneli ve aküyle çalışan kamera ve elektrikli çit sistemlerini tek seferde kuruyoruz.</p>
+            </details>
+            <details class="faq__item" name="sss">
+              <summary class="faq__question">Kurulumdan sonra destek veriyor musunuz?</summary>
+              <p class="faq__answer">Evet. Kurulum sonrasında da teknik destek ve bakım hizmetiyle yanınızdayız. Bir sorun olduğunda bize telefon veya WhatsApp üzerinden ulaşabilirsiniz.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
            CTA BÖLÜMÜ — Harekete geçirici çağrı
            DEĞİŞTİRMEK İÇİN: Başlık, açıklama ve buton metnini güncelleyin
            ========================================== -->
@@ -385,7 +573,7 @@
           <div data-animate="fade-up">
             <span class="section-label" style="color:var(--color-accent-light)">Hemen Başlayın</span>
             <h2 class="section-title">Projeniz İçin Teklif Alın</h2>
-            <p class="section-desc">Güneş enerjisi, kamera veya mühendislik projeleriniz için ücretsiz keşif ve teklif almak isterseniz hemen iletişime geçin.</p>
+            <p class="section-desc">Güneş enerjisi, güvenlik veya mühendislik projeleriniz için ücretsiz keşif ve teklif almak isterseniz hemen iletişime geçin.</p>
             <div style="margin-top:var(--space-8)">
               <a href="contact.html" class="btn btn--primary btn--lg">
                 <i class="fas fa-paper-plane"></i> Ücretsiz Teklif Al
@@ -410,14 +598,14 @@
           <!-- Marka sütunu -->
           <div class="footer__brand">
             <div class="footer__logo">
-              <img src="img/logo.svg" alt="" width="32" height="32">
-              Solar<span>Enerji</span>
+              <img src="img/logo.png" alt="KCK Tech" width="90" height="48" class="footer__logo-img">
+              <span class="footer__logo-text"><span class="footer__logo-name">KÜÇÜKLER</span><span class="footer__logo-sub">MÜHENDİSLİK</span></span>
             </div>
             <!-- DEĞİŞTİRMEK İÇİN: Firma tanıtım metnini güncelleyin -->
             <p>Enerji, güvenlik ve mühendislik alanlarında profesyonel çözümler sunarak teknolojik bir gelecek inşa ediyoruz.</p>
             <!-- Sosyal medya linkleri — DEĞİŞTİRMEK İÇİN: # yerine gerçek URL yazın -->
             <div class="footer__social">
-              <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/kucukler_muh/" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
               <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
               <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -431,7 +619,7 @@
               <a href="index.html" class="footer__link">Ana Sayfa</a>
               <a href="about.html" class="footer__link">Hakkımızda</a>
               <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi</a>
-              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="guvenlik-sistemleri.html" class="footer__link">Güvenlik Sistemleri</a>
               <a href="muhendislik.html" class="footer__link">Mühendislik</a>
               <a href="contact.html" class="footer__link">İletişim</a>
             </div>
@@ -442,7 +630,7 @@
             <h4 class="footer__heading">Hizmetlerimiz</h4>
             <div class="footer__links">
               <a href="gunes-enerjisi.html" class="footer__link">Güneş Enerjisi Sistemleri</a>
-              <a href="kamera-kurulumu.html" class="footer__link">Kamera Kurulumu</a>
+              <a href="guvenlik-sistemleri.html" class="footer__link">Güvenlik Sistemleri</a>
               <a href="muhendislik.html" class="footer__link">Mühendislik Destekleri</a>
             </div>
           </div>
@@ -450,16 +638,17 @@
           <!-- İletişim sütunu — DEĞİŞTİRMEK İÇİN: bilgileri güncelleyin -->
           <div>
             <h4 class="footer__heading">İletişim</h4>
-            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><span>Ankara, Türkiye</span></div>
-            <div class="footer__contact-item"><i class="fas fa-phone"></i><span>+90 (5XX) XXX XX XX</span></div>
-            <div class="footer__contact-item"><i class="fas fa-envelope"></i><span>info@solarenerji.com</span></div>
+            <div class="footer__contact-item"><i class="fas fa-map-marker-alt"></i><a href="https://www.google.com/maps/search/?api=1&amp;query=Ortaca%2C%20Mu%C4%9Fla" class="footer__link" target="_blank" rel="noopener">Ortaca, Muğla</a></div>
+            <div class="footer__contact-item"><i class="fas fa-phone"></i><span><a href="tel:+905436194898" class="footer__link">+90 (543) 619 48 98</a><br><a href="tel:+905436398913" class="footer__link">+90 (543) 639 89 13</a></span></div>
+            <div class="footer__contact-item"><i class="fas fa-envelope"></i><a href="mailto:kcktech48@gmail.com?subject=Web%20Sitesi%20-%20Bilgi%20Talebi" class="footer__link">kcktech48@gmail.com</a></div>
+            <div class="footer__contact-item"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/kucukler_muh/" class="footer__link" target="_blank" rel="noopener">@kucukler_muh</a></div>
           </div>
         </div>
 
         <!-- Alt çizgi — telif hakkı -->
         <div class="footer__bottom">
           <!-- DEĞİŞTİRMEK İÇİN: Yılı ve firma adını güncelleyin -->
-          <p>&copy; 2025 SolarEnerji. Tüm hakları saklıdır.</p>
+          <p>&copy; 2025 KCK Tech — Küçükler Mühendislik. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
@@ -472,10 +661,10 @@
          - Konum: Google Maps koordinatlarını değiştirin (enlem,boylam)
          ========================================== -->
     <div class="floating-buttons">
-      <a href="https://wa.me/90XXXXXXXXXX" class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener">
+      <a href="https://wa.me/905436194898?text=Merhaba%2C%20web%20sitenizden%20ula%C5%9F%C4%B1yorum.%20Bilgi%20almak%20istiyorum." class="floating-btn floating-btn--whatsapp" aria-label="WhatsApp ile iletişim" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp"></i>
       </a>
-      <a href="tel:+90XXXXXXXXXX" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın">
+      <a href="tel:+905436194898" class="floating-btn floating-btn--phone" aria-label="Telefon ile arayın">
         <i class="fas fa-phone"></i>
       </a>
       <a href="https://www.google.com/maps?q=ENLEM,BOYLAM" class="floating-btn floating-btn--location" aria-label="Konumumuzu haritada görün" target="_blank" rel="noopener">
@@ -492,5 +681,7 @@
   <script src="js/counters.js"></script>
   <script src="js/smooth-scroll.js"></script>
   <script src="js/main.js"></script>
+  <!-- 3D arazi maketi — sayfa yüklendikten sonra arka planda yüklenir, açılışı yavaşlatmaz -->
+  <script src="js/scene3d.js" defer></script>
 </body>
 </html>

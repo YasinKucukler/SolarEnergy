@@ -60,7 +60,7 @@ Tum HTML dosyalarinda icerik degistirilecek alanlarin yanina `DEGISTIRMEK ICIN` 
 - 6 adet hizmet karti (baslik + aciklama + ozellik listesi)
 - CTA bolumu metni
 
-#### kamera-kurulumu.html (Kamera Kurulumu)
+#### guvenlik-sistemleri.html (Kamera Kurulumu)
 
 - Hero baslik ve aciklama
 - 4 adet hizmet karti (baslik + aciklama + ozellik listesi)
@@ -147,42 +147,42 @@ Tum renkler `css/variables.css` dosyasinda merkezi olarak yonetilir. Bir rengi d
 
 ## 3. Logo Degistirme
 
-### Adim 1: Logo Dosyasini Degistirin
+### Logo Dosyalari
 
-1. Yeni logonuzu `img/logo.svg` olarak kaydedin (SVG formati onerilir)
-2. PNG/JPG kullaniyorsaniz dosya adini ve uzantisini not edin
+| Dosya | Kullanim |
+|-------|----------|
+| `img/logo.png` | Header ve footer amblemi. Arka plani seffaf, KCK harfleri koyu zemin icin beyaza cevrilmis (240x128) |
+| `img/favicon.png` | Tarayici sekme ikonu (64x64, orijinal renkler) |
+| `img/apple-touch-icon.png` | iPhone/iPad ana ekran ikonu (180x180, beyaz zemin) |
+| `img/logo-full.jpg` | Sloganli tam logo (600px). `index.html` JSON-LD `logo` alaninda kullanilir |
 
-### Adim 2: HTML Dosyalarini Guncelleyin
+**Onemli:** Header ve footer koyu renkli oldugu icin `img/logo.png` dosyasinda arka plan **seffaf** ve koyu lacivert harfler **beyaz** olmalidir. Orijinal (beyaz zeminli) logo dogrudan konursa beyaz kutu gibi gorunur, lacivert harfler de zeminde kaybolur.
 
-Tum HTML dosyalarinda (`index.html`, `about.html`, `contact.html` vb.) header bolumunde su kodu bulun:
+### HTML Yapisi
+
+Tum HTML dosyalarinda header bolumunde:
 
 ```html
 <a href="index.html" class="logo" aria-label="Ana Sayfa">
-  <img src="img/logo.svg" alt="" width="36" height="36">
-  Solar<span>Enerji</span>
+  <img src="img/logo.png" alt="KCK Tech" width="83" height="44" class="logo__img">
+  <span class="logo__text"><span class="logo__name">KÜÇÜKLER</span><span class="logo__sub">MÜHENDİSLİK</span></span>
 </a>
 ```
 
-Degistirin:
-- `img/logo.svg` yerine yeni dosya yolunuzu yazin (ornegin `img/yeni-logo.png`)
-- `width` ve `height` degerlerini logonuzun boyutuna gore ayarlayin
-- `Solar<span>Enerji</span>` yerine kendi marka adinizi yazin
+- Amblem boyutu: `css/navigation.css` → `.logo__img { height: 44px; }`
+- Yanindaki yazi: `logo__name` (ust satir) ve `logo__sub` (alt satir)
+- Footer'da ayni yapi `footer__logo-img` / `footer__logo-name` / `footer__logo-sub` siniflariyla yer alir (`css/footer.css`)
 
-### Adim 3: Favicon'u Guncelleyin
+### Favicon
 
 Her HTML dosyasinin `<head>` bolumunde:
 
 ```html
-<link rel="icon" href="img/logo.svg" type="image/svg+xml">
-```
-
-PNG favicon kullaniyorsaniz:
-
-```html
 <link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 ```
 
-**Not:** Logo 7 HTML dosyasinda da degistirilmelidir: `index.html`, `gunes-enerjisi.html`, `kamera-kurulumu.html`, `muhendislik.html`, `contact.html`, `admin.html`, `about.html`.
+**Not:** Logo 7 HTML dosyasinda da degistirilmelidir: `index.html`, `gunes-enerjisi.html`, `guvenlik-sistemleri.html`, `muhendislik.html`, `contact.html`, `admin.html`, `about.html`.
 
 ---
 
@@ -413,7 +413,7 @@ Ilgili `<div class="card">` blogunun tamamini (acilis ve kapanis etiketi dahil) 
 
 ### Yeni Hizmet Sayfasi Ekleme
 
-1. Mevcut bir hizmet sayfasini kopyalayin (ornegin `kamera-kurulumu.html`)
+1. Mevcut bir hizmet sayfasini kopyalayin (ornegin `guvenlik-sistemleri.html`)
 2. Icerigini yeni hizmetinize gore degistirin
 3. `css/pages/` altina yeni bir CSS dosyasi olusturun
 4. Ilgili HTML'in `<head>` bolumune yeni CSS'i ekleyin:
@@ -969,7 +969,7 @@ Her hizmet sayfasinin alt kisminda "Tamamlanan Projelerimiz" bolumu bulunur. Bur
 | Sayfa | Dosya | Yer |
 |-------|-------|-----|
 | Gunes Enerjisi | `gunes-enerjisi.html` | CTA bolumunun hemen ustu |
-| Kamera Kurulumu | `kamera-kurulumu.html` | CTA bolumunun hemen ustu |
+| Kamera Kurulumu | `guvenlik-sistemleri.html` | CTA bolumunun hemen ustu |
 | Muhendislik | `muhendislik.html` | CTA bolumunun hemen ustu |
 
 ### Tek Proje Kartinin HTML Yapisi

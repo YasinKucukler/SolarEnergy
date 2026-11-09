@@ -251,7 +251,7 @@ function setBadge(gid, p, f) {
 var PG = {
   home: BASE + '/index.html',
   solar: BASE + '/gunes-enerjisi.html',
-  camera: BASE + '/kamera-kurulumu.html',
+  camera: BASE + '/guvenlik-sistemleri.html',
   eng: BASE + '/muhendislik.html',
   contact: BASE + '/contact.html',
   admin: BASE + '/admin.html',
@@ -301,7 +301,7 @@ var GROUPS = [
   { id:'NAV10', name:'Footer hizmet linkleri var', fn: async function() {
     await load(PG.home);
     el('footer a[href="gunes-enerjisi.html"]');
-    el('footer a[href="kamera-kurulumu.html"]');
+    el('footer a[href="guvenlik-sistemleri.html"]');
     el('footer a[href="muhendislik.html"]');
   }},
 ]},
@@ -611,7 +611,7 @@ var GROUPS = [
     assert(cards.length === 3, '3 kart olmali');
     var hrefs = [].map.call(cards, function(c) { return c.getAttribute('href'); });
     assert(hrefs.indexOf('gunes-enerjisi.html') !== -1, 'gunes linki yok');
-    assert(hrefs.indexOf('kamera-kurulumu.html') !== -1, 'kamera linki yok');
+    assert(hrefs.indexOf('guvenlik-sistemleri.html') !== -1, 'kamera linki yok');
     assert(hrefs.indexOf('muhendislik.html') !== -1, 'muhendislik linki yok');
   }},
   { id:'IDX02', name:'Gorsel kartlari yukleniyor', fn: async function() {
@@ -697,18 +697,18 @@ var GROUPS = [
       contains(attr('meta[property="og:image"]','content'), map[i][1]);
     }
   }},
-  { id:'SEO10', name:'Favicon logo.svg', fn: async function() {
+  { id:'SEO10', name:'Favicon favicon.png', fn: async function() {
     await load(PG.home);
-    contains(attr('link[rel="icon"]','href'), 'logo.svg');
+    contains(attr('link[rel="icon"]','href'), 'favicon.png');
   }},
 ]},
 
 // ---- 12. GORSELLER ----
 { id:'img', title:'12. Gorseller', tests:[
-  { id:'IMG06', name:'logo.svg header + footer', fn: async function() {
+  { id:'IMG06', name:'logo.png header + footer', fn: async function() {
     await load(PG.home);
-    el('.header img[src*="logo.svg"]');
-    el('footer img[src*="logo.svg"]');
+    el('.header img[src*="logo.png"]');
+    el('footer img[src*="logo.png"]');
   }},
   { id:'IMG07', name:'object-fit: cover', fn: async function() {
     await load(PG.home);

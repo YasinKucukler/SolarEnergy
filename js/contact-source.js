@@ -48,9 +48,9 @@
         service: 'gunes-enerjisi'
       },
       'kamera': {
-        title: 'Kamera Kurulumu Hakkında İletişim',
-        desc: 'Güvenlik kamerası kurulumu için teklif almak istiyorsunuz.',
-        subject: 'Kamera Kurulumu Teklif Talebi',
+        title: 'Güvenlik Sistemleri Hakkında İletişim',
+        desc: 'Güvenlik kamerası veya elektrikli çit için teklif almak istiyorsunuz.',
+        subject: 'Güvenlik Sistemleri Teklif Talebi',
         service: 'kamera'
       },
       'muhendislik': {

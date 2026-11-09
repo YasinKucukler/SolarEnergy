@@ -10,7 +10,7 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 
 | # | Senaryo | Beklenen Sonuc | P |
 |---|---------|----------------|---|
-| NAV-01 | Masaustunde (>768px) header'daki 5 linke tek tek tikla | Her link dogru sayfaya yonlendirir (index, gunes-enerjisi, kamera-kurulumu, muhendislik, contact) | 1 |
+| NAV-01 | Masaustunde (>768px) header'daki 5 linke tek tek tikla | Her link dogru sayfaya yonlendirir (index, gunes-enerjisi, guvenlik-sistemleri, muhendislik, contact) | 1 |
 | NAV-02 | `index.html` sayfasindayken "Ana Sayfa" linkinin aktif gorundugunu dogrula | `nav__link--active` sinifi uygulanmis, altin renk + alt cizgi gorunur | 2 |
 | NAV-03 | `about.html` sayfasindayken hicbir nav linkinin aktif olmadigini dogrula | About footer'dan erisilebilir, ust menude degil — hicbir link aktif olmamali | 3 |
 | NAV-04 | Sayfayi 50px'ten fazla asagi kaydir | Header'a `header--scrolled` sinifi eklenir, golge efekti gorunur | 2 |
@@ -141,7 +141,7 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 | # | Senaryo | Beklenen Sonuc | P |
 |---|---------|----------------|---|
 | SRC-01 | `contact.html?source=gunes-enerjisi` adresine git | Baslik: "Gunes Enerjisi Hakkinda Iletisim", konu otomatik dolar, dropdown "gunes-enerjisi" secer | 1 |
-| SRC-02 | `contact.html?source=kamera` adresine git | Baslik: "Kamera Kurulumu Hakkinda Iletisim", dropdown "kamera" secer | 1 |
+| SRC-02 | `contact.html?source=kamera` adresine git | Baslik: "Guvenlik Sistemleri Hakkinda Iletisim", dropdown "kamera" secer | 1 |
 | SRC-03 | `contact.html?source=muhendislik` adresine git | Baslik: "Muhendislik Destegi Hakkinda Iletisim", dropdown "muhendislik" secer | 1 |
 | SRC-04 | `contact.html?source=diger` adresine git | Tanimsiz kaynak — hicbir degisiklik yapilmaz, varsayilan degerler kalir | 2 |
 | SRC-05 | `contact.html` (source parametresi yok) adresine git | Varsayilan baslik "Iletisim", form bos | 1 |
@@ -227,12 +227,12 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 | GNS-03 | 6 alt hizmet kartinin gorunur oldugunu dogrula | Tum kartlar okunabilir ve duzgun goruntulenir | 2 |
 | GNS-04 | Scroll animasyonlarinin tum bolümlerde calistigini dogrula | fade-up, fade-left, fade-right animasyonlari tetiklenir | 3 |
 
-### 9.3 Kamera Kurulumu (kamera-kurulumu.html)
+### 9.3 Güvenlik Sistemleri (guvenlik-sistemleri.html)
 
 | # | Senaryo | Beklenen Sonuc | P |
 |---|---------|----------------|---|
 | KAM-01 | "Teklif Al" CTA butonuna tikla | `contact.html?source=kamera` adresine yonlendirir | 1 |
-| KAM-02 | Aktif nav linkinin "Kamera Kurulumu" oldugunu dogrula | Dogru link vurgulu | 2 |
+| KAM-02 | Aktif nav linkinin "Güvenlik Sistemleri" oldugunu dogrula | Dogru link vurgulu | 2 |
 | KAM-03 | Hero bolumunun mavi tonlu gradient kullandigini dogrula | `.camera-hero` sinifi uygulanmis | 3 |
 | KAM-04 | 4 kamera hizmet kartinin gorunur oldugunu dogrula | Kartlar duzgun goruntulenir | 2 |
 
@@ -309,7 +309,7 @@ Bu belge, SolarEnerji projesinin tum sayfa, bilesen ve islevlerini kapsayan manu
 | # | Senaryo | Beklenen Sonuc | P |
 |---|---------|----------------|---|
 | E2E-01 | index.html → "Gunes Enerjisi" karti tikla → gunes-enerjisi.html → "Teklif Al" tikla → contact.html?source=gunes-enerjisi → formu doldur ve gonder → admin.html'de giris yap → mesaji gor | Tum akis sorunsuz calisir, mesaj kaynagi "gunes-enerjisi" olarak gorunur | 1 |
-| E2E-02 | Ayni akis kamera icin: index → kamera-kurulumu → contact?source=kamera → admin | Mesaj kaynagi "kamera" olarak gorunur | 1 |
+| E2E-02 | Ayni akis kamera icin: index → guvenlik-sistemleri → contact?source=kamera → admin | Mesaj kaynagi "kamera" olarak gorunur | 1 |
 | E2E-03 | Ayni akis muhendislik icin: index → muhendislik → contact?source=muhendislik → admin | Mesaj kaynagi "muhendislik" olarak gorunur | 1 |
 | E2E-04 | Dogrudan contact.html (source yok) → formu gonder → admin'de mesaj | Mesajda source_page alani bos | 2 |
 | E2E-05 | Tema degistir → 3 farkli sayfaya git → temanin korunur oldugunu dogrula | Tema tum sayfalarda tutarli | 1 |
