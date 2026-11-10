@@ -18,7 +18,19 @@ const PAGES = {
   about: '/about.html',
 };
 
-const ADMIN_PASSWORD = 'admin123';
+// Gercek admin sifresi repoda yok (admin.js sadece SHA-256 ozetini tutar).
+// Testler admin.js'i yuklerken ozeti bu test sifresinin ozetiyle degistirir.
+const ADMIN_PASSWORD = 'test-sifre-123';
+const ADMIN_PASSWORD_HASH = require('crypto').createHash('sha256').update(ADMIN_PASSWORD, 'utf8').digest('hex');
+
+test.beforeEach(async ({ page }) => {
+  await page.route('**/js/admin.js', async (route) => {
+    const response = await route.fetch();
+    const body = (await response.text())
+      .replace(/var ADMIN_PASSWORD_HASH = '[0-9a-f]{64}'/, `var ADMIN_PASSWORD_HASH = '${ADMIN_PASSWORD_HASH}'`);
+    await route.fulfill({ response, body });
+  });
+});
 
 // ============================================================================
 // 1. NAVIGASYON VE HEADER
@@ -583,9 +595,9 @@ test.describe('8. Yonetici Paneli', () => {
       await expect(page.locator('#login-error')).toBeVisible();
     });
 
-    test('ADM-03: Bosluklu sifre (admin123 ) — hata mesaji', async ({ page }) => {
+    test('ADM-03: Sonunda bosluk olan sifre — hata mesaji', async ({ page }) => {
       await page.goto(PAGES.admin);
-      await page.locator('#admin-password').fill('admin123 ');
+      await page.locator('#admin-password').fill(ADMIN_PASSWORD + ' ');
       await page.locator('#login-form button[type="submit"]').click();
       await expect(page.locator('#login-error')).toBeVisible();
     });

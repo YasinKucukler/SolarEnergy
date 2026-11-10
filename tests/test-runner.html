@@ -114,6 +114,11 @@ var BASE = window.location.protocol + '//' + window.location.host;
 
 function doc() { return F.contentDocument; }
 function win() { return F.contentWindow; }
+var _adminPw = new URLSearchParams(location.search).get('pw');
+function adminPw() {
+  if (_adminPw === null) _adminPw = prompt('Admin testleri icin sifre:') || '';
+  return _adminPw;
+}
 
 function load(url) {
   return new Promise(function(ok, no) {
@@ -536,11 +541,12 @@ var GROUPS = [
 ]},
 
 // ---- 9. ADMIN ----
+// Sifre repoda tutulmaz: ?pw=... ile verilir ya da ilk admin testinde bir kez sorulur.
 { id:'adm', title:'9. Admin Paneli', tests:[
   { id:'ADM01', name:'Dogru sifre ile giris', fn: async function() {
     win().sessionStorage.removeItem('solarenerji_admin_session');
     await load(PG.admin);
-    el('#admin-password').value = 'admin123';
+    el('#admin-password').value = adminPw();
     triggerSubmit(el('#login-form'));
     await wait(500);
     assert(hasClass('#admin-dashboard','visible'), 'Dashboard .visible olmali');
@@ -557,7 +563,7 @@ var GROUPS = [
     win().localStorage.removeItem('solarenerji_messages');
     win().sessionStorage.removeItem('solarenerji_admin_session');
     await load(PG.admin);
-    el('#admin-password').value = 'admin123';
+    el('#admin-password').value = adminPw();
     triggerSubmit(el('#login-form'));
     await wait(500);
     assert(isVisible('#empty-state'), 'Bos durum gorunmeli');
@@ -570,7 +576,7 @@ var GROUPS = [
     ]));
     win().sessionStorage.removeItem('solarenerji_admin_session');
     await load(PG.admin);
-    el('#admin-password').value = 'admin123';
+    el('#admin-password').value = adminPw();
     triggerSubmit(el('#login-form'));
     await wait(500);
     assert(el('#stat-total').textContent.trim() === '3', 'Toplam 3 olmali');
@@ -586,7 +592,7 @@ var GROUPS = [
     await load(PG.admin);
     var fired = false;
     win().alert = function() { fired = true; };
-    el('#admin-password').value = 'admin123';
+    el('#admin-password').value = adminPw();
     triggerSubmit(el('#login-form'));
     await wait(1000);
     assert(!fired, 'XSS alert calisMAMALI');
@@ -594,7 +600,7 @@ var GROUPS = [
   { id:'ADM26', name:'Cikis butonu giris ekranina doner', fn: async function() {
     win().sessionStorage.removeItem('solarenerji_admin_session');
     await load(PG.admin);
-    el('#admin-password').value = 'admin123';
+    el('#admin-password').value = adminPw();
     triggerSubmit(el('#login-form'));
     await wait(500);
     el('#logout-btn').click(); await wait(500);
@@ -763,7 +769,7 @@ var GROUPS = [
     // Admin panelinde kontrol
     win().sessionStorage.removeItem('solarenerji_admin_session');
     await load(PG.admin);
-    el('#admin-password').value = 'admin123';
+    el('#admin-password').value = adminPw();
     triggerSubmit(el('#login-form'));
     await wait(500);
     assert(el('#stat-total').textContent.trim() === '1', 'Toplam 1 mesaj');

@@ -13,7 +13,7 @@
  * - Mesaj silme
  *
  * DEĞİŞTİRMEK İÇİN:
- * - ADMIN_PASSWORD: Giriş şifresini değiştirin (satır 26)
+ * - ADMIN_PASSWORD_HASH: Giriş şifresinin SHA-256 özeti
  * - STORAGE_KEY: localStorage anahtar adını değiştirin
  * - Gerçek bir backend eklendiğinde fetch() ile API'ye bağlanılabilir
  *
@@ -25,8 +25,48 @@
   'use strict';
 
   /* ---- Ayarlar ---- */
-  /* DEĞİŞTİRMEK İÇİN: Bu şifreyi kendi şifrenizle değiştirin */
-  var ADMIN_PASSWORD = 'admin123';
+  /* Şifrenin kendisi değil, SHA-256 özeti saklanır — kodda şifre görünmez.
+     DEĞİŞTİRMEK İÇİN: yeni şifrenin SHA-256 özetini (küçük harf hex) buraya yazın.
+     PowerShell: $s=[Security.Cryptography.SHA256]::Create(); ($s.ComputeHash([Text.Encoding]::UTF8.GetBytes('YENI_SIFRE'))|%{$_.ToString('x2')}) -join '' */
+  var ADMIN_PASSWORD_HASH = 'e9718687a9faa98575e03553a6c1fd28c096ef328be2e2a29287f5038cf5562f';
+
+  /** UTF-8 metnin SHA-256 özeti (hex). Senkron; http üzerinde de çalışır. */
+  function sha256(text) {
+    var bytes = unescape(encodeURIComponent(text));
+    var K = [], H = [], i, j;
+    var isPrime = function (n) { for (var d = 2; d * d <= n; d++) if (n % d === 0) return false; return true; };
+    for (var n = 2, c = 0; c < 64; n++) {
+      if (isPrime(n)) {
+        if (c < 8) H[c] = (Math.pow(n, 1 / 2) * 4294967296) | 0;
+        K[c++] = (Math.pow(n, 1 / 3) * 4294967296) | 0;
+      }
+    }
+    var len = bytes.length, words = [];
+    for (i = 0; i < len; i++) words[i >> 2] |= bytes.charCodeAt(i) << (24 - (i % 4) * 8);
+    words[len >> 2] |= 0x80 << (24 - (len % 4) * 8);
+    words[(((len + 8) >> 6) << 4) + 15] = len * 8;
+    var rotr = function (x, r) { return (x >>> r) | (x << (32 - r)); };
+    for (i = 0; i < words.length; i += 16) {
+      var w = [], a = H.slice(0);
+      for (j = 0; j < 16; j++) w[j] = words[i + j] | 0;
+      for (j = 0; j < 64; j++) {
+        if (j >= 16) {
+          var w15 = w[j - 15], w2 = w[j - 2];
+          w[j] = (w[j - 16] + (rotr(w15, 7) ^ rotr(w15, 18) ^ (w15 >>> 3)) +
+                  w[j - 7] + (rotr(w2, 17) ^ rotr(w2, 19) ^ (w2 >>> 10))) | 0;
+        }
+        var e = a[4];
+        var t1 = a[7] + (rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25)) + ((e & a[5]) ^ (~e & a[6])) + K[j] + w[j];
+        var t2 = (rotr(a[0], 2) ^ rotr(a[0], 13) ^ rotr(a[0], 22)) + ((a[0] & a[1]) ^ (a[0] & a[2]) ^ (a[1] & a[2]));
+        a = [(t1 + t2) | 0].concat(a.slice(0, 7));
+        a[4] = (a[4] + t1) | 0;
+      }
+      for (j = 0; j < 8; j++) H[j] = (H[j] + a[j]) | 0;
+    }
+    var hex = '';
+    for (i = 0; i < 8; i++) hex += ('00000000' + (H[i] >>> 0).toString(16)).slice(-8);
+    return hex;
+  }
 
   /* localStorage anahtarı — form-validation.js ile aynı olmalı */
   var STORAGE_KEY = 'solarenerji_messages';
@@ -83,7 +123,7 @@
       e.preventDefault();
       var password = document.getElementById('admin-password').value;
 
-      if (password === ADMIN_PASSWORD) {
+      if (sha256(password) === ADMIN_PASSWORD_HASH) {
         /* Şifre doğru — oturumu başlat */
         sessionStorage.setItem(SESSION_KEY, 'active');
         loginError.classList.remove('visible');
