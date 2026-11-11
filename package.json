@@ -5,7 +5,9 @@
     "test": "npx playwright test",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed",
-    "test:report": "npx playwright show-report"
+    "test:report": "npx playwright show-report",
+    "content": "node scripts/apply-content.js",
+    "serve": "npx serve . -l 3000 --no-clipboard -c tests/serve.json"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",

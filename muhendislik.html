@@ -331,10 +331,9 @@
 
       <!-- ==========================================
            TAMAMLANAN PROJELERİMİZ — Mühendislik proje galerisi
-           DEĞİŞTİRMEK İÇİN:
-           - Kart eklemek: Mevcut bir kartı kopyalayıp içeriğini değiştirin
-           - Görsel eklemek: .project-card__image içine <img src="..." alt="..."> ekleyin
-           - Kart silmek: İlgili <div class="project-card"> bloğunu silin
+           DEĞİŞTİRMEK İÇİN: admin.html → Projeler sekmesi → "Yayınla",
+           ardından: npm run content -- <indirilen site-content.json>
+           (cms:projects işaretleri arasındaki kartlar betik tarafından yeniden yazılır)
            ========================================== -->
       <section class="section">
         <div class="container">
@@ -345,12 +344,11 @@
           </div>
 
           <div class="projects-grid" style="margin-top:var(--space-10)">
+            <!-- cms:projects:muhendislik:start — Bu bölüm admin panelinden yönetilir (npm run content). Elle düzenlemeyin. -->
 
-            <!-- Proje 1 -->
-            <!-- DEĞİŞTİRMEK İÇİN: Başlık, açıklama ve etiketi güncelleyin, gerçek fotoğraf ekleyin -->
             <div class="project-card" data-animate="fade-up" data-delay="100">
               <div class="project-card__image project-card__image--engineering">
-                <i class="fas fa-cube"></i>
+                <i class="fas fa-cube" aria-hidden="true"></i>
               </div>
               <div class="project-card__body">
                 <h3 class="project-card__title">Lorem Ipsum Projesi</h3>
@@ -359,10 +357,9 @@
               </div>
             </div>
 
-            <!-- Proje 2 -->
             <div class="project-card" data-animate="fade-up" data-delay="200">
               <div class="project-card__image project-card__image--engineering">
-                <i class="fas fa-print"></i>
+                <i class="fas fa-print" aria-hidden="true"></i>
               </div>
               <div class="project-card__body">
                 <h3 class="project-card__title">Lorem Ipsum Projesi</h3>
@@ -371,10 +368,9 @@
               </div>
             </div>
 
-            <!-- Proje 3 -->
             <div class="project-card" data-animate="fade-up" data-delay="300">
               <div class="project-card__image project-card__image--engineering">
-                <i class="fas fa-code"></i>
+                <i class="fas fa-code" aria-hidden="true"></i>
               </div>
               <div class="project-card__body">
                 <h3 class="project-card__title">Lorem Ipsum Projesi</h3>
@@ -383,6 +379,7 @@
               </div>
             </div>
 
+            <!-- cms:projects:muhendislik:end -->
           </div>
         </div>
       </section>

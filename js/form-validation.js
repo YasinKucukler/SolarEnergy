@@ -193,6 +193,7 @@
 
         /* Yeni mesaj objesi oluştur */
         var messageObj = {
+          id: 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
           name: formData.get('name') || '',
           email: formData.get('email') || '',
           phone: formData.get('phone') || '',

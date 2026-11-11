@@ -13,7 +13,7 @@ Bu belge, SolarEnerji projesinin tam yapisini, sayfa haritasini, dosya agacini v
 | `guvenlik-sistemleri.html` | Kamera Kurulumu                | `/guvenlik-sistemleri.html`     | 4 kart + ozellikler ile kamera kurulumu detay sayfasi   |
 | `muhendislik.html`     | Muhendislik Destekleri         | `/muhendislik.html`         | 3 kart + ozellikler ile muhendislik detay sayfasi       |
 | `contact.html`         | Iletisim                       | `/contact.html`             | Iletisim formu + kaynak sayfa tespiti (?source= param)  |
-| `admin.html`           | Yonetici Paneli                | `/admin.html`               | localStorage tabanli demo yonetim paneli                |
+| `admin.html`           | Yonetici Paneli                | `/admin.html`               | Mesajlar, projeler, site ayarlari, bildirimler (bkz. degisiklik-rehberi §12) |
 | `about.html`           | Hakkimizda                     | `/about.html`               | Sirket hikayesi, ekip, sertifikalar                     |
 
 ### Sayfa Akisi

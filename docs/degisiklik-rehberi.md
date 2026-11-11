@@ -595,31 +595,46 @@ Form ayni zamanda localStorage'a da kaydeder. Yani Formspree calismasa bile admi
 
 ---
 
-## 12. Admin Sifresi
+## 12. Admin Paneli ve Sifresi
 
-Admin panelinin varsayilan sifresi `admin123`'tur. Bu sifreyi degistirmeniz **kesinlikle onerilir**.
+### Panelde neler var?
+
+| Sekme | Ne yapar | Veri nerede |
+|-------|----------|-------------|
+| Mesajlar | Arama, hizmet/durum filtresi, ic not, durum, silme, CSV, e-posta/WhatsApp ile yanitla | Bu tarayicinin localStorage'i (sadece bu tarayicida gonderilen formlar) |
+| Projeler | "Tamamlanan Projelerimiz" kartlarini ekle/duzenle/sil/sirala, fotograf yukle | Taslak → `data/site-content.json` |
+| Site Ayarlari | Telefonlar, e-posta, Instagram, Facebook/LinkedIn/YouTube, harita konumu, ana sayfa sayaclari | Taslak → `data/site-content.json` |
+| Bildirimler | Formspree ID (e-posta bildirimi), tarayici bildirimi | Formspree ID → `data/site-content.json` |
+
+Panel, projeler ve ayarlar icin `data/site-content.json` dosyasini okur; bu yuzden dosyadan (file://) degil sunucudan acilmalidir:
+`npm run serve` → http://localhost:3000/admin.html
+
+### Proje / ayar degisikligini yayinlama
+
+1. Panelde degisikligi yapin (taslak olarak bu tarayicida saklanir).
+2. Ustteki **Yayinla** → `site-content.json` indir.
+3. Proje klasorunde: `npm run content -- "%USERPROFILE%\Downloads\site-content.json"`
+   (once gormek icin sona `--dry` ekleyin). Betik HTML dosyalarini, `img/projeler/` gorsellerini ve `data/site-content.json`'u gunceller.
+4. GitHub Desktop'tan commit + push. Panel, yayina giren taslagi otomatik siler.
+
+Proje galerisi su an sadece `muhendislik.html`'de var. Baska bir sayfaya galeri eklemek icin `projects-grid` icine
+`<!-- cms:projects:KATEGORI:start -->` ve `<!-- cms:projects:KATEGORI:end -->` isaretlerini koyun ve `js/admin.js` → `GALLERY_CATEGORIES`'e kategoriyi ekleyin.
 
 ### Sifre Degistirme
 
-1. `js/admin.js` dosyasini acin
-2. Dosyanin ust kisminda su satiri bulun (yaklasik 29. satir):
+Kodda sifrenin kendisi degil SHA-256 ozeti tutulur (`js/admin.js` → `ADMIN_PASSWORD_HASH`).
 
-```javascript
-/* DEGISTIRMEK ICIN: Bu sifreyi kendi sifrenizle degistirin */
-var ADMIN_PASSWORD = 'admin123';
+1. PowerShell'de yeni sifrenin ozetini alin:
+
+```powershell
+$s=[Security.Cryptography.SHA256]::Create(); ($s.ComputeHash([Text.Encoding]::UTF8.GetBytes('YENI_SIFRE'))|%{$_.ToString('x2')}) -join ''
 ```
 
-3. `admin123` yerine kendi sifrenizi yazin:
-
-```javascript
-var ADMIN_PASSWORD = 'guvenli_yeni_sifre_2024';
-```
-
-4. Dosyayi kaydedin
+2. Cikan 64 karakterlik degeri `var ADMIN_PASSWORD_HASH = '...';` satirina yazin ve kaydedin.
 
 ### Guvenlik Uyarisi
 
-Bu panel **demo amaclidir**. JavaScript tarafindaki sifre, tarayicinin gelistirici araclariyla gorulebilir. Gercek uretim ortaminda:
+Sifre kontrolu tarayicida yapilir. Panel gizli veri barindirmaz (mesajlar zaten sadece o tarayicida, ayarlar zaten sitede herkese acik), ama cok kullanicili gercek bir panel icin:
 
 - Sunucu tarafli kimlik dogrulama (PHP session, JWT token) kullanin
 - HTTPS baglantisi zorunlu kilin
@@ -1088,7 +1103,7 @@ Kart sayisini artirdiginizda grid otomatik olarak yeni satirlara sarar.
 | Hizmet kartlari           | Ilgili hizmet HTML dosyasi              |
 | SEO etiketleri            | Ilgili HTML `<head>` bolumu             |
 | Form backend              | `contact.html` (action) + `js/form-validation.js` |
-| Admin sifresi             | `js/admin.js` (ADMIN_PASSWORD)          |
+| Admin sifresi             | `js/admin.js` (ADMIN_PASSWORD_HASH)        |
 | Harita                    | `contact.html`                          |
 | WhatsApp/Telefon          | Tum HTML (floating butonlar)            |
 | Scroll animasyonlari      | `css/animations.css` + `js/scroll-animations.js` |

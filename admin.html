@@ -51,7 +51,7 @@
     <div class="nav-spacer"></div>
 
     <main>
-      <section class="section">
+      <section class="section admin-section">
         <div class="container">
 
           <!-- ==========================================
@@ -60,21 +60,19 @@
                - Şifre özeti admin.js içinde (ADMIN_PASSWORD_HASH)
                ========================================== -->
           <div class="admin-login" id="admin-login">
-            <div style="font-size:var(--fs-4xl);margin-bottom:var(--space-4);color:var(--color-accent)">
-              <i class="fas fa-lock"></i>
-            </div>
+            <div class="admin-login__icon"><i class="fas fa-lock"></i></div>
             <h1 class="admin-login__title">Yönetici Girişi</h1>
-            <p class="admin-login__desc">Mesajları görüntülemek için giriş yapın.</p>
+            <p class="admin-login__desc">Paneli kullanmak için giriş yapın.</p>
 
             <!-- Hata mesajı — yanlış şifrede görünür -->
-            <div class="admin-login__error" id="login-error">
+            <div class="admin-login__error" id="login-error" role="alert">
               <i class="fas fa-exclamation-circle"></i> Şifre hatalı. Tekrar deneyin.
             </div>
 
             <form id="login-form">
               <div class="form-group" style="text-align:left">
                 <label for="admin-password" class="form-label">Şifre</label>
-                <input type="password" id="admin-password" class="form-input" placeholder="Şifrenizi girin" required>
+                <input type="password" id="admin-password" class="form-input" placeholder="Şifrenizi girin" autocomplete="current-password" required>
               </div>
               <button type="submit" class="btn btn--primary" style="width:100%">
                 <i class="fas fa-sign-in-alt"></i> Giriş Yap
@@ -84,7 +82,6 @@
 
           <!-- ==========================================
                DASHBOARD — Giriş sonrası görünür
-               localStorage'daki mesajları gösterir
                ========================================== -->
           <div class="admin-dashboard" id="admin-dashboard">
 
@@ -93,53 +90,262 @@
               <h1 class="admin-header__title">
                 <i class="fas fa-tachometer-alt"></i> Yönetici Paneli
               </h1>
-              <button class="btn btn--outline" id="logout-btn" type="button">
+              <button class="btn btn--outline btn--sm" id="logout-btn" type="button">
                 <i class="fas fa-sign-out-alt"></i> Çıkış
               </button>
             </div>
 
-            <!-- ==========================================
-                 İSTATİSTİK KARTLARI
-                 JS tarafından dinamik olarak doldurulur
-                 ========================================== -->
-            <div class="admin-stats" id="admin-stats">
-              <!-- Toplam Mesaj -->
-              <div class="admin-stat-card">
-                <div class="admin-stat-card__number" id="stat-total">0</div>
-                <div class="admin-stat-card__label">Toplam Mesaj</div>
+            <!-- Sekmeler -->
+            <div class="admin-tabs" role="tablist" aria-label="Panel bölümleri">
+              <button class="admin-tab is-active" role="tab" type="button" id="tab-messages" aria-controls="panel-messages" aria-selected="true">
+                <i class="fas fa-envelope"></i> Mesajlar <span class="admin-tab__badge" id="unread-badge" hidden>0</span>
+              </button>
+              <button class="admin-tab" role="tab" type="button" id="tab-projects" aria-controls="panel-projects" aria-selected="false" tabindex="-1">
+                <i class="fas fa-images"></i> Projeler
+              </button>
+              <button class="admin-tab" role="tab" type="button" id="tab-settings" aria-controls="panel-settings" aria-selected="false" tabindex="-1">
+                <i class="fas fa-sliders-h"></i> Site Ayarları
+              </button>
+              <button class="admin-tab" role="tab" type="button" id="tab-notify" aria-controls="panel-notify" aria-selected="false" tabindex="-1">
+                <i class="fas fa-bell"></i> Bildirimler
+              </button>
+            </div>
+
+            <!-- Yayınlanmamış değişiklik çubuğu — projeler/ayarlar taslağı yayındakinden farklıysa görünür -->
+            <div class="admin-publish-bar" id="publish-bar" hidden>
+              <div class="admin-publish-bar__text">
+                <i class="fas fa-pen"></i>
+                <span><strong>Yayınlanmamış değişiklikler var.</strong> <span id="publish-summary"></span></span>
               </div>
-              <!-- Güneş Enerjisi -->
-              <div class="admin-stat-card admin-stat-card--solar">
-                <div class="admin-stat-card__number" id="stat-solar">0</div>
-                <div class="admin-stat-card__label">Güneş Enerjisi</div>
-              </div>
-              <!-- Güvenlik (kamera + elektrikli çit) — iç değer: "kamera" -->
-              <div class="admin-stat-card admin-stat-card--camera">
-                <div class="admin-stat-card__number" id="stat-camera">0</div>
-                <div class="admin-stat-card__label">Güvenlik</div>
-              </div>
-              <!-- Mühendislik -->
-              <div class="admin-stat-card admin-stat-card--engineering">
-                <div class="admin-stat-card__number" id="stat-eng">0</div>
-                <div class="admin-stat-card__label">Mühendislik</div>
+              <div class="admin-publish-bar__actions">
+                <button class="btn btn--sm admin-btn-ghost" id="draft-discard" type="button">Taslağı sil</button>
+                <button class="btn btn--primary btn--sm" id="publish-open" type="button"><i class="fas fa-upload"></i> Yayınla</button>
               </div>
             </div>
 
-            <!-- ==========================================
-                 MESAJ LİSTESİ
-                 Son 10 mesaj localStorage'dan okunur
-                 ========================================== -->
-            <div class="admin-messages" id="admin-messages">
-              <div class="admin-messages__header">
-                <i class="fas fa-envelope"></i> Son Mesajlar
+            <!-- ================= MESAJLAR ================= -->
+            <div class="admin-panel" role="tabpanel" id="panel-messages" aria-labelledby="tab-messages">
+
+              <!-- İstatistik kartları — tıklayınca o hizmete göre filtreler -->
+              <div class="admin-stats" id="admin-stats">
+                <button type="button" class="admin-stat-card" data-filter-service="">
+                  <span class="admin-stat-card__number" id="stat-total">0</span>
+                  <span class="admin-stat-card__label">Toplam Mesaj</span>
+                </button>
+                <button type="button" class="admin-stat-card admin-stat-card--solar" data-filter-service="gunes-enerjisi">
+                  <span class="admin-stat-card__number" id="stat-solar">0</span>
+                  <span class="admin-stat-card__label">Güneş Enerjisi</span>
+                </button>
+                <!-- Güvenlik (kamera + elektrikli çit) — iç değer: "kamera" -->
+                <button type="button" class="admin-stat-card admin-stat-card--camera" data-filter-service="kamera">
+                  <span class="admin-stat-card__number" id="stat-camera">0</span>
+                  <span class="admin-stat-card__label">Güvenlik</span>
+                </button>
+                <button type="button" class="admin-stat-card admin-stat-card--engineering" data-filter-service="muhendislik">
+                  <span class="admin-stat-card__number" id="stat-eng">0</span>
+                  <span class="admin-stat-card__label">Mühendislik</span>
+                </button>
               </div>
-              <!-- Mesaj listesi JS tarafından doldurulur -->
-              <div id="messages-list">
+
+              <div class="admin-messages" id="admin-messages">
+                <!-- Araç çubuğu: arama + filtreler + dışa aktarma -->
+                <div class="admin-toolbar">
+                  <div class="admin-search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="search" id="msg-search" class="form-input" placeholder="İsim, e-posta, telefon, konu ara…" aria-label="Mesajlarda ara">
+                  </div>
+                  <select id="msg-filter-service" class="form-input admin-select" aria-label="Hizmete göre filtrele">
+                    <option value="">Tüm hizmetler</option>
+                    <option value="gunes-enerjisi">Güneş Enerjisi</option>
+                    <option value="kamera">Güvenlik</option>
+                    <option value="muhendislik">Mühendislik</option>
+                    <option value="diger">Diğer / Belirtilmemiş</option>
+                  </select>
+                  <select id="msg-filter-status" class="form-input admin-select" aria-label="Duruma göre filtrele">
+                    <option value="">Tüm durumlar</option>
+                    <option value="new">Yeni</option>
+                    <option value="read">Okundu</option>
+                    <option value="replied">Yanıtlandı</option>
+                  </select>
+                  <button type="button" class="btn btn--sm admin-btn-ghost" id="msg-export" title="Görünen mesajları Excel uyumlu CSV olarak indir">
+                    <i class="fas fa-file-csv"></i> CSV
+                  </button>
+                </div>
+
+                <div class="admin-messages__meta" id="msg-meta" aria-live="polite"></div>
+
+                <!-- Mesaj listesi JS tarafından doldurulur -->
+                <div id="messages-list"></div>
+
                 <!-- Boş durum -->
                 <div class="admin-empty" id="empty-state">
                   <div class="admin-empty__icon"><i class="fas fa-inbox"></i></div>
                   <p>Henüz mesaj yok. İletişim formundan gelen mesajlar burada görünecek.</p>
                 </div>
+                <!-- Filtre sonucu boş -->
+                <div class="admin-empty" id="no-results" hidden>
+                  <div class="admin-empty__icon"><i class="fas fa-filter"></i></div>
+                  <p>Bu filtreyle eşleşen mesaj yok.</p>
+                </div>
+
+                <div class="admin-more" id="msg-more-wrap" hidden>
+                  <button type="button" class="btn btn--sm admin-btn-ghost" id="msg-more">Daha fazla göster</button>
+                </div>
+              </div>
+
+              <p class="admin-hint">
+                <i class="fas fa-info-circle"></i>
+                Bu liste yalnızca <strong>bu tarayıcıda</strong> gönderilen formları gösterir. Müşteri mesajlarının asıl kopyası
+                e-posta ile gelir — <a href="#" data-goto-tab="tab-notify">Bildirimler</a> sekmesinden Formspree'yi ayarlayın.
+              </p>
+            </div>
+
+            <!-- ================= PROJELER ================= -->
+            <div class="admin-panel" role="tabpanel" id="panel-projects" aria-labelledby="tab-projects" hidden>
+              <div class="admin-card">
+                <div class="admin-card__head">
+                  <div>
+                    <h2 class="admin-card__title">Tamamlanan Projeler</h2>
+                    <p class="admin-card__desc">Sitedeki “Tamamlanan Projelerimiz” galerisinde görünen kartlar. Sıralama sitede de aynıdır.</p>
+                  </div>
+                  <div class="admin-card__actions">
+                    <select id="proj-filter" class="form-input admin-select" aria-label="Kategoriye göre filtrele">
+                      <option value="">Tüm kategoriler</option>
+                      <option value="gunes-enerjisi">Güneş Enerjisi</option>
+                      <option value="kamera">Güvenlik</option>
+                      <option value="muhendislik">Mühendislik</option>
+                    </select>
+                    <button type="button" class="btn btn--primary btn--sm" id="proj-add"><i class="fas fa-plus"></i> Yeni proje</button>
+                  </div>
+                </div>
+                <div class="admin-projects" id="projects-list"></div>
+                <div class="admin-empty" id="projects-empty" hidden>
+                  <div class="admin-empty__icon"><i class="fas fa-images"></i></div>
+                  <p>Bu kategoride proje yok.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= SİTE AYARLARI ================= -->
+            <div class="admin-panel" role="tabpanel" id="panel-settings" aria-labelledby="tab-settings" hidden>
+              <form id="settings-form" class="admin-settings" novalidate>
+
+                <fieldset class="admin-card">
+                  <legend class="admin-card__title">İletişim Bilgileri</legend>
+                  <p class="admin-card__desc">Tüm sayfalarda (üst bilgi, alt bilgi, WhatsApp/telefon butonları, Google bilgileri) birlikte güncellenir.</p>
+                  <div class="admin-grid-2">
+                    <div class="form-group">
+                      <label class="form-label" for="set-phone1">Telefon 1 (WhatsApp ve arama butonu)</label>
+                      <input class="form-input" id="set-phone1" name="phone1" inputmode="tel" placeholder="0543 619 48 98" required>
+                      <span class="form-error"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="set-phone2">Telefon 2</label>
+                      <input class="form-input" id="set-phone2" name="phone2" inputmode="tel" placeholder="0543 639 89 13" required>
+                      <span class="form-error"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="set-email">E-posta</label>
+                      <input class="form-input" id="set-email" name="email" type="email" required>
+                      <span class="form-error"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="set-instagram">Instagram kullanıcı adı</label>
+                      <input class="form-input" id="set-instagram" name="instagram" placeholder="kucukler_muh" required>
+                      <span class="form-error"></span>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset class="admin-card">
+                  <legend class="admin-card__title">Sosyal Medya ve Konum</legend>
+                  <p class="admin-card__desc">Boş bırakılan sosyal medya ikonları tıklanamaz kalır.</p>
+                  <div class="admin-grid-2">
+                    <div class="form-group">
+                      <label class="form-label" for="set-facebook">Facebook adresi</label>
+                      <input class="form-input" id="set-facebook" name="facebook" type="url" placeholder="https://www.facebook.com/…">
+                      <span class="form-error"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="set-linkedin">LinkedIn adresi</label>
+                      <input class="form-input" id="set-linkedin" name="linkedin" type="url" placeholder="https://www.linkedin.com/company/…">
+                      <span class="form-error"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="set-youtube">YouTube adresi</label>
+                      <input class="form-input" id="set-youtube" name="youtube" type="url" placeholder="https://www.youtube.com/@…">
+                      <span class="form-error"></span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="set-maps">Harita konumu (enlem, boylam)</label>
+                      <input class="form-input" id="set-maps" name="maps" placeholder="36.8394, 28.7645">
+                      <span class="form-hint">Google Haritalar'da işletmeye sağ tıklayın → ilk satırdaki sayıları kopyalayın.</span>
+                      <span class="form-error"></span>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset class="admin-card">
+                  <legend class="admin-card__title">Ana Sayfa Sayaçları</legend>
+                  <p class="admin-card__desc">Ana sayfadaki animasyonlu sayılar.</p>
+                  <div class="admin-stats-edit" id="stats-edit"></div>
+                </fieldset>
+
+                <div class="admin-settings__footer">
+                  <span class="admin-settings__status" id="settings-status" aria-live="polite"></span>
+                  <button type="submit" class="btn btn--primary btn--sm"><i class="fas fa-save"></i> Taslağa kaydet</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- ================= BİLDİRİMLER ================= -->
+            <div class="admin-panel" role="tabpanel" id="panel-notify" aria-labelledby="tab-notify" hidden>
+
+              <div class="admin-card">
+                <div class="admin-card__head">
+                  <div>
+                    <h2 class="admin-card__title"><i class="fas fa-envelope-open-text"></i> E-posta bildirimi</h2>
+                    <p class="admin-card__desc">Formdan gelen her mesaj Formspree üzerinden e-postanıza gönderilir. Bu, ziyaretçi mesajlarını almanın asıl yoludur.</p>
+                  </div>
+                  <span class="admin-pill" id="formspree-status"></span>
+                </div>
+                <form id="formspree-form" class="admin-inline-form" novalidate>
+                  <div class="form-group">
+                    <label class="form-label" for="set-formspree">Formspree form ID'si</label>
+                    <input class="form-input" id="set-formspree" placeholder="ör. xrgvkbqa ya da https://formspree.io/f/xrgvkbqa">
+                    <span class="form-error"></span>
+                  </div>
+                  <button type="submit" class="btn btn--primary btn--sm"><i class="fas fa-save"></i> Taslağa kaydet</button>
+                </form>
+                <ol class="admin-steps">
+                  <li><a href="https://formspree.io/register" target="_blank" rel="noopener">formspree.io</a>'da ücretsiz hesap açın (bildirimlerin gideceği e-postayla).</li>
+                  <li><em>New Form</em> → oluşan adresin sonundaki kodu (ör. <code>xrgvkbqa</code>) buraya yapıştırın.</li>
+                  <li>Üstteki <strong>Yayınla</strong> ile siteye uygulayın. Ücretsiz plan ayda 50 mesaj içerir.</li>
+                </ol>
+              </div>
+
+              <div class="admin-card">
+                <div class="admin-card__head">
+                  <div>
+                    <h2 class="admin-card__title"><i class="fas fa-desktop"></i> Tarayıcı bildirimi</h2>
+                    <p class="admin-card__desc">Panel açıkken yeni mesaj gelirse masaüstü bildirimi gösterir ve sekme başlığında okunmamış sayısını yazar.</p>
+                  </div>
+                  <label class="admin-switch">
+                    <input type="checkbox" id="notify-toggle">
+                    <span class="admin-switch__track" aria-hidden="true"></span>
+                    <span class="sr-only">Tarayıcı bildirimlerini aç</span>
+                  </label>
+                </div>
+                <p class="admin-card__desc" id="notify-status"></p>
+                <button type="button" class="btn btn--sm admin-btn-ghost" id="notify-test"><i class="fas fa-paper-plane"></i> Deneme bildirimi</button>
+              </div>
+
+              <div class="admin-card">
+                <h2 class="admin-card__title"><i class="fab fa-whatsapp"></i> WhatsApp</h2>
+                <p class="admin-card__desc">
+                  Otomatik WhatsApp bildirimi bir sunucu gerektirir. Bunun yerine her mesajın detayında
+                  <strong>WhatsApp ile yanıtla</strong> butonu var: müşterinin numarasına hazır mesajla sohbet açar.
+                </p>
               </div>
             </div>
           </div>
@@ -148,33 +354,134 @@
                MESAJ DETAY MODALI
                Bir mesaja tıklandığında açılır
                ========================================== -->
-          <div class="admin-message-detail" id="message-detail">
+          <div class="admin-message-detail" id="message-detail" role="dialog" aria-modal="true" aria-labelledby="detail-title">
             <div class="admin-message-detail__content">
-              <button class="admin-message-detail__close" id="detail-close" type="button">
+              <button class="admin-message-detail__close" id="detail-close" type="button" aria-label="Kapat">
                 <i class="fas fa-times"></i>
               </button>
-              <h2 style="margin-bottom:var(--space-6);color:var(--text-heading)">Mesaj Detayı</h2>
+              <h2 class="admin-modal__title" id="detail-title">Mesaj Detayı</h2>
               <div id="detail-content">
                 <!-- JS tarafından dinamik olarak doldurulur -->
               </div>
+
+              <!-- Hızlı yanıt -->
+              <div class="admin-reply" id="detail-reply"></div>
+
+              <!-- İç not — müşteri görmez -->
+              <div class="form-group admin-note">
+                <label class="form-label" for="detail-note"><i class="fas fa-sticky-note"></i> İç not</label>
+                <textarea id="detail-note" class="form-textarea" rows="3" placeholder="Ör. Keşif 14 Kasım, 10 kW teklif verildi…"></textarea>
+                <span class="form-hint" id="detail-note-status" aria-live="polite"></span>
+              </div>
+
               <!-- Durum değiştirme butonları -->
-              <div style="margin-top:var(--space-6);display:flex;gap:var(--space-3);flex-wrap:wrap">
-                <button class="btn btn--sm" id="btn-mark-read" type="button" style="background:var(--color-camera-bg);color:var(--color-camera);border:1px solid var(--color-camera)">
+              <div class="admin-detail-actions">
+                <button class="btn btn--sm admin-status-btn admin-status-btn--read" id="btn-mark-read" type="button">
                   <i class="fas fa-eye"></i> Okundu
                 </button>
-                <button class="btn btn--sm" id="btn-mark-replied" type="button" style="background:var(--bg-surface-alt);color:var(--text-muted);border:1px solid var(--border-color)">
+                <button class="btn btn--sm admin-status-btn admin-status-btn--replied" id="btn-mark-replied" type="button">
                   <i class="fas fa-reply"></i> Yanıtlandı
                 </button>
-                <button class="btn btn--sm" id="btn-delete-msg" type="button" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid #ef4444">
+                <button class="btn btn--sm admin-status-btn admin-status-btn--new" id="btn-mark-new" type="button">
+                  <i class="fas fa-envelope"></i> Yeni
+                </button>
+                <button class="btn btn--sm admin-status-btn admin-status-btn--delete" id="btn-delete-msg" type="button">
                   <i class="fas fa-trash"></i> Sil
                 </button>
               </div>
             </div>
           </div>
 
+          <!-- ==========================================
+               PROJE DÜZENLEME MODALI
+               ========================================== -->
+          <div class="admin-message-detail" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <div class="admin-message-detail__content">
+              <button class="admin-message-detail__close" type="button" data-close-modal aria-label="Kapat">
+                <i class="fas fa-times"></i>
+              </button>
+              <h2 class="admin-modal__title" id="project-modal-title">Proje</h2>
+              <form id="project-form" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="proj-title">Başlık *</label>
+                  <input class="form-input" id="proj-title" maxlength="80" required placeholder="Ör. Dalyan 12 kWp Çatı GES">
+                  <span class="form-error"></span>
+                </div>
+                <div class="admin-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="proj-category">Kategori</label>
+                    <select class="form-input" id="proj-category">
+                      <option value="gunes-enerjisi">Güneş Enerjisi</option>
+                      <option value="kamera">Güvenlik</option>
+                      <option value="muhendislik">Mühendislik</option>
+                    </select>
+                    <span class="form-hint" id="proj-category-hint"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="proj-tag">Etiket</label>
+                    <input class="form-input" id="proj-tag" maxlength="40" placeholder="Ör. Ortaca · 12 kWp">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="proj-desc">Kısa açıklama</label>
+                  <textarea class="form-textarea" id="proj-desc" rows="3" maxlength="220" placeholder="1–2 cümle"></textarea>
+                </div>
+                <div class="form-group">
+                  <span class="form-label">Görsel</span>
+                  <div class="admin-image-pick">
+                    <div class="admin-image-pick__preview" id="proj-image-preview"></div>
+                    <div class="admin-image-pick__controls">
+                      <label class="btn btn--sm admin-btn-ghost admin-file-btn">
+                        <i class="fas fa-upload"></i> Fotoğraf seç
+                        <input type="file" id="proj-image" accept="image/jpeg,image/png,image/webp" class="sr-only">
+                      </label>
+                      <button type="button" class="btn btn--sm admin-btn-ghost" id="proj-image-clear"><i class="fas fa-times"></i> Kaldır</button>
+                      <span class="form-hint">Otomatik olarak 1200 px'e küçültülür. Fotoğraf yoksa ikon gösterilir:</span>
+                      <select class="form-input admin-select" id="proj-icon" aria-label="Fotoğraf yoksa gösterilecek ikon"></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="admin-detail-actions">
+                  <button type="submit" class="btn btn--primary btn--sm"><i class="fas fa-check"></i> Kaydet</button>
+                  <button type="button" class="btn btn--sm admin-btn-ghost" data-close-modal>Vazgeç</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               YAYINLAMA MODALI
+               ========================================== -->
+          <div class="admin-message-detail" id="publish-modal" role="dialog" aria-modal="true" aria-labelledby="publish-title">
+            <div class="admin-message-detail__content">
+              <button class="admin-message-detail__close" type="button" data-close-modal aria-label="Kapat">
+                <i class="fas fa-times"></i>
+              </button>
+              <h2 class="admin-modal__title" id="publish-title">Değişiklikleri yayınla</h2>
+              <ul class="admin-changes" id="publish-changes"></ul>
+              <ol class="admin-steps">
+                <li>
+                  <button type="button" class="btn btn--primary btn--sm" id="publish-download"><i class="fas fa-download"></i> site-content.json indir</button>
+                </li>
+                <li>Proje klasöründe şunu çalıştırın:
+                  <div class="admin-code">
+                    <code id="publish-cmd">npm run content -- "%USERPROFILE%\Downloads\site-content.json"</code>
+                    <button type="button" class="admin-code__copy" id="publish-copy" aria-label="Komutu kopyala"><i class="far fa-copy"></i></button>
+                  </div>
+                  <span class="form-hint">Önce görmek için sona <code>--dry</code> ekleyin.</span>
+                </li>
+                <li>Değişen dosyaları GitHub Desktop'tan commit edip yayınlayın (push).</li>
+              </ol>
+              <p class="admin-card__desc">Yayına girdikten sonra panel taslağı otomatik olarak temizler.</p>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
+
+    <!-- Bildirim baloncukları -->
+    <div class="admin-toasts" id="admin-toasts" aria-live="polite"></div>
 
     <!-- Basitleştirilmiş footer -->
     <footer class="footer" role="contentinfo">
@@ -187,7 +494,7 @@
   </div>
 
   <script src="js/theme-toggle.js"></script>
-  <!-- Admin panel JS — giriş, mesaj listeleme, CRUD işlemleri -->
+  <!-- Admin panel JS — giriş, mesajlar, projeler, site ayarları, bildirimler -->
   <script src="js/admin.js"></script>
 </body>
 </html>
