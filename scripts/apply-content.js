@@ -258,7 +258,16 @@ const orphan = Object.keys(CATEGORIES).filter(
 );
 
 /* ---- 4. Yeni içeriği referans olarak kaydet ---- */
-if (!dryRun) fs.writeFileSync(DATA_FILE, JSON.stringify(newContent, null, 2) + '\n', 'utf8');
+if (!dryRun) {
+  fs.writeFileSync(DATA_FILE, JSON.stringify(newContent, null, 2) + '\n', 'utf8');
+  /* Aynı içerik .js olarak da — admin.html dosyadan (file://) açıldığında fetch çalışmaz, <script> çalışır */
+  fs.writeFileSync(
+    DATA_FILE.replace(/\.json$/, '.js'),
+    '/* Otomatik üretilir (npm run content) — elle düzenlemeyin. Kaynak: data/site-content.json */\n' +
+      'window.SITE_CONTENT = ' + JSON.stringify(newContent, null, 2) + ';\n',
+    'utf8'
+  );
+}
 
 /* ---- Rapor ---- */
 console.log(dryRun ? '\nDeneme çalıştırması — hiçbir dosya yazılmadı.\n' : '\nİçerik uygulandı.\n');

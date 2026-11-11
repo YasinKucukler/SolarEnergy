@@ -773,17 +773,20 @@
   }
 
   function loadContent() {
-    fetch(CONTENT_URL, { cache: 'no-store' })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (json) {
-        published = json;
-        readDraft();
-        renderContent();
-      })
+    var useContent = function (json) {
+      published = json;
+      readDraft();
+      renderContent();
+    };
+    /* Dosyadan açıldıysa fetch hiç çalışmaz — doğrudan data/site-content.js'teki kopyayı kullan */
+    var p = location.protocol === 'file:'
+      ? Promise.reject(new Error('file'))
+      : fetch(CONTENT_URL, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+    p.then(useContent)
       .catch(function () {
-        contentError = location.protocol === 'file:'
-          ? 'Projeler ve ayarlar dosyadan açıldığında yüklenemez. Paneli yerel sunucuyla açın: npm run serve → http://localhost:3000/admin.html'
-          : CONTENT_URL + ' okunamadı. Dosyanın sunucuda olduğundan emin olun.';
+        if (window.SITE_CONTENT && Array.isArray(window.SITE_CONTENT.projects)) { useContent(window.SITE_CONTENT); return; }
+        contentError = 'Site içeriği yüklenemedi (data/site-content.json ve data/site-content.js bulunamadı). ' +
+          'Proje klasöründe "npm run content" çalıştırıp sayfayı yenileyin.';
         contentUnavailable($('projects-list'));
         $('proj-add').disabled = true;
         Array.prototype.forEach.call(document.querySelectorAll('#settings-form input, #settings-form button, #formspree-form input, #formspree-form button'), function (el) { el.disabled = true; });

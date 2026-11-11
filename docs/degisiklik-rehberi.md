@@ -606,8 +606,8 @@ Form ayni zamanda localStorage'a da kaydeder. Yani Formspree calismasa bile admi
 | Site Ayarlari | Telefonlar, e-posta, Instagram, Facebook/LinkedIn/YouTube, harita konumu, ana sayfa sayaclari | Taslak → `data/site-content.json` |
 | Bildirimler | Formspree ID (e-posta bildirimi), tarayici bildirimi | Formspree ID → `data/site-content.json` |
 
-Panel, projeler ve ayarlar icin `data/site-content.json` dosyasini okur; bu yuzden dosyadan (file://) degil sunucudan acilmalidir:
-`npm run serve` → http://localhost:3000/admin.html
+Panel, projeler ve ayarlar icin `data/site-content.json` dosyasini okur. Dosyadan (cift tiklayarak, file://) acildiginda
+ayni icerigin kopyasi olan `data/site-content.js`'i kullanir; ikisini de `npm run content` uretir, elle duzenlemeyin.
 
 ### Proje / ayar degisikligini yayinlama
 
