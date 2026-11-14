@@ -535,8 +535,7 @@ test.describe('7. Iletisim Formu', () => {
       const title = await page.locator('#contact-page-title').textContent();
       expect(title).toContain('Güneş Enerjisi');
 
-      const serviceVal = await page.locator('#service').inputValue();
-      expect(serviceVal).toBe('gunes-enerjisi');
+      await expect(page.locator('#service')).toHaveValue('gunes-enerjisi');
     });
 
     test('SRC-02: source=kamera — baslik ve form degisir', async ({ page }) => {
@@ -544,8 +543,7 @@ test.describe('7. Iletisim Formu', () => {
       const title = await page.locator('#contact-page-title').textContent();
       expect(title).toContain('Güvenlik Sistemleri');
 
-      const serviceVal = await page.locator('#service').inputValue();
-      expect(serviceVal).toBe('kamera');
+      await expect(page.locator('#service')).toHaveValue('kamera');
     });
 
     test('SRC-03: source=muhendislik — baslik ve form degisir', async ({ page }) => {
@@ -553,8 +551,7 @@ test.describe('7. Iletisim Formu', () => {
       const title = await page.locator('#contact-page-title').textContent();
       expect(title).toContain('Mühendislik');
 
-      const serviceVal = await page.locator('#service').inputValue();
-      expect(serviceVal).toBe('muhendislik');
+      await expect(page.locator('#service')).toHaveValue('muhendislik');
     });
 
     test('SRC-04: source=diger (tanimsiz) — degisiklik yok', async ({ page }) => {
@@ -1027,8 +1024,7 @@ test.describe('13. Uctan Uca Akislar', () => {
     await expect(page).toHaveURL(/contact\.html\?source=gunes-enerjisi/);
 
     // 3. Form otomatik doldurulmus mu kontrol et
-    const serviceVal = await page.locator('#service').inputValue();
-    expect(serviceVal).toBe('gunes-enerjisi');
+    await expect(page.locator('#service')).toHaveValue('gunes-enerjisi');
 
     // 4. Formu tamamla ve gonder
     await page.locator('#name').fill('E2E Test Kullanici');
@@ -1057,8 +1053,7 @@ test.describe('13. Uctan Uca Akislar', () => {
     await page.locator('a[href*="contact.html?source=kamera"]').first().click();
     await expect(page).toHaveURL(/contact\.html\?source=kamera/);
 
-    const serviceVal = await page.locator('#service').inputValue();
-    expect(serviceVal).toBe('kamera');
+    await expect(page.locator('#service')).toHaveValue('kamera');
 
     await page.locator('#name').fill('Kamera Test');
     await page.locator('#email').fill('kamera@test.com');
@@ -1083,8 +1078,7 @@ test.describe('13. Uctan Uca Akislar', () => {
     await page.locator('a[href*="contact.html?source=muhendislik"]').first().click();
     await expect(page).toHaveURL(/contact\.html\?source=muhendislik/);
 
-    const serviceVal = await page.locator('#service').inputValue();
-    expect(serviceVal).toBe('muhendislik');
+    await expect(page.locator('#service')).toHaveValue('muhendislik');
 
     await page.locator('#name').fill('Muhendislik Test');
     await page.locator('#email').fill('eng@test.com');

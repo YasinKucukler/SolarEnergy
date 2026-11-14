@@ -1,98 +1,49 @@
 /**
- * Contact Source — URL'den kaynak sayfa tespiti
- * =============================================
+ * Contact Source — contact.html?source=… ile gelindiğinde formu ön doldurur
  *
- * BU DOSYA: İletişim sayfasına ?source= parametresi ile
- * gelindiğinde otomatik olarak:
- * - Sayfa başlığını günceller
- * - Hizmet dropdown'ını seçer
- * - Konu alanını doldurur
- * - Gizli source_page input'unu set eder
+ * KULLANIM: contact.html?source=gunes-enerjisi | kamera | muhendislik
+ * Başlık, açıklama, konu, hizmet seçimi ve gizli source_page alanı doldurulur.
  *
- * KULLANIM:
- * contact.html?source=gunes-enerjisi
- * contact.html?source=kamera
- * contact.html?source=muhendislik
- *
- * DEĞİŞTİRMEK İÇİN:
- * - Yeni kaynak eklemek için sourceMap objesine yeni key-value ekleyin
- * - Başlık ve açıklama metinlerini değiştirin
+ * DEĞİŞTİRMEK İÇİN: yeni kaynak için SOURCES'a bir kayıt ekleyin
+ * (anahtar = ?source= değeri = hizmet dropdown'ındaki option value).
  */
 (function () {
   'use strict';
 
+  var SOURCES = {
+    'gunes-enerjisi': {
+      title: 'Güneş Enerjisi Hakkında İletişim',
+      desc: 'Güneş enerjisi sistemleri için teklif almak istiyorsunuz.',
+      subject: 'Güneş Enerjisi Teklif Talebi'
+    },
+    'kamera': {
+      title: 'Güvenlik Sistemleri Hakkında İletişim',
+      desc: 'Güvenlik kamerası veya elektrikli çit için teklif almak istiyorsunuz.',
+      subject: 'Güvenlik Sistemleri Teklif Talebi'
+    },
+    'muhendislik': {
+      title: 'Mühendislik Desteği Hakkında İletişim',
+      desc: 'Mühendislik hizmetleri için teklif almak istiyorsunuz.',
+      subject: 'Mühendislik Desteği Teklif Talebi'
+    }
+  };
+
   document.addEventListener('DOMContentLoaded', function () {
-
-    // URL'den ?source= parametresini oku
-    var params = new URLSearchParams(window.location.search);
-    var source = params.get('source');
-
-    // Kaynak yoksa hiçbir şey yapma
-    if (!source) return;
-
-    /**
-     * Kaynak haritası — her kaynak için özelleştirmeler
-     * DEĞİŞTİRMEK İÇİN: Yeni hizmet eklemek için buraya yeni key ekleyin
-     *
-     * Yapı:
-     * - title: Sayfa hero başlığı
-     * - desc: Sayfa hero açıklaması
-     * - subject: Konu alanına yazılacak metin
-     * - service: Dropdown'da seçilecek option value
-     */
-    var sourceMap = {
-      'gunes-enerjisi': {
-        title: 'Güneş Enerjisi Hakkında İletişim',
-        desc: 'Güneş enerjisi sistemleri için teklif almak istiyorsunuz.',
-        subject: 'Güneş Enerjisi Teklif Talebi',
-        service: 'gunes-enerjisi'
-      },
-      'kamera': {
-        title: 'Güvenlik Sistemleri Hakkında İletişim',
-        desc: 'Güvenlik kamerası veya elektrikli çit için teklif almak istiyorsunuz.',
-        subject: 'Güvenlik Sistemleri Teklif Talebi',
-        service: 'kamera'
-      },
-      'muhendislik': {
-        title: 'Mühendislik Desteği Hakkında İletişim',
-        desc: 'Mühendislik hizmetleri için teklif almak istiyorsunuz.',
-        subject: 'Mühendislik Desteği Teklif Talebi',
-        service: 'muhendislik'
-      }
-    };
-
-    // Eşleşen kaynak var mı kontrol et
-    var config = sourceMap[source];
+    var source = new URLSearchParams(window.location.search).get('source');
+    var config = source && Object.prototype.hasOwnProperty.call(SOURCES, source) ? SOURCES[source] : null;
     if (!config) return;
 
-    // Sayfa başlığını güncelle
-    var titleEl = document.getElementById('contact-page-title');
-    if (titleEl) {
-      titleEl.textContent = config.title;
-    }
+    var el = function (id) { return document.getElementById(id); };
+    var title = el('contact-page-title');
+    var desc = el('contact-page-desc');
+    var subject = el('subject');
+    var service = el('service');
+    var sourceInput = el('source_page');
 
-    // Sayfa açıklamasını güncelle
-    var descEl = document.getElementById('contact-page-desc');
-    if (descEl) {
-      descEl.textContent = config.desc;
-    }
-
-    // Konu alanını otomatik doldur
-    var subjectEl = document.getElementById('subject');
-    if (subjectEl && !subjectEl.value) {
-      subjectEl.value = config.subject;
-    }
-
-    // Hizmet dropdown'ını otomatik seç
-    var serviceEl = document.getElementById('service');
-    if (serviceEl) {
-      serviceEl.value = config.service;
-    }
-
-    // Gizli kaynak input'unu set et
-    var sourceInput = document.getElementById('source_page');
-    if (sourceInput) {
-      sourceInput.value = source;
-    }
+    if (title) title.textContent = config.title;
+    if (desc) desc.textContent = config.desc;
+    if (subject && !subject.value) subject.value = config.subject;
+    if (service) service.value = source;
+    if (sourceInput) sourceInput.value = source;
   });
 })();

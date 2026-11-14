@@ -11,7 +11,7 @@
    - Link geçişi
    - Buton varyantları (primary, secondary, outline, lg, sm)
    - Bölüm başlık stilleri (section-label, section-title)
-   - Utility sınıfları (text-center, text-white, sr-only)
+   - Utility sınıfları (text-center, sr-only)
 
    DEĞİŞTİRMEK İÇİN:
    - Buton renklerini variables.css'ten değiştirin
@@ -158,9 +158,6 @@ a {
 
 /* ---- Yardımcı Sınıflar (Utility) ---- */
 .text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-white { color: var(--color-white); }
-.text-accent { color: var(--color-accent); }
 
 /* Screen Reader Only — görsel olarak gizli ama ekran okuyucu erişebilir */
 .sr-only {

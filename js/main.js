@@ -1,73 +1,31 @@
 /**
- * Main — Ana Başlatma ve Global Davranışlar
- * ==========================================
- *
- * BU DOSYA: Site genelinde kullanılan genel işlevleri yönetir.
- *
- * ÖZELLİKLER:
- * 1. Sticky Header — Kaydırmada navbar'a gölge efekti
- * 2. Active Nav Link — Mevcut sayfanın menü linkini vurgulama
+ * Main — Sticky header gölgesi + aktif menü linki
  *
  * DEĞİŞTİRMEK İÇİN:
- * - scrollThreshold: Kaç piksel sonra gölge eklensin (varsayılan 50)
- * - Active link tespiti: window.location.pathname kullanır
+ * - SCROLL_THRESHOLD: kaç piksel kaydırınca header'a gölge eklensin
  */
 (function () {
   'use strict';
 
-  document.addEventListener('DOMContentLoaded', function () {
+  var SCROLL_THRESHOLD = 50;
 
-    /* ============================================
-       1. STICKY HEADER — Kaydırma gölge efekti
-       Sayfa 50px aşağı kaydırıldığında header'a
-       .header--scrolled class'ı eklenir (gölge efekti)
-       ============================================ */
+  document.addEventListener('DOMContentLoaded', function () {
+    /* Kaydırınca header'a .header--scrolled ekle */
     var header = document.querySelector('.header');
     if (header) {
-      /* DEĞİŞTİRMEK İÇİN: Bu değeri artırıp azaltabilirsiniz */
-      var scrollThreshold = 50;
-
-      function onScroll() {
-        if (window.scrollY > scrollThreshold) {
-          header.classList.add('header--scrolled');
-        } else {
-          header.classList.remove('header--scrolled');
-        }
-      }
-
-      /* passive: true — kaydırma performansını artırır */
+      var onScroll = function () {
+        header.classList.toggle('header--scrolled', window.scrollY > SCROLL_THRESHOLD);
+      };
       window.addEventListener('scroll', onScroll, { passive: true });
-      /* Sayfa yüklendiğinde de kontrol et (sayfa ortasında yüklendiyse) */
       onScroll();
     }
 
-    /* ============================================
-       2. ACTIVE NAV LINK — Mevcut sayfa vurgulama
-       Tarayıcıdaki URL'ye göre hangi menü linkinin
-       aktif olduğunu tespit eder ve vurgular.
-       ============================================ */
-
-    /* Mevcut sayfa dosya adını al (ör: "index.html", "contact.html") */
+    /* Bulunulan sayfanın linkini vurgula (masaüstü + mobil menü) */
     var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-    /* Masaüstü navigasyon linklerini güncelle */
-    var navLinks = document.querySelectorAll('.nav__link');
-    navLinks.forEach(function (link) {
-      var href = link.getAttribute('href');
-      link.classList.remove('nav__link--active');
-      if (href === currentPage) {
-        link.classList.add('nav__link--active');
-      }
-    });
-
-    /* Mobil navigasyon linklerini güncelle */
-    var mobileLinks = document.querySelectorAll('.mobile-nav__link');
-    mobileLinks.forEach(function (link) {
-      var href = link.getAttribute('href');
-      link.classList.remove('mobile-nav__link--active');
-      if (href === currentPage) {
-        link.classList.add('mobile-nav__link--active');
-      }
+    [['.nav__link', 'nav__link--active'], ['.mobile-nav__link', 'mobile-nav__link--active']].forEach(function (pair) {
+      document.querySelectorAll(pair[0]).forEach(function (link) {
+        link.classList.toggle(pair[1], link.getAttribute('href') === currentPage);
+      });
     });
   });
 })();

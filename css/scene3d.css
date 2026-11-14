@@ -39,7 +39,7 @@ html.has-3d {
 }
 
 html.has-3d :is(.card, .icon-card, .image-card, .testimonial, .service-image-card, .feature-card,
-  .project-card, .process__step, .contact-form-wrapper, .contact-info-card, .team-card, .cert-badge, .faq__item) {
+  .project-card, .process__step, .contact-form-wrapper, .contact-info-card, .team-card, .faq__item) {
   -webkit-backdrop-filter: blur(14px) saturate(1.25);
   backdrop-filter: blur(14px) saturate(1.25);
 }

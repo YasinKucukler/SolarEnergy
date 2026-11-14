@@ -110,15 +110,6 @@
   line-height: var(--lh-relaxed);
 }
 
-/* ---- Süreç Adımları ---- */
-/* Güneş enerjisi kurulum süreci timeline */
-.solar-process {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
-  margin-top: var(--space-10);
-}
-
 /* ---- Responsive ---- */
 /* Tablet ve üzeri — 2 sütun grid */
 @media (min-width: 576px) {

@@ -103,6 +103,17 @@
      ========================================================== */
   var $ = function (id) { return document.getElementById(id); };
 
+  /** Seçiciye uyan her öğe için fn çalıştır (root verilmezse tüm belge) */
+  function each(selector, fn, root) {
+    Array.prototype.forEach.call((root || document).querySelectorAll(selector), fn);
+  }
+
+  /** id'si eşleşen kaydın dizideki sırası; yoksa -1 (mesajlar ve projeler için) */
+  function indexById(list, id) {
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return i;
+    return -1;
+  }
+
   /** XSS koruması — metni HTML'e (ve öznitelik değerine) güvenle koy */
   function esc(text) {
     return String(text == null ? '' : text)
@@ -204,12 +215,10 @@
     if (e.key === 'Escape' && openModalEl) closeModal();
   });
 
-  Array.prototype.forEach.call(document.querySelectorAll('.admin-message-detail'), function (m) {
+  each('.admin-message-detail', function (m) {
     m.addEventListener('click', function (e) { if (e.target === m) closeModal(); });
   });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-close-modal]'), function (b) {
-    b.addEventListener('click', closeModal);
-  });
+  each('[data-close-modal]', function (b) { b.addEventListener('click', closeModal); });
 
   /* ==========================================================
      OTURUM
@@ -290,7 +299,7 @@
     });
   });
 
-  Array.prototype.forEach.call(document.querySelectorAll('[data-goto-tab]'), function (a) {
+  each('[data-goto-tab]', function (a) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       selectTab($(a.getAttribute('data-goto-tab')), true);
@@ -333,11 +342,6 @@
     if (!store('local', STORAGE_KEY, JSON.stringify(list))) toast('Kaydedilemedi: tarayıcı depolaması dolu veya kapalı.', true);
   }
 
-  function findMessage(list, id) {
-    for (var i = 0; i < list.length; i++) if (list[i].id === id) return i;
-    return -1;
-  }
-
   function serviceOf(m) {
     var s = m.service || m.source_page || '';
     return SERVICE_NAMES[s] && s !== 'diger' ? s : 'diger';
@@ -373,7 +377,7 @@
     $('stat-camera').textContent = counts.kamera;
     $('stat-eng').textContent = counts.muhendislik;
 
-    Array.prototype.forEach.call(document.querySelectorAll('[data-filter-service]'), function (b) {
+    each('[data-filter-service]', function (b) {
       var on = b.getAttribute('data-filter-service') === filter.service;
       b.classList.toggle('is-active', on && filter.service !== '');
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -449,7 +453,7 @@
   $('msg-filter-status').addEventListener('change', function () {
     filter.status = this.value; visibleCount = PAGE_SIZE; loadMessages();
   });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-filter-service]'), function (b) {
+  each('[data-filter-service]', function (b) {
     b.addEventListener('click', function () {
       var v = b.getAttribute('data-filter-service');
       filter.service = filter.service === v ? '' : v;
@@ -494,7 +498,7 @@
 
   function showMessageDetail(id) {
     var messages = getMessages();
-    var idx = findMessage(messages, id);
+    var idx = indexById(messages, id);
     if (idx === -1) return;
     var m = messages[idx];
     currentMessageId = id;
@@ -558,7 +562,7 @@
   /** Mesajın bir alanını güncelle */
   function patchMessage(id, patch) {
     var messages = getMessages();
-    var idx = findMessage(messages, id);
+    var idx = indexById(messages, id);
     if (idx === -1) return false;
     for (var k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) messages[idx][k] = patch[k];
     saveMessages(messages);
@@ -569,7 +573,7 @@
     clearTimeout(noteTimer);
     if (!currentMessageId) return;
     var messages = getMessages();
-    var idx = findMessage(messages, currentMessageId);
+    var idx = indexById(messages, currentMessageId);
     if (idx === -1 || (messages[idx].note || '') === noteInput.value) return;
     patchMessage(currentMessageId, { note: noteInput.value });
     loadMessages();
@@ -602,7 +606,7 @@
     if (!currentMessageId) return;
     if (!confirm('Bu mesajı silmek istediğinize emin misiniz?')) return;
     var messages = getMessages();
-    var idx = findMessage(messages, currentMessageId);
+    var idx = indexById(messages, currentMessageId);
     if (idx !== -1) messages.splice(idx, 1);
     saveMessages(messages);
     currentMessageId = null;
@@ -697,7 +701,8 @@
     var x = clone(c);
     (x.projects || []).forEach(function (p) {
       if (p.imageData) {
-        var match = ref && (ref.projects || []).filter(function (q) { return q.id === p.id; })[0];
+        var refList = (ref && ref.projects) || [];
+        var match = refList[indexById(refList, p.id)];
         p.image = match && match.image ? match.image : '__new__';
         delete p.imageData;
       }
@@ -789,7 +794,7 @@
           'Proje klasöründe "npm run content" çalıştırıp sayfayı yenileyin.';
         contentUnavailable($('projects-list'));
         $('proj-add').disabled = true;
-        Array.prototype.forEach.call(document.querySelectorAll('#settings-form input, #settings-form button, #formspree-form input, #formspree-form button'), function (el) { el.disabled = true; });
+        each('#settings-form input, #settings-form button, #formspree-form input, #formspree-form button', function (el) { el.disabled = true; });
         $('settings-status').textContent = contentError;
         $('formspree-status').textContent = 'Bilinmiyor';
       });
@@ -867,8 +872,7 @@
     var id = btn.closest('.admin-project').getAttribute('data-id');
     var next = clone(working());
     var list = next.projects;
-    var i = -1;
-    list.forEach(function (p, k) { if (p.id === id) i = k; });
+    var i = indexById(list, id);
     if (i === -1) return;
     var act = btn.getAttribute('data-act');
     if (act === 'edit') { openProjectForm(list[i]); return; }
@@ -894,7 +898,8 @@
 
   function updateImagePreview() {
     var cat = $('proj-category').value;
-    var p = editingProjectId ? working().projects.filter(function (x) { return x.id === editingProjectId; })[0] : null;
+    var list = working().projects;
+    var p = editingProjectId ? list[indexById(list, editingProjectId)] : null;
     var src = pendingImage !== undefined ? pendingImage : (p ? (p.imageData || p.image) : '');
     var box = $('proj-image-preview');
     box.className = 'admin-image-pick__preview project-card__image--' + CATEGORY_CLASS[cat];
@@ -962,7 +967,7 @@
     var next = clone(working());
     var p;
     if (editingProjectId) {
-      p = next.projects.filter(function (x) { return x.id === editingProjectId; })[0];
+      p = next.projects[indexById(next.projects, editingProjectId)];
       if (!p) { closeModal(); return; }
     } else {
       p = { id: 'p-' + Date.now().toString(36), image: '' };
@@ -991,8 +996,8 @@
   }
 
   function clearErrors(form) {
-    Array.prototype.forEach.call(form.querySelectorAll('.error'), function (el) { el.classList.remove('error'); });
-    Array.prototype.forEach.call(form.querySelectorAll('.form-error'), function (el) { el.textContent = ''; el.classList.remove('visible'); });
+    each('.error', function (el) { el.classList.remove('error'); }, form);
+    each('.form-error', function (el) { el.textContent = ''; el.classList.remove('visible'); }, form);
   }
 
   /* ---- Site Ayarları ---- */
